@@ -17,6 +17,10 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         .container {
             max-width: 1200px;
@@ -52,12 +56,27 @@
             font-weight: 600;
         }
         .logo {
-            max-height: 100px;
-            margin: 0 auto 1rem auto;
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
             border-radius: 0.5rem;
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .sleeper-logo {
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
+            border-radius: 0.5rem;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
         .nav-ribbon {
-            background-color: #2d6f22;
+            background-color: #1f2937;
             display: flex;
             justify-content: center;
             padding: 0.5rem 0;
@@ -73,31 +92,84 @@
             transition: background-color 0.2s;
         }
         .nav-ribbon a:hover {
-            background-color: #1a4314;
+            background-color: #4b5563;
+        }
+
+        /* Dropdown specific styles */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f2937;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4b5563;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
 <body class="bg-gray-100">
 
-    <!-- Header Section -->
     <header class="header bg-gray-800">
         <div class="container flex flex-col items-center">
             <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
-            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
+            <h1 class="text-4xl font-bold">The TFFL Wiki</h1>
             <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+            <img src="Sleeper Logo.png" alt="Sleeper App Logo" class="sleeper-logo">
         </div>
     </header>
 
-        <!-- Navigation Ribbon -->
-    <nav class="nav-ribbon">
+        <nav class="nav-ribbon">
         <a href="index.html">Home</a>
         <a href="history.html">League History</a>
         <a href="throne.html">Thoughts from the Throne</a>
-        <a href="ownerprofiles.html">Owner Profiles</a>
+        <div class="dropdown">
+            <a href="ownerprofiles.html" class="dropbtn">Owner Profiles</a>
+            <div class="dropdown-content">
+                <a href="taylor.html">Team A</a>
+                <a href="ron.html">Team B</a>
+                <a href="mitch.html">Team C</a>
+                <a href="stephen.html">Team D</a>
+                <a href="riley.html">Team E</a>
+                <a href="bill.html">Team F</a>
+                <a href="jason.html">Team G</a>
+                <a href="jose.html">Team H</a>
+                <a href="israel.html">Team I</a>
+                <a href="jake.html">Team J</a>
+                <a href="zach.html">Team K</a>
+                <a href="taryn.html">Team L</a>
+            </div>
+        </div>
         <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
     </nav>
 
-    <!-- Main Content -->
     <main class="container">
         <section class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Israel Flores</h2>

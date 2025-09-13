@@ -17,6 +17,10 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         .container {
             max-width: 1200px;
@@ -52,12 +56,27 @@
             font-weight: 600;
         }
         .logo {
-            max-height: 100px;
-            margin: 0 auto 1rem auto;
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
             border-radius: 0.5rem;
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .sleeper-logo {
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
+            border-radius: 0.5rem;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
         .nav-ribbon {
-            background-color: #2d6f22;
+            background-color: #1f2937;
             display: flex;
             justify-content: center;
             padding: 0.5rem 0;
@@ -73,143 +92,42 @@
             transition: background-color 0.2s;
         }
         .nav-ribbon a:hover {
-            background-color: #1a4314;
+            background-color: #4b5563;
         }
-    </style>
-</head>
-<body class="bg-gray-100">
 
-    <!-- Header Section -->
-    <header class="header bg-gray-800">
-        <div class="container flex flex-col items-center">
-            <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
-            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
-            <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
-        </div>
-    </header>
+        /* Dropdown specific styles */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-        <!-- Navigation Ribbon -->
-    <nav class="nav-ribbon">
-        <a href="index.html">Home</a>
-        <a href="history.html">League History</a>
-        <a href="throne.html">Thoughts from the Throne</a>
-        <a href="ownerprofiles.html">Owner Profiles</a>
-        <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
-    </nav>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f2937;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
+        }
 
-    <!-- Main Content -->
-    <main class="container">
-        <section class="card">
-            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Bill & Kathy Kuhl</h2>
-            <p class="text-gray-700 mb-6">The Kuhl family has a history of success in the TFFL, with two championship titles (2018 and 2021) to their name. With an 11-season tenure and a 48.7% career win percentage, their teams have a knack for getting hot at the right time. They've proven to be consistent competitors and worthy champions, a steady presence in the league's history.</p>
-            
-            <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">Career Overview</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Season</th>
-                            <th>Team Name</th>
-                            <th>Record</th>
-                            <th>Final Standing</th>
-                            <th>Championship</th>
-                            <th>Division Title</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2024</td>
-                            <td>Playing it Kuhl</td>
-                            <td>4-24</td>
-                            <td>12</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2023</td>
-                            <td>Playing it Kuhl</td>
-                            <td>16-12</td>
-                            <td>5</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2022</td>
-                            <td>Team Kuhl</td>
-                            <td>9-19</td>
-                            <td>10</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2021</td>
-                            <td>TeamKuhl</td>
-                            <td>17-11</td>
-                            <td>1</td>
-                            <td>Yes</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2020</td>
-                            <td>TeamKuhl</td>
-                            <td>16-10</td>
-                            <td>6</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2019</td>
-                            <td>Team Kuhl</td>
-                            <td>14-12</td>
-                            <td>5</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2018</td>
-                            <td>Team Kuhl</td>
-                            <td>10-3</td>
-                            <td>1</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>2017</td>
-                            <td>Team Kuhl</td>
-                            <td>8-4</td>
-                            <td>4</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2016</td>
-                            <td>Team Kuhl</td>
-                            <td>7-6</td>
-                            <td>6</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2015</td>
-                            <td>Team Kuhl</td>
-                            <td>5-8</td>
-                            <td>7</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2013</td>
-                            <td>Team Kuhl</td>
-                            <td>5-8</td>
-                            <td>7</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="mt-4 text-sm text-gray-500">Note: The record format changed after the 2018 season to include League Median scores.</p>
-        </section>
-    </main>
-</body>
-</html>
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4b5563;
+        }
+
+        .dropdown:hover .

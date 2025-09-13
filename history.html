@@ -17,6 +17,10 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         .container {
             max-width: 1200px;
@@ -52,12 +56,27 @@
             font-weight: 600;
         }
         .logo {
-            max-height: 100px;
-            margin: 0 auto 1rem auto;
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
             border-radius: 0.5rem;
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .sleeper-logo {
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
+            border-radius: 0.5rem;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
         .nav-ribbon {
-            background-color: #2d6f22;
+            background-color: #1f2937;
             display: flex;
             justify-content: center;
             padding: 0.5rem 0;
@@ -73,34 +92,86 @@
             transition: background-color 0.2s;
         }
         .nav-ribbon a:hover {
-            background-color: #1a4314;
+            background-color: #4b5563;
         }
+        /* Dropdown specific styles */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f2937;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4b5563;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100">
 
-    <!-- Header Section -->
     <header class="header bg-gray-800">
         <div class="container flex flex-col items-center">
             <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
-            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
+            <h1 class="text-4xl font-bold">The TFFL Wiki</h1>
             <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+            <img src="Sleeper Logo.png" alt="Sleeper App Logo" class="sleeper-logo">
         </div>
     </header>
 
-        <!-- Navigation Ribbon -->
-    <nav class="nav-ribbon">
+        <nav class="nav-ribbon">
         <a href="index.html">Home</a>
         <a href="history.html">League History</a>
         <a href="throne.html">Thoughts from the Throne</a>
-        <a href="ownerprofiles.html">Owner Profiles</a>
+        <div class="dropdown">
+            <a href="ownerprofiles.html" class="dropbtn">Owner Profiles</a>
+            <div class="dropdown-content">
+                <a href="team-a.html">Team A</a>
+                <a href="team-b.html">Team B</a>
+                <a href="team-c.html">Team C</a>
+                <a href="team-d.html">Team D</a>
+                <a href="team-e.html">Team E</a>
+                <a href="team-f.html">Team F</a>
+                <a href="team-g.html">Team G</a>
+                <a href="team-h.html">Team H</a>
+                <a href="team-i.html">Team I</a>
+                <a href="team-j.html">Team J</a>
+                <a href="team-k.html">Team K</a>
+                <a href="team-l.html">Team L</a>
+            </div>
+        </div>
         <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
     </nav>
 
-    <!-- Main Content -->
     <main class="container">
         
-        <!-- League History Section -->
         <section id="history" class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">League History (2013-2024)</h2>
             <p class="text-gray-700">The TFFL has been a battleground for fantasy football glory for over a decade. Since its inception in 2013, the league has grown, evolved, and seen a multitude of triumphs and heartbreaks. It all began with just 8 teams in 2013, with Stephen Zamora's "Team Zbaggs" claiming the inaugural championship. The league was also known for its exciting live draft parties, a cherished tradition that has not been a full live event since the COVID-19 pandemic. The league saw a gradual expansion, growing to 10 teams in 2014 and reaching its current competitive format of 12 teams in 2015.</p>
@@ -109,7 +180,6 @@
             <p class="mt-4 text-gray-700">In more recent history, the league has seen a new era of contenders. Taylor Wilson has been a model of consistency, with a league-leading 63.6% career win percentage and a championship title in 2020. Jason Zamora secured his first title in 2022 with a stellar performance, while Zach Loya's "We Stink" lived up to their ironic name by winning the championship in 2024. The history of the TFFL is a testament to its enduring camaraderie and rivalries, with every season bringing new highs and lows for its dedicated owners.</p>
         </section>
 
-        <!-- Championships Section -->
         <section id="champions" class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Championship History</h2>
             <div class="table-container">
@@ -139,7 +209,6 @@
             </div>
         </section>
 
-        <!-- League Spotlight Section -->
         <section id="league-spotlight" class="card mt-8">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">League Spotlight</h2>
             <div class="table-container">
