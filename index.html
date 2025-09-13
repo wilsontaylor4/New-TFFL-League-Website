@@ -17,6 +17,10 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         .container {
             max-width: 1200px;
@@ -52,9 +56,14 @@
             font-weight: 600;
         }
         .logo {
-            max-height: 100px;
-            margin: 0 auto 1rem auto;
+            max-height: 150px;
+            max-width: 150px;
+            margin: 0;
             border-radius: 0.5rem;
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
         .nav-ribbon {
             background-color: #2d6f22;
@@ -220,16 +229,14 @@
 </head>
 <body class="bg-gray-100">
 
-    <!-- Header Section -->
     <header class="header bg-gray-800">
         <div class="container flex flex-col items-center">
             <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
-            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
+            <h1 class="text-4xl font-bold">The TFFL Wiki</h1>
             <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
         </div>
     </header>
 
-    <!-- Navigation Ribbon -->
     <nav class="nav-ribbon">
         <a href="index.html">Home</a>
         <a href="history.html">League History</a>
@@ -238,13 +245,11 @@
         <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
     </nav>
 
-    <!-- Main Content -->
     <main class="container">
         
         <section id="weekly-standings" class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Divisional Standings</h2>
             
-            <!-- Divisional Standings -->
             <div id="divisional-standings-container">
                 <div class="division-header defenders-header">The Defenders</div>
                 <div class="standing-row table-header">
@@ -257,7 +262,6 @@
                     <div class="pf">PF</div>
                     <div class="pa">PA</div>
                 </div>
-                <!-- Copy/paste your division 1 standings here (4 teams) -->
                 <div class="standing-row defenders-leader">
                     <div class="rank">1</div>
                     <div class="team">Team A</div>
@@ -310,7 +314,6 @@
                     <div class="pf">PF</div>
                     <div class="pa">PA</div>
                 </div>
-                <!-- Copy/paste your division 2 standings here (4 teams) -->
                 <div class="standing-row contenders-leader">
                     <div class="rank">1</div>
                     <div class="team">Team C</div>
@@ -363,7 +366,6 @@
                     <div class="pf">PF</div>
                     <div class="pa">PA</div>
                 </div>
-                <!-- Copy/paste your division 3 standings here (4 teams) -->
                 <div class="standing-row pretenders-leader">
                     <div class="rank">1</div>
                     <div class="team">Team E</div>
@@ -416,7 +418,6 @@
                     <div class="wins-median">Wins Against the League Median</div>
                     <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
                 </div>
-                <!-- Copy/paste your power rankings here (12 teams) -->
                 <div class="power-rankings-row">
                     <div class="rank">1</div>
                     <div class="team">Team A <span class="movement">(±0)</span></div>
@@ -504,7 +505,6 @@
                     <div class="pf">PF</div>
                     <div class="pa">PA</div>
                 </div>
-                <!-- Copy/paste your wildcard standings here (6 teams) -->
                 <div class="standing-row">
                     <div class="rank">1</div>
                     <div class="team">Team D</div>
