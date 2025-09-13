@@ -230,9 +230,10 @@
         background-color: #3b82f6;
         color: white;
         border-bottom: 1px solid #e5e7eb;
-        text-align: center;
     }
-    .power-rankings-header .rank {
+    .power-rankings-header .rank,
+    .power-rankings-header .wins-median,
+    .power-rankings-header .sos {
         text-align: center;
     }
     .power-rankings-header .team {
@@ -245,7 +246,6 @@
     }
     .power-rankings-row > div {
         padding: 0.5rem;
-        text-align: center;
     }
     .power-rankings-row .rank {
         width: 10%;
@@ -490,70 +490,128 @@
                 </div>
                 <div class="power-rankings-row">
                     <div class="rank">1</div>
-                    <div class="team">Team A <span class="movement">(±0)</span></div>
+                    <div class="team">Team A <span class="movement">(+1)</span></div>
                     <div class="wins-median">10</div>
-                    <div class="sos">120</div>
+                    <div class="sos">1</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">2</div>
                     <div class="team">Team E <span class="movement">(+1)</span></div>
                     <div class="wins-median">9</div>
-                    <div class="sos">115</div>
+                    <div class="sos">2</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">3</div>
-                    <div class="team">Team C <span class="movement">(-1)</span></div>
+                    <div class="team">Team C <span class="movement">(-2)</span></div>
                     <div class="wins-median">9</div>
-                    <div class="sos">110</div>
+                    <div class="sos">3</div>
                 </div>
                 <div class="power-rankings-row">
                     <div class="rank">4</div>
                     <div class="team">Team B <span class="movement">(+2)</span></div>
                     <div class="wins-median">8</div>
-                    <div class="sos">105</div>
+                    <div class="sos">4</div>
                 </div>
                 <div class="power-rankings-row">
                     <div class="rank">5</div>
                     <div class="team">Team D <span class="movement">(-1)</span></div>
                     <div class="wins-median">7</div>
-                    <div class="sos">100</div>
+                    <div class="sos">5</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">6</div>
                     <div class="team">Team F <span class="movement">(±0)</span></div>
                     <div class="wins-median">7</div>
-                    <div class="sos">95</div>
+                    <div class="sos">6</div>
                 </div>
                 <div class="power-rankings-row">
                     <div class="rank">7</div>
                     <div class="team">Team G <span class="movement">(+1)</span></div>
                     <div class="wins-median">6</div>
-                    <div class="sos">90</div>
+                    <div class="sos">7</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">8</div>
                     <div class="team">Team I <span class="movement">(-1)</span></div>
                     <div class="wins-median">6</div>
-                    <div class="sos">85</div>
+                    <div class="sos">8</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">9</div>
                     <div class="team">Team K <span class="movement">(-1)</span></div>
                     <div class="wins-median">6</div>
-                    <div class="sos">80</div>
+                    <div class="sos">9</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">10</div>
                     <div class="team">Team H <span class="movement">(+2)</span></div>
                     <div class="wins-median">4</div>
-                    <div class="sos">75</div>
+                    <div class="sos">10</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">11</div>
                     <div class="team">Team J <span class="movement">(-1)</span></div>
                     <div class="wins-median">4</div>
-                    <div class="sos">70</div>
+                    <div class="sos">11</div>
                 </div>
                  <div class="power-rankings-row">
                     <div class="rank">12</div>
                     <div class="team">Team L <span class="movement">(-1)</span></div>
+                    <div class="wins-median">4</div>
+                    <div class="sos">12</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wildcard-standings" class="card mt-8">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
+            <div id="wildcard-standings-container">
+                <div class="standing-row wildcard-header">
+                    <div class="rank">Rank</div>
+                    <div class="team">Team</div>
+                    <div class="record">Overall Record</div>
+                    <div class="pf">PF</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">1</div>
+                    <div class="team">Team B</div>
+                    <div class="record">8-5-0</div>
+                    <div class="pf">1100</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">2</div>
+                    <div class="team">Team F</div>
+                    <div class="record">7-6-0</div>
+                    <div class="pf">1050</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">3</div>
+                    <div class="team">Team D</div>
+                    <div class="record">7-6-0</div>
+                    <div class="pf">1050</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">4</div>
+                    <div class="team">Team G</div>
+                    <div class="record">6-7-0</div>
+                    <div class="pf">1050</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">5</div>
+                    <div class="team">Team I</div>
+                    <div class="record">6-7-0</div>
+                    <div class="pf">1050</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">6</div>
+                    <div class="team">Team K</div>
+                    <div class="record">6-7-0</div>
+                    <div class="pf">1050</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
