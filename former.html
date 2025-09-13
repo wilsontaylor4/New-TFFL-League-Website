@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFFL Former Members</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .header {
+            background-color: #1a4314;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .logo {
+            max-height: 100px;
+            margin: 0 auto 1rem auto;
+            border-radius: 0.5rem;
+        }
+        .nav-ribbon {
+            background-color: #2d6f22;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .nav-ribbon a {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        .nav-ribbon a:hover {
+            background-color: #1a4314;
+        }
+        .owner-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="header bg-gray-800">
+        <div class="container flex flex-col items-center">
+            <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
+            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
+            <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+        </div>
+    </header>
+
+        <!-- Navigation Ribbon -->
+    <nav class="nav-ribbon">
+        <a href="tffl.html">Home</a>
+        <a href="history.html">League History</a>
+        <a href="throne.html">Thoughts from the Throne</a>
+        <a href="ownerprofiles.html">Owner Profiles</a>
+        <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section id="former-members" class="card">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Former Members</h2>
+            <p class="mb-6 text-gray-700">The TFFL has been a battleground for over a decade, and throughout its history, several owners have left their mark. Here are the career highlights of our former league members.</p>
+            
+            <div class="owner-stats">
+                <div class="stat-card">
+                    <h3>Richard Diaz</h3>
+                    <p class="text-gray-600">**Years:** 5</p>
+                    <p class="text-gray-600">**Championships:** 1 (2014)</p>
+                    <p class="text-gray-600">**Career Win %:** 50.8%</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Steven Sennewald</h3>
+                    <p class="text-gray-600">**Years:** 5</p>
+                    <p class="text-gray-600">**Championships:** 0</p>
+                    <p class="text-gray-600">**Career Win %:** 38.0%</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Nate Honnes</h3>
+                    <p class="text-gray-600">**Years:** 3</p>
+                    <p class="text-gray-600">**Championships:** 0</p>
+                    <p class="text-gray-600">**Career Win %:** 35.9%</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Peter Flores</h3>
+                    <p class="text-gray-600">**Years:** 2</p>
+                    <p class="text-gray-600">**Championships:** 0</p>
+                    <p class="text-gray-600">**Career Win %:** 46.2%</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Eric Talmich</h3>
+                    <p class="text-gray-600">**Years:** 1</p>
+                    <p class="text-gray-600">**Championships:** 0</p>
+                    <p class="text-gray-600">**Career Win %:** 61.5%</p>
+                </div>
+                 <div class="stat-card">
+                    <h3>Kary Dodson</h3>
+                    <p class="text-gray-600">**Years:** 1</p>
+                    <p class="text-gray-600">**Championships:** 0</p>
+                    <p class="text-gray-600">**Career Win %:** 53.8%</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFFL Wiki - League History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .header {
+            background-color: #1a4314;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #2d6f22;
+            color: white;
+            font-weight: 600;
+        }
+        .logo {
+            max-height: 100px;
+            margin: 0 auto 1rem auto;
+            border-radius: 0.5rem;
+        }
+        .nav-ribbon {
+            background-color: #2d6f22;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .nav-ribbon a {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        .nav-ribbon a:hover {
+            background-color: #1a4314;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="header bg-gray-800">
+        <div class="container flex flex-col items-center">
+            <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
+            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
+            <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+        </div>
+    </header>
+
+        <!-- Navigation Ribbon -->
+    <nav class="nav-ribbon">
+        <a href="tffl.html">Home</a>
+        <a href="history.html">League History</a>
+        <a href="throne.html">Thoughts from the Throne</a>
+        <a href="ownerprofiles.html">Owner Profiles</a>
+        <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- League History Section -->
+        <section id="history" class="card">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">League History (2013-2024)</h2>
+            <p class="text-gray-700">The TFFL has been a battleground for fantasy football glory for over a decade. Since its inception in 2013, the league has grown, evolved, and seen a multitude of triumphs and heartbreaks. It all began with just 8 teams in 2013, with Stephen Zamora's "Team Zbaggs" claiming the inaugural championship. The league was also known for its exciting live draft parties, a cherished tradition that has not been a full live event since the COVID-19 pandemic. The league saw a gradual expansion, growing to 10 teams in 2014 and reaching its current competitive format of 12 teams in 2015.</p>
+            <p class="mt-4 text-gray-700">The early years (2013-2018) were hosted on ESPN, but starting with the 2019 season, the TFFL made a forward-thinking move to the Sleeper app, joining the platform before its widespread popularity. This move marked a new era for the league. The early years were dominated by a few key players. Ron Wilson's "Somewhere Over Dwayne Bowe" put up a spectacular 11-2 record in 2013, although they finished second to Stephen Zamora. Ron would get his revenge in 2016, winning his first title, and later went on to secure a total of three championships, making him the most decorated champion in TFFL history.</p>
+            <p class="mt-4 text-gray-700">Mitch Sennewald and Bill & Kathy Kuhl have also etched their names in the record books with two championships each. Mitch's "Lambo's Fields" and "Bad Hombres" teams secured titles in 2015 and 2017, respectively, while Bill & Kathy's "Team Kuhl" brought home championships in 2018 and 2021. The league also saw some truly dominant regular seasons that didn't end in a title, such as Jose Granados's 2016 team which went an astounding 12-1 but finished fourth.</p>
+            <p class="mt-4 text-gray-700">In more recent history, the league has seen a new era of contenders. Taylor Wilson has been a model of consistency, with a league-leading 63.6% career win percentage and a championship title in 2020. Jason Zamora secured his first title in 2022 with a stellar performance, while Zach Loya's "We Stink" lived up to their ironic name by winning the championship in 2024. The history of the TFFL is a testament to its enduring camaraderie and rivalries, with every season bringing new highs and lows for its dedicated owners.</p>
+        </section>
+
+        <!-- Championships Section -->
+        <section id="champions" class="card">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Championship History</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Season</th>
+                            <th>Champion</th>
+                            <th>Team Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2024</td><td>Zach Loya</td><td>We Stink</td></tr>
+                        <tr><td>2023</td><td>Ron Wilson</td><td>Dewey DewHickeys</td></tr>
+                        <tr><td>2022</td><td>Jason Zamora</td><td>Henry Given Sunday</td></tr>
+                        <tr><td>2021</td><td>Bill & Kathy Kuhl</td><td>Team Kuhl</td></tr>
+                        <tr><td>2020</td><td>Taylor Wilson</td><td>Glass Case of Emotion</td></tr>
+                        <tr><td>2019</td><td>Ron Wilson</td><td>Ooops i did it again!!!</td></tr>
+                        <tr><td>2018</td><td>Bill & Kathy Kuhl</td><td>Team Kuhl</td></tr>
+                        <tr><td>2017</td><td>Mitch Sennewald</td><td>Bad Hombres</td></tr>
+                        <tr><td>2016</td><td>Ron Wilson</td><td>Woodhead Be Out Of The Question</td></tr>
+                        <tr><td>2015</td><td>Mitch Sennewald</td><td>Lambo's Fields</td></tr>
+                        <tr><td>2014</td><td>Richard Diaz (He Who Must Not Be Named)</td><td>Team Diaz</td></tr>
+                        <tr><td>2013</td><td>Stephen Zamora</td><td>Team Zbaggs</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- League Spotlight Section -->
+        <section id="league-spotlight" class="card mt-8">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">League Spotlight</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Owner</th>
+                            <th>Seasons</th>
+                            <th>Total Wins</th>
+                            <th>Total Losses</th>
+                            <th>Win Percentage</th>
+                            <th>Championships</th>
+                            <th>Division Titles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Taylor Wilson</td><td>12</td><td>154</td><td>88</td><td>63.6%</td><td>1</td><td>4</td></tr>
+                        <tr><td>Ron Wilson</td><td>12</td><td>128</td><td>114</td><td>52.9%</td><td>3</td><td>0</td></tr>
+                        <tr><td>Mitch Sennewald</td><td>11</td><td>127</td><td>102</td><td>55.5%</td><td>2</td><td>2</td></tr>
+                        <tr><td>Stephen Zamora</td><td>12</td><td>124</td><td>117</td><td>51.5%</td><td>1</td><td>2</td></tr>
+                        <tr><td>Riley Kuhl</td><td>12</td><td>123</td><td>119</td><td>50.8%</td><td>0</td><td>1</td></tr>
+                        <tr><td>Bill & Kathy Kuhl</td><td>11</td><td>111</td><td>117</td><td>48.7%</td><td>2</td><td>0</td></tr>
+                        <tr><td>Jason Zamora</td><td>10</td><td>107</td><td>109</td><td>49.5%</td><td>1</td><td>2</td></tr>
+                        <tr><td>Jose Granados</td><td>10</td><td>106</td><td>110</td><td>49.1%</td><td>0</td><td>0</td></tr>
+                        <tr><td>Israel Flores</td><td>11</td><td>100</td><td>129</td><td>43.7%</td><td>0</td><td>0</td></tr>
+                        <tr><td>Jake Wolfer</td><td>9</td><td>98</td><td>105</td><td>48.3%</td><td>0</td><td>2</td></tr>
+                        <tr><td>Zach Loya</td><td>6</td><td>72</td><td>92</td><td>43.9%</td><td>1</td><td>1</td></tr>
+                        <tr><td>Taryn & Josh Sanchez</td><td>6</td><td>46</td><td>62</td><td>42.6%</td><td>0</td><td>0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
