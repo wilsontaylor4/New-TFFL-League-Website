@@ -6,277 +6,280 @@
     <title>TFFL Wiki</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
-        }
-        .header {
-            background-color: #1a4314;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 2rem;
-        }
-        .card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        h1, h2, h3 {
-            font-weight: 700;
-        }
-        .table-container {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            margin-top: 1rem;
-        }
-        th, td {
-            padding: 0.75rem;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        th {
-            background-color: #2d6f22;
-            color: white;
-            font-weight: 600;
-        }
-        .logo {
-            max-height: 150px;
-            max-width: 150px;
-            margin: 0;
-            border-radius: 0.5rem;
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .sleeper-logo {
-            max-height: 150px;
-            max-width: 150px;
-            margin: 0;
-            border-radius: 0.5rem;
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .nav-ribbon {
-            background-color: #1f2937;
-            display: flex;
-            justify-content: center;
-            padding: 0.5rem 0;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .nav-ribbon a {
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.2s;
-        }
-        .nav-ribbon a:hover {
-            background-color: #4b5563;
-        }
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f3f4f6;
+        color: #1f2937;
+    }
+    .header {
+        background-color: #1a4314;
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 2rem;
+    }
+    .card {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    h1, h2, h3 {
+        font-weight: 700;
+    }
+    .table-container {
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        margin-top: 1rem;
+    }
+    th, td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    th {
+        background-color: #2d6f22;
+        color: white;
+        font-weight: 600;
+    }
+    .logo {
+        max-height: 150px;
+        max-width: 150px;
+        margin: 0;
+        border-radius: 0.5rem;
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .sleeper-logo {
+        max-height: 150px;
+        max-width: 150px;
+        margin: 0;
+        border-radius: 0.5rem;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .nav-ribbon {
+        background-color: #1f2937;
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem 0;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    .nav-ribbon a {
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s;
+    }
+    .nav-ribbon a:hover {
+        background-color: #4b5563;
+    }
 
-        /* Dropdown specific styles */
-        .dropdown {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+    /* Dropdown specific styles */
+    .dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #1f2937;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0.5rem;
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 100%;
-        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #1f2937;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+    }
 
-        .dropdown-content a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-            border-radius: 0;
-        }
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        border-radius: 0;
+    }
 
-        .dropdown-content a:hover {
-            background-color: #4b5563;
-        }
+    .dropdown-content a:hover {
+        background-color: #4b5563;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 
-        .standing-row {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .standing-row > div {
-            padding: 0.5rem;
-            text-align: center; /* Center all data */
-        }
-        .standing-row .rank {
-            width: 8%;
-        }
-        .standing-row .team {
-            width: 25%;
-            text-align: left; /* Keep team name left-aligned */
-        }
-        .standing-row .record {
-            width: 15%;
-        }
-        .standing-row .division-record {
-            width: 15%;
-        }
-        .standing-row .h2h {
-            width: 15%;
-        }
-        .standing-row .median {
-            width: 15%;
-        }
-        .standing-row .pf {
-            width: 10%;
-        }
-        .standing-row .pa {
-            width: 10%;
-        }
-        .table-header {
-            font-weight: 600;
-            background-color: #e5e7eb;
-            color: #1a4314;
-            text-align: center;
-        }
-        .table-header .team {
-            text-align: left; /* Align header with team name */
-        }
-        .division-header {
-            background-color: #2d6f22;
-            color: white;
-            font-weight: 700;
-            padding: 0.5rem;
-            margin-top: 1rem;
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-        .leader {
-            font-weight: 600;
-        }
-        /* New styles for The Defenders division */
-        .defenders-header {
-            background-color: #002d62; /* Dark Blue */
-            color: white;
-        }
-        .defenders-leader {
-            background-color: #d1e1f7; /* Light Blue */
-            font-weight: 600;
-        }
-        .defenders-row {
-            background-color: white;
-        }
-        /* New styles for The Contenders division */
-        .contenders-header {
-            background-color: #b31b1b; /* Dark Red */
-            color: white;
-        }
-        .contenders-leader {
-            background-color: #ffcccc; /* Light Red */
-            font-weight: 600;
-        }
-        .contenders-row {
-            background-color: white;
-        }
-        /* New styles for The Pretenders division */
-        .pretenders-header {
-            background-color: #1a4314; /* Dark Green */
-            color: white;
-        }
-        .pretenders-leader {
-            background-color: #b6d7a8; /* Light Green */
-            font-weight: 600;
-        }
-        .pretenders-row {
-            background-color: white;
-        }
-        /* Power Rankings Table adjustments */
-        .power-rankings-header {
-            background-color: #3b82f6; /* Blue */
-            color: white;
-            border-bottom: 1px solid #e5e7eb;
-            text-align: center;
-        }
-        .power-rankings-header .team {
-            text-align: left;
-        }
-        .power-rankings-row {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .power-rankings-row > div {
-             padding: 0.5rem;
-        }
-        .power-rankings-row .rank {
-            width: 10%;
-            text-align: center;
-        }
-        .power-rankings-row .team {
-            width: 30%;
-            text-align: left;
-        }
-        .power-rankings-row .wins-median {
-            width: 25%;
-            text-align: center;
-        }
-        .power-rankings-row .sos {
-            width: 25%;
-            text-align: center;
-        }
-        .movement {
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
-            font-weight: normal;
-        }
-        .power-rankings-green-bg {
-            background-color: #dcfce7; /* Green highlight for top 4 */
-        }
-        .power-rankings-red-bg {
-            background-color: #fee2e2; /* Red highlight for bottom 4 */
-        }
-        /* New Wild Card Standings styles */
-        .wildcard-header {
-            background-color: #8a3014; /* Burnt Orange */
-            color: white;
-        }
-    </style>
-</head>
+    .standing-row {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .standing-row > div {
+        padding: 0.5rem;
+        text-align: center;
+    }
+    .standing-row .rank {
+        width: 8%;
+    }
+    .standing-row .team {
+        width: 25%;
+        text-align: left;
+    }
+    .standing-row .record {
+        width: 15%;
+    }
+    .standing-row .division-record {
+        width: 15%;
+    }
+    .standing-row .h2h {
+        width: 15%;
+    }
+    .standing-row .median {
+        width: 15%;
+    }
+    .standing-row .pf {
+        width: 10%;
+    }
+    .standing-row .pa {
+        width: 10%;
+    }
+    .table-header {
+        font-weight: 600;
+        background-color: #e5e7eb;
+        color: #1a4314;
+        text-align: center;
+    }
+    .table-header .team {
+        text-align: left;
+    }
+    .division-header {
+        background-color: #2d6f22;
+        color: white;
+        font-weight: 700;
+        padding: 0.5rem;
+        margin-top: 1rem;
+        border-radius: 0.5rem;
+        text-align: center;
+    }
+    .leader {
+        font-weight: 600;
+    }
+    /* New styles for The Defenders division */
+    .defenders-header {
+        background-color: #002d62;
+        color: white;
+    }
+    .defenders-leader {
+        background-color: #d1e1f7;
+        font-weight: 600;
+    }
+    .defenders-row {
+        background-color: white;
+    }
+    /* New styles for The Contenders division */
+    .contenders-header {
+        background-color: #b31b1b;
+        color: white;
+    }
+    .contenders-leader {
+        background-color: #ffcccc;
+        font-weight: 600;
+    }
+    .contenders-row {
+        background-color: white;
+    }
+    /* New styles for The Pretenders division */
+    .pretenders-header {
+        background-color: #1a4314;
+        color: white;
+    }
+    .pretenders-leader {
+        background-color: #b6d7a8;
+        font-weight: 600;
+    }
+    .pretenders-row {
+        background-color: white;
+    }
+    /* Power Rankings Table adjustments */
+    .power-rankings-header {
+        background-color: #3b82f6;
+        color: white;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: center;
+    }
+    .power-rankings-header .rank {
+        text-align: center;
+    }
+    .power-rankings-header .team {
+        text-align: left;
+    }
+    .power-rankings-row {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .power-rankings-row > div {
+        padding: 0.5rem;
+        text-align: center;
+    }
+    .power-rankings-row .rank {
+        width: 10%;
+        text-align: center;
+    }
+    .power-rankings-row .team {
+        width: 30%;
+        text-align: left;
+    }
+    .power-rankings-row .wins-median {
+        width: 25%;
+        text-align: center;
+    }
+    .power-rankings-row .sos {
+        width: 25%;
+        text-align: center;
+    }
+    .movement {
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+        font-weight: normal;
+    }
+    .power-rankings-green-bg {
+        background-color: #dcfce7;
+    }
+    .power-rankings-red-bg {
+        background-color: #fee2e2;
+    }
+    /* New Wild Card Standings styles */
+    .wildcard-header {
+        background-color: #8a3014;
+        color: white;
+    }
+</style></head>
 <body class="bg-gray-100">
 
     <header class="header bg-gray-800">
