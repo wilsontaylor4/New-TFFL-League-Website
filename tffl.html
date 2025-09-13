@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFFL Wiki</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .header {
+            background-color: #1a4314;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #2d6f22;
+            color: white;
+            font-weight: 600;
+        }
+        .logo {
+            max-height: 100px;
+            margin: 0 auto 1rem auto;
+            border-radius: 0.5rem;
+        }
+        .nav-ribbon {
+            background-color: #2d6f22;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .nav-ribbon a {
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        .nav-ribbon a:hover {
+            background-color: #1a4314;
+        }
+        .standing-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .standing-row > div {
+            padding: 0.5rem;
+            text-align: center; /* Center all data */
+        }
+        .standing-row .rank {
+            width: 8%;
+        }
+        .standing-row .team {
+            width: 25%;
+            text-align: left; /* Keep team name left-aligned */
+        }
+        .standing-row .record {
+            width: 15%;
+        }
+        .standing-row .division-record {
+            width: 15%;
+        }
+        .standing-row .h2h {
+            width: 15%;
+        }
+        .standing-row .median {
+            width: 15%;
+        }
+        .standing-row .pf {
+            width: 10%;
+        }
+        .standing-row .pa {
+            width: 10%;
+        }
+        .table-header {
+            font-weight: 600;
+            background-color: #e5e7eb;
+            color: #1a4314;
+            text-align: center;
+        }
+        .table-header .team {
+            text-align: left; /* Align header with team name */
+        }
+        .division-header {
+            background-color: #2d6f22;
+            color: white;
+            font-weight: 700;
+            padding: 0.5rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .leader {
+            font-weight: 600;
+        }
+        /* New styles for The Defenders division */
+        .defenders-header {
+            background-color: #002d62; /* Dark Blue */
+            color: white;
+        }
+        .defenders-leader {
+            background-color: #d1e1f7; /* Light Blue */
+            font-weight: 600;
+        }
+        .defenders-row {
+            background-color: white;
+        }
+        /* New styles for The Contenders division */
+        .contenders-header {
+            background-color: #b31b1b; /* Dark Red */
+            color: white;
+        }
+        .contenders-leader {
+            background-color: #ffcccc; /* Light Red */
+            font-weight: 600;
+        }
+        .contenders-row {
+            background-color: white;
+        }
+        /* New styles for The Pretenders division */
+        .pretenders-header {
+            background-color: #1a4314; /* Dark Green */
+            color: white;
+        }
+        .pretenders-leader {
+            background-color: #b6d7a8; /* Light Green */
+            font-weight: 600;
+        }
+        .pretenders-row {
+            background-color: white;
+        }
+        /* Power Rankings Table adjustments */
+        .power-rankings-header {
+            background-color: #3b82f6; /* Blue */
+            color: white;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .power-rankings-header .team {
+            text-align: left;
+        }
+        .power-rankings-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .power-rankings-row > div {
+             padding: 0.5rem;
+        }
+        .power-rankings-row .rank {
+            width: 10%;
+            text-align: center;
+        }
+        .power-rankings-row .team {
+            width: 30%;
+            text-align: left;
+        }
+        .power-rankings-row .wins-median {
+            width: 25%;
+            text-align: center;
+        }
+        .power-rankings-row .sos {
+            width: 25%;
+            text-align: center;
+        }
+        .movement {
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            font-weight: normal;
+        }
+        .power-rankings-green-bg {
+            background-color: #dcfce7; /* Green highlight for top 4 */
+        }
+        .power-rankings-red-bg {
+            background-color: #fee2e2; /* Red highlight for bottom 4 */
+        }
+        /* New Wild Card Standings styles */
+        .wildcard-header {
+            background-color: #8a3014; /* Burnt Orange */
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="header bg-gray-800">
+        <div class="container flex flex-col items-center">
+            <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
+            <h1 class="text-3xl font-bold">The TFFL Wiki</h1>
+            <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+        </div>
+    </header>
+
+    <!-- Navigation Ribbon -->
+    <nav class="nav-ribbon">
+        <a href="index.html">Home</a>
+        <a href="league_history.html">League History</a>
+        <a href="thoughts_from_the_throne.html">Thoughts from the Throne</a>
+        <a href="owner_profiles.html">Owner Profiles</a>
+        <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <section id="weekly-standings" class="card">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Divisional Standings</h2>
+            
+            <!-- Divisional Standings -->
+            <div id="divisional-standings-container">
+                <div class="division-header defenders-header">The Defenders</div>
+                <div class="standing-row table-header">
+                    <div class="rank">Division Rank</div>
+                    <div class="team">Team</div>
+                    <div class="record">Overall Record</div>
+                    <div class="h2h">H2H</div>
+                    <div class="median">Median</div>
+                    <div class="division-record">Divisional Record</div>
+                    <div class="pf">PF</div>
+                    <div class="pa">PA</div>
+                </div>
+                <!-- Copy/paste your division 1 standings here (4 teams) -->
+                <div class="standing-row defenders-leader">
+                    <div class="rank">1</div>
+                    <div class="team">Team A</div>
+                    <div class="record">10-3-0</div>
+                    <div class="h2h">5-2-0</div>
+                    <div class="median">5-1-0</div>
+                    <div class="division-record">3-0-0</div>
+                    <div class="pf">1200</div>
+                    <div class="pa">950</div>
+                </div>
+                <div class="standing-row defenders-row">
+                    <div class="rank">2</div>
+                    <div class="team">Team B</div>
+                    <div class="record">8-5-0</div>
+                    <div class="h2h">4-3-0</div>
+                    <div class="median">4-2-0</div>
+                    <div class="division-record">2-1-0</div>
+                    <div class="pf">1100</div>
+                    <div class="pa">1000</div>
+                </div>
+                <div class="standing-row defenders-row">
+                    <div class="rank">3</div>
+                    <div class="team">Team G</div>
+                    <div class="record">6-7-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="division-record">1-2-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1150</div>
+                </div>
+                <div class="standing-row defenders-row">
+                    <div class="rank">4</div>
+                    <div class="team">Team H</div>
+                    <div class="record">4-9-0</div>
+                    <div class="h2h">2-5-0</div>
+                    <div class="median">2-4-0</div>
+                    <div class="division-record">0-3-0</div>
+                    <div class="pf">900</div>
+                    <div class="pa">1200</div>
+                </div>
+
+                <div class="division-header contenders-header">The Contenders</div>
+                <div class="standing-row table-header">
+                    <div class="rank">Division Rank</div>
+                    <div class="team">Team</div>
+                    <div class="record">Overall Record</div>
+                    <div class="h2h">H2H</div>
+                    <div class="median">Median</div>
+                    <div class="division-record">Divisional Record</div>
+                    <div class="pf">PF</div>
+                    <div class="pa">PA</div>
+                </div>
+                <!-- Copy/paste your division 2 standings here (4 teams) -->
+                <div class="standing-row contenders-leader">
+                    <div class="rank">1</div>
+                    <div class="team">Team C</div>
+                    <div class="record">9-4-0</div>
+                    <div class="h2h">6-1-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="division-record">3-0-0</div>
+                    <div class="pf">1250</div>
+                    <div class="pa">900</div>
+                </div>
+                <div class="standing-row contenders-row">
+                    <div class="rank">2</div>
+                    <div class="team">Team D</div>
+                    <div class="record">7-6-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">4-2-0</div>
+                    <div class="division-record">2-1-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1050</div>
+                </div>
+                 <div class="standing-row contenders-row">
+                    <div class="rank">3</div>
+                    <div class="team">Team I</div>
+                    <div class="record">6-7-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="division-record">1-2-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1150</div>
+                </div>
+                <div class="standing-row contenders-row">
+                    <div class="rank">4</div>
+                    <div class="team">Team J</div>
+                    <div class="record">4-9-0</div>
+                    <div class="h2h">2-5-0</div>
+                    <div class="median">2-4-0</div>
+                    <div class="division-record">0-3-0</div>
+                    <div class="pf">900</div>
+                    <div class="pa">1200</div>
+                </div>
+
+                <div class="division-header pretenders-header">The Pretenders</div>
+                <div class="standing-row table-header">
+                    <div class="rank">Division Rank</div>
+                    <div class="team">Team</div>
+                    <div class="record">Overall Record</div>
+                    <div class="h2h">H2H</div>
+                    <div class="median">Median</div>
+                    <div class="division-record">Divisional Record</div>
+                    <div class="pf">PF</div>
+                    <div class="pa">PA</div>
+                </div>
+                <!-- Copy/paste your division 3 standings here (4 teams) -->
+                <div class="standing-row pretenders-leader">
+                    <div class="rank">1</div>
+                    <div class="team">Team E</div>
+                    <div class="record">9-4-0</div>
+                    <div class="h2h">6-1-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="division-record">3-0-0</div>
+                    <div class="pf">1250</div>
+                    <div class="pa">900</div>
+                </div>
+                <div class="standing-row pretenders-row">
+                    <div class="rank">2</div>
+                    <div class="team">Team F</div>
+                    <div class="record">7-6-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">4-2-0</div>
+                    <div class="division-record">2-1-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1050</div>
+                </div>
+                <div class="standing-row pretenders-row">
+                    <div class="rank">3</div>
+                    <div class="team">Team K</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="record">6-7-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="division-record">1-2-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1150</div>
+                </div>
+                <div class="standing-row pretenders-row">
+                    <div class="rank">4</div>
+                    <div class="team">Team L</div>
+                    <div class="record">4-9-0</div>
+                    <div class="h2h">2-5-0</div>
+                    <div class="median">2-4-0</div>
+                    <div class="division-record">0-3-0</div>
+                    <div class="pf">900</div>
+                    <div class="pa">1200</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="power-rankings" class="card mt-8">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
+            <div id="power-rankings-container">
+                <div class="standing-row power-rankings-header">
+                    <div class="rank">Rank</div>
+                    <div class="team">Team</div>
+                    <div class="wins-median">Wins Against the League Median</div>
+                    <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
+                </div>
+                <!-- Copy/paste your power rankings here (12 teams) -->
+                <div class="power-rankings-row">
+                    <div class="rank">1</div>
+                    <div class="team">Team A <span class="movement">(±0)</span></div>
+                    <div class="wins-median">10</div>
+                    <div class="sos">120</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">2</div>
+                    <div class="team">Team E <span class="movement">(+1)</span></div>
+                    <div class="wins-median">9</div>
+                    <div class="sos">115</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">3</div>
+                    <div class="team">Team C <span class="movement">(-1)</span></div>
+                    <div class="wins-median">9</div>
+                    <div class="sos">110</div>
+                </div>
+                <div class="power-rankings-row">
+                    <div class="rank">4</div>
+                    <div class="team">Team B <span class="movement">(+2)</span></div>
+                    <div class="wins-median">8</div>
+                    <div class="sos">105</div>
+                </div>
+                <div class="power-rankings-row">
+                    <div class="rank">5</div>
+                    <div class="team">Team D <span class="movement">(-1)</span></div>
+                    <div class="wins-median">7</div>
+                    <div class="sos">100</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">6</div>
+                    <div class="team">Team F <span class="movement">(±0)</span></div>
+                    <div class="wins-median">7</div>
+                    <div class="sos">95</div>
+                </div>
+                <div class="power-rankings-row">
+                    <div class="rank">7</div>
+                    <div class="team">Team G <span class="movement">(+1)</span></div>
+                    <div class="wins-median">6</div>
+                    <div class="sos">90</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">8</div>
+                    <div class="team">Team I <span class="movement">(-1)</span></div>
+                    <div class="wins-median">6</div>
+                    <div class="sos">85</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">9</div>
+                    <div class="team">Team K <span class="movement">(-1)</span></div>
+                    <div class="wins-median">6</div>
+                    <div class="sos">80</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">10</div>
+                    <div class="team">Team H <span class="movement">(+2)</span></div>
+                    <div class="wins-median">4</div>
+                    <div class="sos">75</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">11</div>
+                    <div class="team">Team J <span class="movement">(-1)</span></div>
+                    <div class="wins-median">4</div>
+                    <div class="sos">70</div>
+                </div>
+                 <div class="power-rankings-row">
+                    <div class="rank">12</div>
+                    <div class="team">Team L <span class="movement">(-1)</span></div>
+                    <div class="wins-median">4</div>
+                    <div class="sos">65</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="wildcard-standings" class="card mt-8">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
+            <div id="wildcard-standings-container">
+                <div class="standing-row wildcard-header">
+                    <div class="rank">Rank</div>
+                    <div class="team">Team</div>
+                    <div class="record">Overall Record</div>
+                    <div class="h2h">H2H</div>
+                    <div class="median">Median</div>
+                    <div class="pf">PF</div>
+                    <div class="pa">PA</div>
+                </div>
+                <!-- Copy/paste your wildcard standings here (6 teams) -->
+                <div class="standing-row">
+                    <div class="rank">1</div>
+                    <div class="team">Team D</div>
+                    <div class="record">7-6-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">4-2-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1050</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">2</div>
+                    <div class="team">Team B</div>
+                    <div class="record">8-5-0</div>
+                    <div class="h2h">4-3-0</div>
+                    <div class="median">4-2-0</div>
+                    <div class="pf">1100</div>
+                    <div class="pa">1000</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">3</div>
+                    <div class="team">Team G</div>
+                    <div class="record">6-7-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1150</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">4</div>
+                    <div class="team">Team I</div>
+                    <div class="record">6-7-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1150</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">5</div>
+                    <div class="team">Team K</div>
+                    <div class="record">6-7-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">3-3-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1150</div>
+                </div>
+                <div class="standing-row">
+                    <div class="rank">6</div>
+                    <div class="team">Team F</div>
+                    <div class="record">7-6-0</div>
+                    <div class="h2h">3-4-0</div>
+                    <div class="median">4-2-0</div>
+                    <div class="pf">1050</div>
+                    <div class="pa">1050</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
