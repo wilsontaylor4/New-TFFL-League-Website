@@ -479,36 +479,41 @@
         }
 
         function populateWildcardStandings(teams) {
-            const wildcardContainer = document.getElementById('wildcard-standings-container');
+    const wildcardContainer = document.getElementById('wildcard-standings-container');
+    
+    // You should also remove the hardcoded HTML from this section in your index.html file.
+    wildcardContainer.querySelectorAll('.standing-row:not(.wildcard-header)').forEach(row => row.remove());
 
-            // You should also remove the hardcoded HTML from this section.
-            wildcardContainer.querySelectorAll('.standing-row:not(.wildcard-header)').forEach(row => row.remove());
-
-            // Assuming Team A, C, and E are division leaders for wildcard calculations
-            const divisionLeaders = ['Team A', 'Team C', 'Team E'];
-            const wildcardTeams = teams.filter(team => !divisionLeaders.includes(team.TeamName));
-            
-            wildcardTeams.sort((a, b) => {
-                const winsA = parseInt(a.Wins);
-                const winsB = parseInt(b.Wins);
-                if (winsA !== winsB) return b.Wins - a.Wins;
-                
-                return b.PF - a.PF;
-            });
-
-            wildcardTeams.forEach((team, index) => {
-                const overallRecord = `${team.Wins}-${team.Losses}`;
-                const row = document.createElement('div');
-                row.className = 'standing-row';
-                row.innerHTML = `
-                    <div class="rank">${index + 1}</div>
-                    <div class="team">${team.TeamName}</div>
-                    <div class="record">${overallRecord}</div>
-                    <div class="pf">${team.PF}</div>
-                `;
-                wildcardContainer.appendChild(row);
-            });
+    // Filter out division leaders. You may need to update this list dynamically.
+    const divisionLeaders = ['Team A', 'Team C', 'Team E'];
+    const wildcardTeams = teams.filter(team => !divisionLeaders.includes(team.TeamName));
+    
+    // Sort the teams: first by wins (descending), then by PF (descending)
+    wildcardTeams.sort((a, b) => {
+        const winsA = parseInt(a.Wins);
+        const winsB = parseInt(b.Wins);
+        if (winsA !== winsB) {
+            return winsB - winsA;
         }
+        
+        // Tie-breaker: Points For (PF)
+        return b.PF - a.PF;
+    });
+
+    wildcardTeams.forEach((team, index) => {
+        // Create the overall record string from separate columns
+        const overallRecord = `${team.Wins}-${team.Losses}`;
+        const row = document.createElement('div');
+        row.className = 'standing-row';
+        row.innerHTML = `
+            <div class="rank">${index + 1}</div>
+            <div class="team">${team.TeamName}</div>
+            <div class="record">${overallRecord}</div>
+            <div class="pf">${team.PF}</div>
+        `;
+        wildcardContainer.appendChild(row);
+    });
+}
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
     </script>
