@@ -608,29 +608,138 @@
                     <div class="record">6-7-0</div>
                     <div class="pf">1050</div>
                 </div>
-                <div class="standing-row">
-                    <div class="rank">4</div>
-                    <div class="team">Team G</div>
-                    <div class="record">6-7-0</div>
-                    <div class="pf">1050</div>
-                </div>
-                <div class="standing-row">
-                    <div class="rank">5</div>
-                    <div class="team">Team I</div>
-                    <div class="record">6-7-0</div>
-                    <div class="pf">1050</div>
-                </div>
-                <div class="standing-row">
-                    <div class="rank">6</div>
-                    <div class="team">Team K</div>
-                    <div class="record">6-7-0</div>
-                    <div class="pf">1050</div>
-                </div>
             </div>
         </section>
 
     </main>
 
-</body>
+<script>
+    const dataUrl = 'https://script.google.com/macros/s/AKfycbwX2z8f-V3HqIqmOnKVISZumAbiLkEhlTnR8eSlA9KRGWfsvF4gja2vjd45o6wQwZp1Sg/exec';
 
+    async function fetchDataAndPopulate() {
+        try {
+            const response = await fetch(dataUrl);
+            const data = await response.json(); // Assuming the Apps Script returns JSON
+
+            if (data && data.length > 0) {
+                populateDivisionalStandings(data);
+                populatePowerRankings(data);
+                populateWildcardStandings(data);
+            }
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    function populateDivisionalStandings(teams) {
+        const defendersContainer = document.querySelector('#divisional-standings-container .defenders-header').parentElement;
+        const contendersContainer = document.querySelector('#divisional-standings-container .contenders-header').parentElement;
+        const pretendersContainer = document.querySelector('#divisional-standings-container .pretenders-header').parentElement;
+        
+        // Filter teams by division
+        const defenders = teams.filter(t => t.Division === 'The Defenders');
+        const contenders = teams.filter(t => t.Division === 'The Contenders');
+        const pretenders = teams.filter(t => t.Division === 'The Pretenders');
+
+        // Clear existing rows
+        defendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+        contendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+        pretendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+
+        // Add new rows
+        defenders.forEach((team, index) => {
+            const row = createDivisionalRow(team, index + 1);
+            defendersContainer.insertBefore(row, defendersContainer.querySelector('.defenders-header').nextSibling);
+        });
+
+        contenders.forEach((team, index) => {
+            const row = createDivisionalRow(team, index + 1);
+            contendersContainer.insertBefore(row, contendersContainer.querySelector('.contenders-header').nextSibling);
+        });
+        
+        pretenders.forEach((team, index) => {
+            const row = createDivisionalRow(team, index + 1);
+            pretendersContainer.insertBefore(row, pretendersContainer.querySelector('.pretenders-header').nextSibling);
+        });
+    }
+
+    function createDivisionalRow(team, rank) {
+        const row = document.createElement('div');
+        row.className = 'standing-row';
+        if (rank === 1) {
+            row.classList.add(`${team.Division.split(' ').pop().toLowerCase()}-leader`);
+        } else {
+            row.classList.add(`${team.Division.split(' ').pop().toLowerCase()}-row`);
+        }
+
+        row.innerHTML = `
+            <div class="rank">${rank}</div>
+            <div class="team">${team.TeamName}</div>
+            <div class="record">${team.OverallRecord}</div>
+            <div class="h2h">${team.H2H}</div>
+            <div class="median">${team.Median}</div>
+            <div class="division-record">${team.DivisionalRecord}</div>
+            <div class="pf">${team.PF}</div>
+            <div class="pa">${team.PA}</div>
+        `;
+        return row;
+    }
+
+    function populatePowerRankings(teams) {
+        const powerRankingsContainer = document.getElementById('power-rankings-container');
+        powerRankingsContainer.querySelectorAll('.power-rankings-row').forEach(row => row.remove());
+        
+        // Sort teams for power rankings (e.g., by Rank)
+        const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
+        
+        sortedTeams.forEach(team => {
+            const row = document.createElement('div');
+            row.className = 'power-rankings-row';
+            row.innerHTML = `
+                <div class="rank">${team['Power Rank']}</div>
+                <div class="team">${team.TeamName} <span class="movement">(${team.Movement})</span></div>
+                <div class="wins-median">${team.MedianWins}</div>
+                <div class="sos">${team.SOS}</div>
+            `;
+            powerRankingsContainer.appendChild(row);
+        });
+    }
+
+    function populateWildcardStandings(teams) {
+        const wildcardContainer = document.getElementById('wildcard-standings-container');
+        wildcardContainer.querySelectorAll('.standing-row:not(.wildcard-header)').forEach(row => row.remove());
+
+        // Filter out division leaders and sort by overall record and then PF
+        const divisionLeaders = ['Team A', 'Team C', 'Team E']; // You'll need to update this dynamically
+        const wildcardTeams = teams.filter(team => !divisionLeaders.includes(team.TeamName));
+        
+        wildcardTeams.sort((a, b) => {
+            // Sort by wins (descending)
+            const winsA = parseInt(a.OverallRecord.split('-')[0]);
+            const winsB = parseInt(b.OverallRecord.split('-')[0]);
+            if (winsA !== winsB) return winsB - winsA;
+            
+            // Then by PF (descending)
+            return b.PF - a.PF;
+        });
+
+        wildcardTeams.forEach((team, index) => {
+            const row = document.createElement('div');
+            row.className = 'standing-row';
+            row.innerHTML = `
+                <div class="rank">${index + 1}</div>
+                <div class="team">${team.TeamName}</div>
+                <div class="record">${team.OverallRecord}</div>
+                <div class="pf">${team.PF}</div>
+            `;
+            wildcardContainer.appendChild(row);
+        });
+    }
+
+    // Call the main function to start the process
+    document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
+</script>
+
+</body>
 </html>
