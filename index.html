@@ -408,29 +408,31 @@
             const contendersContainer = document.querySelector('#divisional-standings-container');
             const pretendersContainer = document.querySelector('#divisional-standings-container');
             
+            defendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+            contendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+            pretendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+
             defenders.forEach((team, index) => {
-                const row = createDivisionalRow(team, index + 1);
-                defendersContainer.insertBefore(row, defendersContainer.querySelector('.defenders-header').nextSibling);
+                const row = createDivisionalRow(team, index + 1, 'defenders');
+                defendersContainer.insertBefore(row, defendersContainer.querySelector('.contenders-header'));
             });
 
             contenders.forEach((team, index) => {
-                const row = createDivisionalRow(team, index + 1);
-                contendersContainer.insertBefore(row, contendersContainer.querySelector('.contenders-header').nextSibling);
+                const row = createDivisionalRow(team, index + 1, 'contenders');
+                contendersContainer.insertBefore(row, contendersContainer.querySelector('.pretenders-header'));
             });
             
             pretenders.forEach((team, index) => {
-                const row = createDivisionalRow(team, index + 1);
-                pretendersContainer.insertBefore(row, pretendersContainer.querySelector('.pretenders-header').nextSibling);
+                const row = createDivisionalRow(team, index + 1, 'pretenders');
+                pretendersContainer.appendChild(row);
             });
         }
 
-        function createDivisionalRow(team, rank) {
+        function createDivisionalRow(team, rank, divisionName) {
             const row = document.createElement('div');
-            row.className = 'standing-row';
+            row.className = `standing-row ${divisionName}-row`;
             if (rank === 1) {
-                row.classList.add(`${team.Division.split(' ').pop().toLowerCase()}-leader`);
-            } else {
-                row.classList.add(`${team.Division.split(' ').pop().toLowerCase()}-row`);
+                row.classList.add(`${divisionName}-leader`);
             }
 
             const overallRecord = `${team.Wins}-${team.Losses}`;
