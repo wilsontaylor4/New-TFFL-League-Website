@@ -186,9 +186,6 @@
         border-radius: 0.5rem;
         text-align: center;
     }
-    .leader {
-        font-weight: 600;
-    }
     /* New styles for The Defenders division */
     .defenders-header {
         background-color: #002d62;
@@ -196,6 +193,9 @@
     }
     .defenders-leader {
         background-color: #d1e1f7;
+    }
+    .defenders-row {
+        background-color: white;
     }
     /* New styles for The Contenders division */
     .contenders-header {
@@ -213,9 +213,23 @@
     .pretenders-leader {
         background-color: #b6d7a8;
     }
-    .defenders-row, .contenders-row, .pretenders-row {
+    .pretenders-row {
         background-color: white;
     }
+    /* Leader and regular row styling */
+    .standing-row.defenders-leader {
+        background-color: #d1e1f7;
+        font-weight: 600;
+    }
+    .standing-row.contenders-leader {
+        background-color: #ffcccc;
+        font-weight: 600;
+    }
+    .standing-row.pretenders-leader {
+        background-color: #b6d7a8;
+        font-weight: 600;
+    }
+    
     /* Power Rankings Table adjustments */
     .power-rankings-header {
         background-color: #3b82f6;
@@ -509,9 +523,6 @@
                 return b.PF - a.PF;
             });
             
-            const leaderWins = teams[0].Wins;
-            const leaderLosses = teams[0].Losses;
-
             teams.forEach((team, index) => {
                 const overallRecord = `${team.Wins}-${team.Losses}`;
                 const row = document.createElement('div');
@@ -522,7 +533,7 @@
                     row.classList.add('wildcard-leader');
                 }
                 
-                const gamesBack = team.GamesBack;
+                const gamesBack = team['Games Back'];
 
                 row.innerHTML = `
                     <div class="rank">${rank}</div>
