@@ -196,10 +196,6 @@
     }
     .defenders-leader {
         background-color: #d1e1f7;
-        font-weight: 600;
-    }
-    .defenders-row {
-        background-color: white;
     }
     /* New styles for The Contenders division */
     .contenders-header {
@@ -208,10 +204,6 @@
     }
     .contenders-leader {
         background-color: #ffcccc;
-        font-weight: 600;
-    }
-    .contenders-row {
-        background-color: white;
     }
     /* New styles for The Pretenders division */
     .pretenders-header {
@@ -220,9 +212,8 @@
     }
     .pretenders-leader {
         background-color: #b6d7a8;
-        font-weight: 600;
     }
-    .pretenders-row {
+    .defenders-row, .contenders-row, .pretenders-row {
         background-color: white;
     }
     /* Power Rankings Table adjustments */
@@ -279,6 +270,9 @@
         background-color: #8a3014;
         color: white;
     }
+    .wildcard-leader {
+        background-color: #f5d5c7;
+    }
     /* New Side-by-Side Layout CSS */
     .flex-container {
         display: flex;
@@ -306,9 +300,10 @@
     /* Adjust Wild Card Standings columns for side-by-side layout */
     #wildcard-standings-container .standing-row > div { text-align: center; }
     #wildcard-standings-container .standing-row .team { text-align: left; }
-    #wildcard-standings-container .standing-row .rank { width: 15%; }
-    #wildcard-standings-container .standing-row .team { width: 45%; }
-    #wildcard-standings-container .standing-row .record { width: 25%; }
+    #wildcard-standings-container .standing-row .rank { width: 10%; }
+    #wildcard-standings-container .standing-row .team { width: 35%; }
+    #wildcard-standings-container .standing-row .record { width: 20%; }
+    #wildcard-standings-container .standing-row .games-back { width: 20%; }
     #wildcard-standings-container .standing-row .pf { width: 15%; }
 
 </style>
@@ -374,6 +369,7 @@
                         <div class="rank">Rank</div>
                         <div class="team">Team</div>
                         <div class="record">Overall Record</div>
+                        <div class="games-back">Games Back</div>
                         <div class="pf">PF</div>
                     </div>
                     </div>
@@ -512,15 +508,27 @@
                 
                 return b.PF - a.PF;
             });
+            
+            const leaderWins = teams[0].Wins;
+            const leaderLosses = teams[0].Losses;
 
             teams.forEach((team, index) => {
                 const overallRecord = `${team.Wins}-${team.Losses}`;
                 const row = document.createElement('div');
                 row.className = 'standing-row';
+                const rank = index + 1;
+                
+                if (rank <= 3) {
+                    row.classList.add('wildcard-leader');
+                }
+                
+                const gamesBack = team.GamesBack;
+
                 row.innerHTML = `
-                    <div class="rank">${index + 1}</div>
+                    <div class="rank">${rank}</div>
                     <div class="team">${team.TeamName}</div>
                     <div class="record">${overallRecord}</div>
+                    <div class="games-back">${gamesBack}</div>
                     <div class="pf">${team.PF}</div>
                 `;
                 wildcardContainer.appendChild(row);
