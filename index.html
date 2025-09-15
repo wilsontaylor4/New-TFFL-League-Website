@@ -279,6 +279,38 @@
         background-color: #8a3014;
         color: white;
     }
+    /* New Side-by-Side Layout CSS */
+    .flex-container {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .flex-container > section {
+        flex: 1;
+    }
+
+    /* Adjust Power Rankings columns for side-by-side layout */
+    #power-rankings-container .power-rankings-header > div,
+    #power-rankings-container .power-rankings-row > div {
+        text-align: center;
+    }
+    #power-rankings-container .power-rankings-header .team,
+    #power-rankings-container .power-rankings-row .team {
+        text-align: left;
+    }
+    #power-rankings-container .power-rankings-row .rank { width: 15%; }
+    #power-rankings-container .power-rankings-row .team { width: 40%; }
+    #power-rankings-container .power-rankings-row .wins-median { width: 25%; }
+    #power-rankings-container .power-rankings-row .sos { width: 20%; }
+
+    /* Adjust Wild Card Standings columns for side-by-side layout */
+    #wildcard-standings-container .standing-row > div { text-align: center; }
+    #wildcard-standings-container .standing-row .team { text-align: left; }
+    #wildcard-standings-container .standing-row .rank { width: 15%; }
+    #wildcard-standings-container .standing-row .team { width: 45%; }
+    #wildcard-standings-container .standing-row .record { width: 25%; }
+    #wildcard-standings-container .standing-row .pf { width: 15%; }
+
 </style>
 </head>
 <body class="bg-gray-100">
@@ -357,30 +389,32 @@
                 </div>
                 </div>
         </section>
-
-        <section id="power-rankings" class="card mt-8">
-            <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
-            <div id="power-rankings-container">
-                <div class="standing-row power-rankings-header">
-                    <div class="rank">Rank</div>
-                    <div class="team">Team</div>
-                    <div class="wins-median">Wins Against the League Average Schedule</div>
-                    <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
-                </div>
-                </div>
-        </section>
-
-        <section id="wildcard-standings" class="card mt-8">
-            <h2 id="wildcard-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
-            <div id="wildcard-standings-container">
-                <div class="standing-row wildcard-header">
-                    <div class="rank">Rank</div>
-                    <div class="team">Team</div>
-                    <div class="record">Overall Record</div>
-                    <div class="pf">PF</div>
-                </div>
-                </div>
-        </section>
+        
+        <div class="flex-container">
+            <section id="power-rankings" class="card">
+                <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
+                <div id="power-rankings-container">
+                    <div class="standing-row power-rankings-header">
+                        <div class="rank">Rank</div>
+                        <div class="team">Team</div>
+                        <div class="wins-median">Wins Against the League Average Schedule</div>
+                        <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
+                    </div>
+                    </div>
+            </section>
+    
+            <section id="wildcard-standings" class="card">
+                <h2 id="wildcard-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
+                <div id="wildcard-standings-container">
+                    <div class="standing-row wildcard-header">
+                        <div class="rank">Rank</div>
+                        <div class="team">Team</div>
+                        <div class="record">Overall Record</div>
+                        <div class="pf">PF</div>
+                    </div>
+                    </div>
+            </section>
+        </div>
 
     </main>
 
