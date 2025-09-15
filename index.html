@@ -324,7 +324,7 @@
             <div id="divisional-standings-container">
                 <div class="division-header defenders-header">The Defenders</div>
                 <div class="standing-row table-header">
-                    <div class="rank">Division Rank</div>
+                    <div class="rank">Rank</div>
                     <div class="team">Team</div>
                     <div class="record">Overall Record</div>
                     <div class="h2h">H2H</div>
@@ -335,7 +335,7 @@
                 </div>
                 <div class="division-header contenders-header">The Contenders</div>
                 <div class="standing-row table-header">
-                    <div class="rank">Division Rank</div>
+                    <div class="rank">Rank</div>
                     <div class="team">Team</div>
                     <div class="record">Overall Record</div>
                     <div class="h2h">H2H</div>
@@ -346,7 +346,7 @@
                 </div>
                 <div class="division-header pretenders-header">The Pretenders</div>
                 <div class="standing-row table-header">
-                    <div class="rank">Division Rank</div>
+                    <div class="rank">Rank</div>
                     <div class="team">Team</div>
                     <div class="record">Overall Record</div>
                     <div class="h2h">H2H</div>
@@ -359,7 +359,7 @@
         </section>
 
         <section id="power-rankings" class="card mt-8">
-            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
+            <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
             <div id="power-rankings-container">
                 <div class="standing-row power-rankings-header">
                     <div class="rank">Rank</div>
@@ -371,7 +371,7 @@
         </section>
 
         <section id="wildcard-standings" class="card mt-8">
-            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
+            <h2 id="wildcard-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
             <div id="wildcard-standings-container">
                 <div class="standing-row wildcard-header">
                     <div class="rank">Rank</div>
@@ -393,6 +393,13 @@
                 const data = await response.json();
 
                 if (data) {
+                    if (data.defenders && data.defenders.length > 0) {
+                        const firstTeam = data.defenders[0];
+                        const weekNumber = firstTeam.H2HWins + firstTeam.H2HLosses;
+                        updateTitle('power-rankings-title', `Power Rankings Through Week ${weekNumber}`);
+                        updateTitle('wildcard-standings-title', `Wild Card Standings Through Week ${weekNumber}`);
+                    }
+                    
                     populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
                     populatePowerRankings(data.powerRankings);
                     populateWildcardStandings(data.wildcard);
@@ -400,6 +407,13 @@
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+            }
+        }
+
+        function updateTitle(id, titleText) {
+            const titleElement = document.getElementById(id);
+            if (titleElement) {
+                titleElement.textContent = titleText;
             }
         }
 
