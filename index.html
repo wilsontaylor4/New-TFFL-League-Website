@@ -385,17 +385,17 @@
     </main>
 
     <script>
-        const dataUrl = 'https://script.google.com/macros/s/AKfycbwPI9_CTdPHimaxiPHuisUvf86qL6yRE2Hju_9sTVTpuc3IZBHnkFMi7PZhhy8lbu-0cQ/exec';
+        const dataUrl = 'https://script.google.com/macros/s/AKfycbyV4imNssspZfCHRCd2hemHMa5jUhcKOkAvudMWNL-mmAyLET9iy1di_a7MyRdx4iqO/exec';
 
         async function fetchDataAndPopulate() {
             try {
                 const response = await fetch(dataUrl);
                 const data = await response.json();
 
-                if (data && data.length > 0) {
-                    populateDivisionalStandings(data);
-                    populatePowerRankings(data);
-                    populateWildcardStandings(data);
+                if (data) {
+                    populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
+                    populatePowerRankings(data.powerRankings);
+                    populateWildcardStandings(data.wildcard);
                 }
 
             } catch (error) {
@@ -403,17 +403,11 @@
             }
         }
 
-        function populateDivisionalStandings(teams) {
+        function populateDivisionalStandings(defenders, contenders, pretenders) {
             const defendersContainer = document.querySelector('#divisional-standings-container');
             const contendersContainer = document.querySelector('#divisional-standings-container');
             const pretendersContainer = document.querySelector('#divisional-standings-container');
             
-            const defenders = teams.filter(t => t.Division === 'The Defenders').sort((a,b) => a.DivisionalWins - b.DivisionalWins);
-            const contenders = teams.filter(t => t.Division === 'The Contenders').sort((a,b) => a.DivisionalWins - b.DivisionalWins);
-            const pretenders = teams.filter(t => t.Division === 'The Pretenders').sort((a,b) => a.DivisionalWins - b.DivisionalWins);
-
-            // The code you provided already had these. You should remove the hardcoded HTML from your file.
-
             defenders.forEach((team, index) => {
                 const row = createDivisionalRow(team, index + 1);
                 defendersContainer.insertBefore(row, defendersContainer.querySelector('.defenders-header').nextSibling);
@@ -460,7 +454,6 @@
         function populatePowerRankings(teams) {
             const powerRankingsContainer = document.getElementById('power-rankings-container');
             
-            // You should also remove the hardcoded HTML from this section.
             powerRankingsContainer.querySelectorAll('.power-rankings-row').forEach(row => row.remove());
             
             const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
@@ -479,41 +472,33 @@
         }
 
         function populateWildcardStandings(teams) {
-    const wildcardContainer = document.getElementById('wildcard-standings-container');
-    
-    // You should also remove the hardcoded HTML from this section in your index.html file.
-    wildcardContainer.querySelectorAll('.standing-row:not(.wildcard-header)').forEach(row => row.remove());
+            const wildcardContainer = document.getElementById('wildcard-standings-container');
 
-    // Filter out division leaders. You may need to update this list dynamically.
-    const divisionLeaders = ['Team A', 'Team C', 'Team E'];
-    const wildcardTeams = teams.filter(team => !divisionLeaders.includes(team.TeamName));
-    
-    // Sort the teams: first by wins (descending), then by PF (descending)
-    wildcardTeams.sort((a, b) => {
-        const winsA = parseInt(a.Wins);
-        const winsB = parseInt(b.Wins);
-        if (winsA !== winsB) {
-            return winsB - winsA;
+            wildcardContainer.querySelectorAll('.standing-row:not(.wildcard-header)').forEach(row => row.remove());
+
+            teams.sort((a, b) => {
+                const winsA = parseInt(a.Wins);
+                const winsB = parseInt(b.Wins);
+                if (winsA !== winsB) {
+                    return winsB - winsA;
+                }
+                
+                return b.PF - a.PF;
+            });
+
+            teams.forEach((team, index) => {
+                const overallRecord = `${team.Wins}-${team.Losses}`;
+                const row = document.createElement('div');
+                row.className = 'standing-row';
+                row.innerHTML = `
+                    <div class="rank">${index + 1}</div>
+                    <div class="team">${team.TeamName}</div>
+                    <div class="record">${overallRecord}</div>
+                    <div class="pf">${team.PF}</div>
+                `;
+                wildcardContainer.appendChild(row);
+            });
         }
-        
-        // Tie-breaker: Points For (PF)
-        return b.PF - a.PF;
-    });
-
-    wildcardTeams.forEach((team, index) => {
-        // Create the overall record string from separate columns
-        const overallRecord = `${team.Wins}-${team.Losses}`;
-        const row = document.createElement('div');
-        row.className = 'standing-row';
-        row.innerHTML = `
-            <div class="rank">${index + 1}</div>
-            <div class="team">${team.TeamName}</div>
-            <div class="record">${overallRecord}</div>
-            <div class="pf">${team.PF}</div>
-        `;
-        wildcardContainer.appendChild(row);
-    });
-}
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
     </script>
