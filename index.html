@@ -424,7 +424,7 @@
                         <div class="rank">Rank</div>
                         <div class="team">Team</div>
                         <div class="wins-median">Wins Against Average</div>
-                        <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
+                        <div class="sos">Strength of Schedule Faced</div>
                     </div>
                     </div>
             </section>
@@ -522,9 +522,21 @@
         function populatePowerRankings(teams) {
             const powerRankingsContainer = document.getElementById('power-rankings-container');
             
-            powerRankingsContainer.querySelectorAll('.power-rankings-row').forEach(row => row.remove());
+            // Clear previous power rankings rows and note
+            powerRankingsContainer.querySelectorAll('.power-rankings-row, .power-rankings-note').forEach(el => el.remove());
             
             const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
+            
+            // Re-add the header row
+            const headerRow = document.createElement('div');
+            headerRow.className = "standing-row power-rankings-header";
+            headerRow.innerHTML = `
+                <div class="rank">Rank</div>
+                <div class="team">Team</div>
+                <div class="wins-median">Wins Against Average</div>
+                <div class="sos">Strength of Schedule Faced</div>
+            `;
+            powerRankingsContainer.appendChild(headerRow);
             
             sortedTeams.forEach(team => {
                 const row = document.createElement('div');
@@ -540,6 +552,18 @@
                 `;
                 powerRankingsContainer.appendChild(row);
             });
+
+            // Add the new note at the bottom
+            const noteContainer = document.createElement('div');
+            noteContainer.className = "text-sm text-gray-500 mt-4 power-rankings-note";
+            noteContainer.innerHTML = `
+                <p><strong>Note:</strong></p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>The Wins Against Average column is a numerical representation of how many teams you would have outscored in any given week, then added together as the season progresses.</li>
+                    <li>For Strength of Schedule, 1 represents the hardest schedule faced to date and 12 represents the easiest schedule faced to date.</li>
+                </ul>
+            `;
+            powerRankingsContainer.appendChild(noteContainer);
         }
 
         function populateWildcardStandings(teams) {
