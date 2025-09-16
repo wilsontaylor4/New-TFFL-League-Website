@@ -134,40 +134,53 @@
         display: block;
     }
 
+    /*---Table Styles---*/
+
     .standing-row {
         display: flex;
         align-items: center;
         border-bottom: 1px solid #e5e7eb;
     }
+
     .standing-row > div {
         padding: 0.5rem;
         text-align: center;
+        width: 15%; /* Default column width */
     }
+
     .standing-row .rank {
         width: 8%;
     }
+
     .standing-row .team {
         width: 25%;
         text-align: left;
     }
+
     .standing-row .record {
         width: 15%;
     }
+
     .standing-row .division-record {
         width: 15%;
     }
+
     .standing-row .h2h {
         width: 15%;
     }
+
     .standing-row .median {
         width: 15%;
     }
+
     .standing-row .pf {
         width: 10%;
     }
+
     .standing-row .pa {
         width: 10%;
     }
+
     .table-header {
         font-weight: 600;
         background-color: #e5e7eb;
@@ -177,6 +190,9 @@
     .table-header .team {
         text-align: left;
     }
+    
+    /*---Division and Leaderboard Colors---*/
+
     .division-header {
         background-color: #2d6f22;
         color: white;
@@ -186,7 +202,6 @@
         border-radius: 0.5rem;
         text-align: center;
     }
-    /* New styles for The Defenders division */
     .defenders-header {
         background-color: #002d62;
         color: white;
@@ -197,7 +212,6 @@
     .defenders-row {
         background-color: white;
     }
-    /* New styles for The Contenders division */
     .contenders-header {
         background-color: #b31b1b;
         color: white;
@@ -205,7 +219,6 @@
     .contenders-leader {
         background-color: #ffcccc;
     }
-    /* New styles for The Pretenders division */
     .pretenders-header {
         background-color: #1a4314;
         color: white;
@@ -216,7 +229,6 @@
     .pretenders-row {
         background-color: white;
     }
-    /* Leader and regular row styling */
     .standing-row.defenders-leader {
         background-color: #d1e1f7;
         font-weight: 600;
@@ -229,54 +241,6 @@
         background-color: #b6d7a8;
         font-weight: 600;
     }
-    
-    /* Power Rankings Table adjustments */
-    .power-rankings-header {
-        background-color: #3b82f6;
-        color: white;
-        border-bottom: 1px solid #e5e7eb;
-    }
-    .power-rankings-header .rank,
-    .power-rankings-header .wins-median,
-    .power-rankings-header .sos {
-        text-align: center;
-    }
-    .power-rankings-header .team {
-        text-align: left;
-    }
-    .power-rankings-row {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #e5e7eb;
-    }
-    .power-rankings-row > div {
-        padding: 0.5rem;
-    }
-    .power-rankings-row .rank {
-        width: 10%;
-    }
-    .power-rankings-row .team {
-        width: 30%;
-        text-align: left;
-    }
-    .power-rankings-row .wins-median {
-        width: 25%;
-    }
-    .power-rankings-row .sos {
-        width: 25%;
-    }
-    .movement {
-        font-size: 0.8rem;
-        margin-left: 0.5rem;
-        font-weight: normal;
-    }
-    .power-rankings-green-bg {
-        background-color: #dcfce7;
-    }
-    .power-rankings-red-bg {
-        background-color: #fee2e2;
-    }
-    /* New Wild Card Standings styles */
     .wildcard-header {
         background-color: #8a3014;
         color: white;
@@ -284,42 +248,70 @@
     .wildcard-leader {
         background-color: #f5d5c7;
     }
-    /* New Side-by-Side Layout CSS */
+
+    /*---Power Rankings Table Adjustments---*/
+
+    .power-rankings-header {
+        background-color: #3b82f6;
+        color: white;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .power-rankings-header .rank,
+    .power-rankings-header .wins-median,
+    .power-rankings-header .sos {
+        text-align: center;
+    }
+
+    .power-rankings-header .team {
+        text-align: left;
+    }
+
+    .power-rankings-row .rank {
+        width: 15% !important;
+        text-align: center !important;
+    }
+
+    .power-rankings-row .team {
+        width: 40% !important;
+        text-align: left !important;
+    }
+
+    .power-rankings-row .wins-median {
+        width: 25% !important;
+        text-align: center !important;
+    }
+
+    .power-rankings-row .sos {
+        width: 20% !important;
+        text-align: center !important;
+    }
+
+    .movement {
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+        font-weight: normal;
+    }
+
+    /*---Other Styling---*/
+
+    .power-rankings-green-bg {
+        background-color: #dcfce7;
+    }
+
+    .power-rankings-red-bg {
+        background-color: #fee2e2;
+    }
+
     .flex-container {
         display: flex;
         gap: 2rem;
         margin-top: 2rem;
     }
+
     .flex-container > section {
         flex: 1;
     }
-
-    /* Adjust Power Rankings columns for side-by-side layout */
-    .standing-row.power-rankings-row .rank {
-        width: 15% !important;
-        text-align: center !important;
-    }
-    .standing-row.power-rankings-row .team {
-        width: 40% !important;
-        text-align: left !important;
-    }
-    .standing-row.power-rankings-row .wins-median {
-        width: 25% !important;
-        text-align: center !important;
-    }
-    .standing-row.power-rankings-row .sos {
-        width: 20% !important;
-        text-align: center !important;
-    }
-    
-    /* Adjust Wild Card Standings columns for side-by-side layout */
-    #wildcard-standings-container .standing-row > div { text-align: center; }
-    #wildcard-standings-container .standing-row .team { text-align: left; }
-    #wildcard-standings-container .standing-row .rank { width: 10%; }
-    #wildcard-standings-container .standing-row .team { width: 35%; }
-    #wildcard-standings-container .standing-row .record { width: 20%; }
-    #wildcard-standings-container .standing-row .games-back { width: 20%; }
-    #wildcard-standings-container .standing-row .pf { width: 15%; }
 
 </style>
 </head>
