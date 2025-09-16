@@ -406,7 +406,7 @@
     </main>
 
     <script>
-        const dataUrl = 'https://script.google.com/macros/s/AKfycbzo2xF3DktMw4LxuKZr4zCWxl6VJsnT64h29ZwSPpKY9kNHwNw_Ua-q22qwsNCyTKi0/exec';
+        const dataUrl = 'https://script.google.com/macros/s/AKfycbxP2BSr_ylNeT1XTo4ANtCjFjgvRBVJvy6ZewRVcG9RJIfFAkfgt0CJIQp4I0QpV2PQ/exec';
 
         async function fetchDataAndPopulate() {
             try {
@@ -471,10 +471,10 @@
                 row.classList.add(`${divisionName}-leader`);
             }
 
-            const overallRecord = `${team.Wins || '—'}-${team.Losses || '—'}`;
-            const h2hRecord = `${team.H2HWins || '—'}-${team.H2HLosses || '—'}`;
-            const medianRecord = `${team.MedianWins || '—'}-${team.MedianLosses || '—'}`;
-            const divisionalRecord = `${team.DivisionalWins || '—'}-${team.DivisionalLosses || '—'}`;
+            const overallRecord = `${team.Wins === 0 ? '0' : team.Wins || '—'}-${team.Losses === 0 ? '0' : team.Losses || '—'}`;
+            const h2hRecord = `${team.H2HWins === 0 ? '0' : team.H2HWins || '—'}-${team.H2HLosses === 0 ? '0' : team.H2HLosses || '—'}`;
+            const medianRecord = `${team.MedianWins === 0 ? '0' : team.MedianWins || '—'}-${team.MedianLosses === 0 ? '0' : team.MedianLosses || '—'}`;
+            const divisionalRecord = `${team.DivisionalWins === 0 ? '0' : team.DivisionalWins || '—'}-${team.DivisionalLosses === 0 ? '0' : team.DivisionalLosses || '—'}`;
 
             row.innerHTML = `
                 <div class="rank">${rank || '—'}</div>
