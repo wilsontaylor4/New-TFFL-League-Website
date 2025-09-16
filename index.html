@@ -471,20 +471,22 @@
                 row.classList.add(`${divisionName}-leader`);
             }
 
-            const overallRecord = `${team.Wins === 0 ? '0' : team.Wins || '—'}-${team.Losses === 0 ? '0' : team.Losses || '—'}`;
-            const h2hRecord = `${team.H2HWins === 0 ? '0' : team.H2HWins || '—'}-${team.H2HLosses === 0 ? '0' : team.H2HLosses || '—'}`;
-            const medianRecord = `${team.MedianWins === 0 ? '0' : team.MedianWins || '—'}-${team.MedianLosses === 0 ? '0' : team.MedianLosses || '—'}`;
-            const divisionalRecord = `${team.DivisionalWins === 0 ? '0' : team.DivisionalWins || '—'}-${team.DivisionalLosses === 0 ? '0' : team.DivisionalLosses || '—'}`;
+            const getVal = (val) => val === 0 ? '0' : val === null || val === undefined ? '—' : val;
+
+            const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
+            const h2hRecord = `${getVal(team.H2HWins)}-${getVal(team.H2HLosses)}`;
+            const medianRecord = `${getVal(team.MedianWins)}-${getVal(team.MedianLosses)}`;
+            const divisionalRecord = `${getVal(team.DivisionalWins)}-${getVal(team.DivisionalLosses)}`;
 
             row.innerHTML = `
-                <div class="rank">${rank || '—'}</div>
-                <div class="team">${team.TeamName || '—'}</div>
+                <div class="rank">${getVal(rank)}</div>
+                <div class="team">${getVal(team.TeamName)}</div>
                 <div class="record">${overallRecord}</div>
                 <div class="h2h">${h2hRecord}</div>
                 <div class="median">${medianRecord}</div>
                 <div class="division-record">${divisionalRecord}</div>
-                <div class="pf">${team.PF || '—'}</div>
-                <div class="pa">${team.PA || '—'}</div>
+                <div class="pf">${getVal(team.PF)}</div>
+                <div class="pa">${getVal(team.PA)}</div>
             `;
             return row;
         }
@@ -499,11 +501,14 @@
             sortedTeams.forEach(team => {
                 const row = document.createElement('div');
                 row.className = 'power-rankings-row';
+                
+                const getVal = (val) => val === 0 ? '0' : val === null || val === undefined ? '—' : val;
+
                 row.innerHTML = `
-                    <div class="rank">${team['Power Rank'] || '—'}</div>
-                    <div class="team">${team.TeamName || '—'} <span class="movement">(${team.Movement || '—'})</span></div>
-                    <div class="wins-median">${Number(team.PowerRankTotal).toFixed(3) || '—'}</div>
-                    <div class="sos">${team.SOS || '—'}</div>
+                    <div class="rank">${getVal(team['Power Rank'])}</div>
+                    <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(team.Movement)})</span></div>
+                    <div class="wins-median">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
+                    <div class="sos">${getVal(team.SOS)}</div>
                 `;
                 powerRankingsContainer.appendChild(row);
             });
@@ -525,7 +530,6 @@
             });
             
             teams.forEach((team, index) => {
-                const overallRecord = `${team.Wins || '—'}-${team.Losses || '—'}`;
                 const row = document.createElement('div');
                 row.className = 'standing-row';
                 const rank = index + 1;
@@ -534,14 +538,17 @@
                     row.classList.add('wildcard-leader');
                 }
                 
-                const gamesBack = team['Games Back'] || '—';
+                const getVal = (val) => val === 0 ? '0' : val === null || val === undefined ? '—' : val;
+
+                const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
+                const gamesBack = getVal(team['Games Back']);
 
                 row.innerHTML = `
-                    <div class="rank">${rank || '—'}</div>
-                    <div class="team">${team.TeamName || '—'}</div>
+                    <div class="rank">${getVal(rank)}</div>
+                    <div class="team">${getVal(team.TeamName)}</div>
                     <div class="record">${overallRecord}</div>
                     <div class="games-back">${gamesBack}</div>
-                    <div class="pf">${team.PF || '—'}</div>
+                    <div class="pf">${getVal(team.PF)}</div>
                 `;
                 wildcardContainer.appendChild(row);
             });
