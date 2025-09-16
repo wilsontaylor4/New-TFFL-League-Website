@@ -537,10 +537,12 @@
                 row.className = 'power-rankings-row';
                 
                 const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+                const movementVal = team.Movement;
+                const movementText = movementVal > 0 ? `+${movementVal}` : movementVal;
 
                 row.innerHTML = `
                     <div class="rank">${getVal(team['Power Rank'])}</div>
-                    <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(team.Movement)})</span></div>
+                    <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(movementText)})</span></div>
                     <div class="wins-median">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
                     <div class="sos">${getVal(team.SOS)}</div>
                 `;
@@ -563,7 +565,7 @@
         function populateWildcardStandings(teams) {
             const wildcardContainer = document.getElementById('wildcard-standings-container');
 
-            // Remove all old rows, including the header and note, for a clean slate
+            // Clear all old rows, including the header and note, for a clean slate
             wildcardContainer.innerHTML = '';
             
             // Re-create and append the header row
@@ -614,10 +616,15 @@
             });
 
             // Create and append the note after all rows have been added
-            const note = document.createElement('p');
-            note.className = "text-sm text-gray-500 mt-4";
-            note.textContent = "Note: Only the top 3 teams in the wild card standings qualify for a playoff spot.";
-            wildcardContainer.appendChild(note);
+            const noteContainer = document.createElement('div');
+            noteContainer.className = "text-sm text-gray-500 mt-4";
+            noteContainer.innerHTML = `
+                <p><strong>Note:</strong></p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Only the top 3 teams in the wild card standings qualify for a playoff spot.</li>
+                </ul>
+            `;
+            wildcardContainer.appendChild(noteContainer);
         }
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
