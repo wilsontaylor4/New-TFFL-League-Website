@@ -495,6 +495,7 @@
             }
 
             const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+            const formatScore = (score) => score ? Number(score).toFixed(2) : '—';
 
             const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
             const h2hRecord = `${getVal(team.H2HWins)}-${getVal(team.H2HLosses)}`;
@@ -508,8 +509,8 @@
                 <div class="h2h">${h2hRecord}</div>
                 <div class="median">${medianRecord}</div>
                 <div class="division-record">${divisionalRecord}</div>
-                <div class="pf">${getVal(team.PF)}</div>
-                <div class="pa">${getVal(team.PA)}</div>
+                <div class="pf">${formatScore(team.PF)}</div>
+                <div class="pa">${formatScore(team.PA)}</div>
             `;
             return row;
         }
@@ -575,6 +576,7 @@
                 }
                 
                 const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+                const formatScore = (score) => score ? Number(score).toFixed(2) : '—';
 
                 const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
                 const gamesBack = getVal(team['Games Back']);
@@ -584,7 +586,7 @@
                     <div class="team">${getVal(team.TeamName)}</div>
                     <div class="record">${overallRecord}</div>
                     <div class="games-back">${gamesBack}</div>
-                    <div class="pf">${getVal(team.PF)}</div>
+                    <div class="pf">${formatScore(team.PF)}</div>
                 `;
                 wildcardContainer.appendChild(row);
             });
