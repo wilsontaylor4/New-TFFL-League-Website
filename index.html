@@ -249,9 +249,8 @@
         align-items: center;
         border-bottom: 1px solid #e5e7eb;
     }
-    /* New specific rule for centering power ranking data */
     .power-rankings-row > div {
-        text-align: center;
+        padding: 0.5rem;
     }
     .power-rankings-row .rank {
         width: 10%;
@@ -539,7 +538,8 @@
             
             sortedTeams.forEach(team => {
                 const row = document.createElement('div');
-                row.className = 'power-rankings-row';
+                // The key change is to add the "standing-row" class here
+                row.className = 'standing-row power-rankings-row'; 
                 
                 const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
 
