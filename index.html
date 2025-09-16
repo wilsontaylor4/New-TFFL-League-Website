@@ -420,13 +420,7 @@
             <section id="power-rankings" class="card">
                 <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
                 <div id="power-rankings-container">
-                    <div class="standing-row power-rankings-header">
-                        <div class="rank">Rank</div>
-                        <div class="team">Team</div>
-                        <div class="wins-median">Wins Against Average</div>
-                        <div class="sos">Strength of Schedule Faced</div>
                     </div>
-                </div>
             </section>
         </div>
 
@@ -522,10 +516,8 @@
         function populatePowerRankings(teams) {
             const powerRankingsContainer = document.getElementById('power-rankings-container');
             
-            // Clear previous power rankings rows and note
-            powerRankingsContainer.querySelectorAll('.power-rankings-row, .power-rankings-note').forEach(el => el.remove());
-            
-            const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
+            // Clear all existing content within the container for a clean slate
+            powerRankingsContainer.innerHTML = '';
             
             // Re-add the header row
             const headerRow = document.createElement('div');
@@ -537,6 +529,8 @@
                 <div class="sos">Strength of Schedule Faced</div>
             `;
             powerRankingsContainer.appendChild(headerRow);
+            
+            const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
             
             sortedTeams.forEach(team => {
                 const row = document.createElement('div');
