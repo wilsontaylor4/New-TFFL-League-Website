@@ -333,30 +333,6 @@
         </div>
     </header>
 
-    <nav class="nav-ribbon">
-        <a href="index.html">Home</a>
-        <a href="history.html">League History</a>
-        <a href="throne.html">Thoughts from the Throne</a>
-        <div class="dropdown">
-            <a href="ownerprofiles.html" class="dropbtn">Owner Profiles</a>
-            <div class="dropdown-content">
-                <a href="bill.html">Bill & Kathy Kuhl</a>
-                <a href="izzy.html">Israel Flores</a>
-                <a href="jake.html">Jake Wolfer</a>
-                <a href="jason.html">Jason Zamora</a>
-                <a href="Jose.html">Jose Granados</a>
-                <a href="mitch.html">Mitch Sennewald</a>
-                <a href="riley.html">Riley Kuhl</a>
-                <a href="ron.html">ron Wilson</a>
-                <a href="stephen.html">Stephen Zamora</a>
-                <a href="taryn.html">Taryn & Josh Sanchez</a>
-                <a href="taylor.html">Taylor Wilson</a>
-                <a href="zach.html">Zach Loya</a>
-            </div>
-        </div>
-        <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
-    </nav>
-
     <main class="container">
         
         <section id="weekly-standings" class="card">
@@ -410,7 +386,8 @@
                         <div class="games-back">Games Back</div>
                         <div class="pf">PF</div>
                     </div>
-                    </div>
+                    <p class="text-sm text-gray-500 mt-4">Note: Only the top 3 teams in the wild card standings qualify for a playoff spot.</p>
+                </div>
             </section>
     
             <section id="power-rankings" class="card">
@@ -494,20 +471,20 @@
                 row.classList.add(`${divisionName}-leader`);
             }
 
-            const overallRecord = `${team.Wins}-${team.Losses}`;
-            const h2hRecord = `${team.H2HWins}-${team.H2HLosses}`;
-            const medianRecord = `${team.MedianWins}-${team.MedianLosses}`;
-            const divisionalRecord = `${team.DivisionalWins}-${team.DivisionalLosses}`;
+            const overallRecord = `${team.Wins || '—'}-${team.Losses || '—'}`;
+            const h2hRecord = `${team.H2HWins || '—'}-${team.H2HLosses || '—'}`;
+            const medianRecord = `${team.MedianWins || '—'}-${team.MedianLosses || '—'}`;
+            const divisionalRecord = `${team.DivisionalWins || '—'}-${team.DivisionalLosses || '—'}`;
 
             row.innerHTML = `
-                <div class="rank">${rank}</div>
-                <div class="team">${team.TeamName}</div>
+                <div class="rank">${rank || '—'}</div>
+                <div class="team">${team.TeamName || '—'}</div>
                 <div class="record">${overallRecord}</div>
                 <div class="h2h">${h2hRecord}</div>
                 <div class="median">${medianRecord}</div>
                 <div class="division-record">${divisionalRecord}</div>
-                <div class="pf">${team.PF}</div>
-                <div class="pa">${team.PA}</div>
+                <div class="pf">${team.PF || '—'}</div>
+                <div class="pa">${team.PA || '—'}</div>
             `;
             return row;
         }
@@ -523,10 +500,10 @@
                 const row = document.createElement('div');
                 row.className = 'power-rankings-row';
                 row.innerHTML = `
-                    <div class="rank">${team['Power Rank']}</div>
-                    <div class="team">${team.TeamName} <span class="movement">(${team.Movement})</span></div>
-                    <div class="wins-median">${Number(team.PowerRankTotal).toFixed(3)}</div>
-                    <div class="sos">${team.SOS}</div>
+                    <div class="rank">${team['Power Rank'] || '—'}</div>
+                    <div class="team">${team.TeamName || '—'} <span class="movement">(${team.Movement || '—'})</span></div>
+                    <div class="wins-median">${Number(team.PowerRankTotal).toFixed(3) || '—'}</div>
+                    <div class="sos">${team.SOS || '—'}</div>
                 `;
                 powerRankingsContainer.appendChild(row);
             });
@@ -548,7 +525,7 @@
             });
             
             teams.forEach((team, index) => {
-                const overallRecord = `${team.Wins}-${team.Losses}`;
+                const overallRecord = `${team.Wins || '—'}-${team.Losses || '—'}`;
                 const row = document.createElement('div');
                 row.className = 'standing-row';
                 const rank = index + 1;
@@ -557,14 +534,14 @@
                     row.classList.add('wildcard-leader');
                 }
                 
-                const gamesBack = team['Games Back'];
+                const gamesBack = team['Games Back'] || '—';
 
                 row.innerHTML = `
-                    <div class="rank">${rank}</div>
-                    <div class="team">${team.TeamName}</div>
+                    <div class="rank">${rank || '—'}</div>
+                    <div class="team">${team.TeamName || '—'}</div>
                     <div class="record">${overallRecord}</div>
                     <div class="games-back">${gamesBack}</div>
-                    <div class="pf">${team.PF}</div>
+                    <div class="pf">${team.PF || '—'}</div>
                 `;
                 wildcardContainer.appendChild(row);
             });
