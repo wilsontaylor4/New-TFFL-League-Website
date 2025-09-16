@@ -406,7 +406,7 @@
     </main>
 
     <script>
-        const dataUrl = 'https://script.google.com/macros/s/AKfycbxP2BSr_ylNeT1XTo4ANtCjFjgvRBVJvy6ZewRVcG9RJIfFAkfgt0CJIQp4I0QpV2PQ/exec';
+        const dataUrl = 'https://script.google.com/macros/s/AKfycbw0yxPcjSDePxbjpMshXRE_w9ac767nYYED5rxT7_H2wUywLEODDKns1HBZ-6fOXmgY/exec';
 
         async function fetchDataAndPopulate() {
             try {
@@ -530,7 +530,6 @@
             });
             
             teams.forEach((team, index) => {
-                const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
                 const row = document.createElement('div');
                 row.className = 'standing-row';
                 const rank = index + 1;
@@ -541,6 +540,7 @@
                 
                 const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
 
+                const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
                 const gamesBack = getVal(team['Games Back']);
 
                 row.innerHTML = `
