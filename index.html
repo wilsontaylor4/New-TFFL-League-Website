@@ -295,20 +295,28 @@
     }
 
     /* Adjust Power Rankings columns for side-by-side layout */
-    #power-rankings-container .power-rankings-header > div,
-    #power-rankings-container .power-rankings-row .rank,
-    #power-rankings-container .power-rankings-row .wins-median,
-    #power-rankings-container .power-rankings-row .sos {
+    #power-rankings-container .power-rankings-header > div {
         text-align: center;
     }
-    #power-rankings-container .power-rankings-header .team,
-    #power-rankings-container .power-rankings-row .team {
+    #power-rankings-container .power-rankings-header .team {
         text-align: left;
     }
-    #power-rankings-container .power-rankings-row .rank { width: 15%; }
-    #power-rankings-container .power-rankings-row .team { width: 40%; }
-    #power-rankings-container .power-rankings-row .wins-median { width: 25%; }
-    #power-rankings-container .power-rankings-row .sos { width: 20%; }
+    #power-rankings-container .power-rankings-row .rank {
+        width: 15%;
+        text-align: center;
+    }
+    #power-rankings-container .power-rankings-row .team {
+        width: 40%;
+        text-align: left;
+    }
+    #power-rankings-container .power-rankings-row .wins-median {
+        width: 25%;
+        text-align: center;
+    }
+    #power-rankings-container .power-rankings-row .sos {
+        width: 20%;
+        text-align: center;
+    }
 
     /* Adjust Wild Card Standings columns for side-by-side layout */
     #wildcard-standings-container .standing-row > div { text-align: center; }
