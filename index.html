@@ -251,14 +251,13 @@
     }
     .power-rankings-row > div {
         padding: 0.5rem;
-        text-align: center; /* This is the key change */
     }
     .power-rankings-row .rank {
         width: 10%;
     }
     .power-rankings-row .team {
         width: 30%;
-        text-align: left; /* Overrides the center alignment for team names */
+        text-align: left;
     }
     .power-rankings-row .wins-median {
         width: 25%;
@@ -297,7 +296,9 @@
 
     /* Adjust Power Rankings columns for side-by-side layout */
     #power-rankings-container .power-rankings-header > div,
-    #power-rankings-container .power-rankings-row > div {
+    #power-rankings-container .power-rankings-row .rank,
+    #power-rankings-container .power-rankings-row .wins-median,
+    #power-rankings-container .power-rankings-row .sos {
         text-align: center;
     }
     #power-rankings-container .power-rankings-header .team,
