@@ -100,6 +100,7 @@
         position: relative;
         display: flex;
         align-items: center;
+        padding-bottom: 0.5rem;
     }
 
     .dropdown-content {
@@ -111,7 +112,7 @@
         z-index: 1;
         border-radius: 0.5rem;
         padding: 0.5rem 0;
-        margin-top: 0.5rem;
+        margin-top: 0;
         left: 50%;
         transform: translateX(-50%);
         top: 100%;
@@ -319,10 +320,11 @@
     #wildcard-standings-container .standing-row > div { text-align: center; }
     #wildcard-standings-container .standing-row .team { text-align: left; }
     #wildcard-standings-container .standing-row .rank { width: 10%; }
-    #wildcard-standings-container .standing-row .team { width: 35%; }
-    #wildcard-standings-container .standing-row .record { width: 20%; }
-    #wildcard-standings-container .standing-row .games-back { width: 20%; }
-    #wildcard-standings-container .standing-row .pf { width: 15%; }
+    #wildcard-standings-container .standing-row .team { width: 30%; }
+    #wildcard-standings-container .standing-row .record { width: 15%; }
+    #wildcard-standings-container .standing-row .games-back { width: 15%; }
+    #wildcard-standings-container .standing-row .sos-remaining { width: 20%; }
+    #wildcard-standings-container .standing-row .pf { width: 10%; }
 
 </style>
 </head>
@@ -351,7 +353,7 @@
                 <a href="Jose.html">Jose Granados</a>
                 <a href="mitch.html">Mitch Sennewald</a>
                 <a href="riley.html">Riley Kuhl</a>
-                <a href="ron.html">Ron Wilson</a>
+                <a href="ron.html">ron Wilson</a>
                 <a href="stephen.html">Stephen Zamora</a>
                 <a href="taryn.html">Taryn & Josh Sanchez</a>
                 <a href="taylor.html">Taylor Wilson</a>
@@ -412,6 +414,7 @@
                         <div class="team">Team</div>
                         <div class="record">Overall Record</div>
                         <div class="games-back">Games Back</div>
+                        <div class="sos-remaining">Strength of Schedule Remaining</div>
                         <div class="pf">PF</div>
                     </div>
                 </div>
@@ -576,6 +579,7 @@
                 <div class="team">Team</div>
                 <div class="record">Overall Record</div>
                 <div class="games-back">Games Back</div>
+                <div class="sos-remaining">Strength of Schedule Remaining</div>
                 <div class="pf">PF</div>
             `;
             wildcardContainer.appendChild(headerRow);
@@ -604,12 +608,14 @@
 
                 const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
                 const gamesBack = getVal(team['Games Back']);
+                const sosRemaining = getVal(team['SOSRemain']);
 
                 row.innerHTML = `
                     <div class="rank">${getVal(rank)}</div>
                     <div class="team">${getVal(team.TeamName)}</div>
                     <div class="record">${overallRecord}</div>
                     <div class="games-back">${gamesBack}</div>
+                    <div class="sos-remaining">${sosRemaining}</div>
                     <div class="pf">${formatScore(team.PF)}</div>
                 `;
                 wildcardContainer.appendChild(row);
