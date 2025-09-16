@@ -130,4 +130,66 @@
             background-color: #4b5563;
         }
 
-        .dropdown:hover .
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .owner-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="header bg-gray-800">
+        <div class="container flex flex-col items-center">
+            <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
+            <h1 class="text-4xl font-bold">The TFFL Wiki</h1>
+            <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+            <img src="Sleeper Logo.png" alt="Sleeper App Logo" class="sleeper-logo">
+        </div>
+    </header>
+
+    <nav class="nav-ribbon">
+        <a href="index.html">Home</a>
+        <a href="history.html">League History</a>
+        <a href="throne.html">Thoughts from the Throne</a>
+        <div class="dropdown">
+            <a href="ownerprofiles.html" class="dropbtn">Owner Profiles</a>
+            <div class="dropdown-content">
+                <a href="bill.html">Bill & Kathy Kuhl</a>
+                <a href="izzy.html">Israel Flores</a>
+                <a href="jake.html">Jake Wolfer</a>
+                <a href="jason.html">Jason Zamora</a>
+                <a href="Jose.html">Jose Granados</a>
+                <a href="mitch.html">Mitch Sennewald</a>
+                <a href="riley.html">Riley Kuhl</a>
+                <a href="ron.html">Ron Wilson</a>
+                <a href="stephen.html">Stephen Zamora</a>
+                <a href="taryn.html">Taryn & Josh Sanchez</a>
+                <a href="taylor.html">Taylor Wilson</a>
+                <a href="zach.html">Zach Loya</a>
+            </div>
+        </div>
+        <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
+    </nav>
+
+    <main class="container">
+        </main>
+</body>
+</html>
