@@ -186,9 +186,6 @@
         border-radius: 0.5rem;
         text-align: center;
     }
-    .leader {
-        font-weight: 600;
-    }
     /* New styles for The Defenders division */
     .defenders-header {
         background-color: #002d62;
@@ -196,7 +193,6 @@
     }
     .defenders-leader {
         background-color: #d1e1f7;
-        font-weight: 600;
     }
     .defenders-row {
         background-color: white;
@@ -208,10 +204,6 @@
     }
     .contenders-leader {
         background-color: #ffcccc;
-        font-weight: 600;
-    }
-    .contenders-row {
-        background-color: white;
     }
     /* New styles for The Pretenders division */
     .pretenders-header {
@@ -220,11 +212,24 @@
     }
     .pretenders-leader {
         background-color: #b6d7a8;
-        font-weight: 600;
     }
     .pretenders-row {
         background-color: white;
     }
+    /* Leader and regular row styling */
+    .standing-row.defenders-leader {
+        background-color: #d1e1f7;
+        font-weight: 600;
+    }
+    .standing-row.contenders-leader {
+        background-color: #ffcccc;
+        font-weight: 600;
+    }
+    .standing-row.pretenders-leader {
+        background-color: #b6d7a8;
+        font-weight: 600;
+    }
+    
     /* Power Rankings Table adjustments */
     .power-rankings-header {
         background-color: #3b82f6;
@@ -279,6 +284,42 @@
         background-color: #8a3014;
         color: white;
     }
+    .wildcard-leader {
+        background-color: #f5d5c7;
+    }
+    /* New Side-by-Side Layout CSS */
+    .flex-container {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .flex-container > section {
+        flex: 1;
+    }
+
+    /* Adjust Power Rankings columns for side-by-side layout */
+    #power-rankings-container .power-rankings-header > div,
+    #power-rankings-container .power-rankings-row > div {
+        text-align: center;
+    }
+    #power-rankings-container .power-rankings-header .team,
+    #power-rankings-container .power-rankings-row .team {
+        text-align: left;
+    }
+    #power-rankings-container .power-rankings-row .rank { width: 15%; }
+    #power-rankings-container .power-rankings-row .team { width: 40%; }
+    #power-rankings-container .power-rankings-row .wins-median { width: 25%; }
+    #power-rankings-container .power-rankings-row .sos { width: 20%; }
+
+    /* Adjust Wild Card Standings columns for side-by-side layout */
+    #wildcard-standings-container .standing-row > div { text-align: center; }
+    #wildcard-standings-container .standing-row .team { text-align: left; }
+    #wildcard-standings-container .standing-row .rank { width: 10%; }
+    #wildcard-standings-container .standing-row .team { width: 35%; }
+    #wildcard-standings-container .standing-row .record { width: 20%; }
+    #wildcard-standings-container .standing-row .games-back { width: 20%; }
+    #wildcard-standings-container .standing-row .pf { width: 15%; }
+
 </style>
 </head>
 <body class="bg-gray-100">
@@ -292,25 +333,10 @@
         </div>
     </header>
 
-    <nav class="nav-ribbon">
-        <a href="#weekly-standings">Home</a>
-        <div class="dropdown">
-            <a href="#">League History</a>
-            <div class="dropdown-content">
-                <a href="#">Champions</a>
-                <a href="#">Hall of Fame</a>
-                <a href="#">Defensive Player of the Year</a>
-                <a href="#">Offensive Player of the Year</a>
-                <a href="#">Weekly Records</a>
-                <a href="#">All-Time Records</a>
-            </div>
-        </div>
-    </nav>
-
     <main class="container">
         
         <section id="weekly-standings" class="card">
-            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Divisional Standings</h2>
+            <h2 id="divisional-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Divisional Standings</h2>
             
             <div id="divisional-standings-container">
                 <div class="division-header defenders-header">The Defenders</div>
@@ -348,30 +374,34 @@
                 </div>
                 </div>
         </section>
-
-        <section id="power-rankings" class="card mt-8">
-            <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
-            <div id="power-rankings-container">
-                <div class="standing-row power-rankings-header">
-                    <div class="rank">Rank</div>
-                    <div class="team">Team</div>
-                    <div class="wins-median">Wins Against the League Average Schedule</div>
-                    <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
+        
+        <div class="flex-container">
+            <section id="wildcard-standings" class="card">
+                <h2 id="wildcard-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
+                <div id="wildcard-standings-container">
+                    <div class="standing-row wildcard-header">
+                        <div class="rank">Rank</div>
+                        <div class="team">Team</div>
+                        <div class="record">Overall Record</div>
+                        <div class="games-back">Games Back</div>
+                        <div class="pf">PF</div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">Note: Only the top 3 teams in the wild card standings qualify for a playoff spot.</p>
                 </div>
-                </div>
-        </section>
-
-        <section id="wildcard-standings" class="card mt-8">
-            <h2 id="wildcard-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
-            <div id="wildcard-standings-container">
-                <div class="standing-row wildcard-header">
-                    <div class="rank">Rank</div>
-                    <div class="team">Team</div>
-                    <div class="record">Overall Record</div>
-                    <div class="pf">PF</div>
-                </div>
-                </div>
-        </section>
+            </section>
+    
+            <section id="power-rankings" class="card">
+                <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
+                <div id="power-rankings-container">
+                    <div class="standing-row power-rankings-header">
+                        <div class="rank">Rank</div>
+                        <div class="team">Team</div>
+                        <div class="wins-median">Wins Against the League Average Schedule</div>
+                        <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
+                    </div>
+                    </div>
+            </section>
+        </div>
 
     </main>
 
@@ -387,6 +417,7 @@
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
                         const weekNumber = firstTeam.H2HWins + firstTeam.H2HLosses;
+                        updateTitle('divisional-standings-title', `Divisional Standings Through Week ${weekNumber}`);
                         updateTitle('power-rankings-title', `Power Rankings Through Week ${weekNumber}`);
                         updateTitle('wildcard-standings-title', `Wild Card Standings Through Week ${weekNumber}`);
                     }
@@ -440,20 +471,22 @@
                 row.classList.add(`${divisionName}-leader`);
             }
 
-            const overallRecord = `${team.Wins}-${team.Losses}`;
-            const h2hRecord = `${team.H2HWins}-${team.H2HLosses}`;
-            const medianRecord = `${team.MedianWins}-${team.MedianLosses}`;
-            const divisionalRecord = `${team.DivisionalWins}-${team.DivisionalLosses}`;
+            const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+
+            const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
+            const h2hRecord = `${getVal(team.H2HWins)}-${getVal(team.H2HLosses)}`;
+            const medianRecord = `${getVal(team.MedianWins)}-${getVal(team.MedianLosses)}`;
+            const divisionalRecord = `${getVal(team.DivisionalWins)}-${getVal(team.DivisionalLosses)}`;
 
             row.innerHTML = `
-                <div class="rank">${rank}</div>
-                <div class="team">${team.TeamName}</div>
+                <div class="rank">${getVal(rank)}</div>
+                <div class="team">${getVal(team.TeamName)}</div>
                 <div class="record">${overallRecord}</div>
                 <div class="h2h">${h2hRecord}</div>
                 <div class="median">${medianRecord}</div>
                 <div class="division-record">${divisionalRecord}</div>
-                <div class="pf">${team.PF}</div>
-                <div class="pa">${team.PA}</div>
+                <div class="pf">${getVal(team.PF)}</div>
+                <div class="pa">${getVal(team.PA)}</div>
             `;
             return row;
         }
@@ -468,11 +501,14 @@
             sortedTeams.forEach(team => {
                 const row = document.createElement('div');
                 row.className = 'power-rankings-row';
+                
+                const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+
                 row.innerHTML = `
-                    <div class="rank">${team['Power Rank']}</div>
-                    <div class="team">${team.TeamName} <span class="movement">(${team.Movement})</span></div>
-                    <div class="wins-median">${Number(team.PowerRankTotal).toFixed(3)}</div>
-                    <div class="sos">${team.SOS}</div>
+                    <div class="rank">${getVal(team['Power Rank'])}</div>
+                    <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(team.Movement)})</span></div>
+                    <div class="wins-median">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
+                    <div class="sos">${getVal(team.SOS)}</div>
                 `;
                 powerRankingsContainer.appendChild(row);
             });
@@ -492,16 +528,27 @@
                 
                 return b.PF - a.PF;
             });
-
+            
             teams.forEach((team, index) => {
-                const overallRecord = `${team.Wins}-${team.Losses}`;
                 const row = document.createElement('div');
                 row.className = 'standing-row';
+                const rank = index + 1;
+                
+                if (rank <= 3) {
+                    row.classList.add('wildcard-leader');
+                }
+                
+                const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+
+                const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
+                const gamesBack = getVal(team['Games Back']);
+
                 row.innerHTML = `
-                    <div class="rank">${index + 1}</div>
-                    <div class="team">${team.TeamName}</div>
+                    <div class="rank">${getVal(rank)}</div>
+                    <div class="team">${getVal(team.TeamName)}</div>
                     <div class="record">${overallRecord}</div>
-                    <div class="pf">${team.PF}</div>
+                    <div class="games-back">${gamesBack}</div>
+                    <div class="pf">${getVal(team.PF)}</div>
                 `;
                 wildcardContainer.appendChild(row);
             });
