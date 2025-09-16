@@ -249,8 +249,9 @@
         align-items: center;
         border-bottom: 1px solid #e5e7eb;
     }
+    /* New specific rule for centering power ranking data */
     .power-rankings-row > div {
-        padding: 0.5rem;
+        text-align: center;
     }
     .power-rankings-row .rank {
         width: 10%;
@@ -524,7 +525,15 @@
         function populatePowerRankings(teams) {
             const powerRankingsContainer = document.getElementById('power-rankings-container');
             
-            powerRankingsContainer.querySelectorAll('.power-rankings-row').forEach(row => row.remove());
+            // Recreate the header and clear old data rows
+            powerRankingsContainer.innerHTML = `
+                <div class="standing-row power-rankings-header">
+                    <div class="rank">Rank</div>
+                    <div class="team">Team</div>
+                    <div class="wins-median">Wins Against the League Average Schedule</div>
+                    <div class="sos">Strength of Schedule<br>(1=hardest, 12=easiest)</div>
+                </div>
+            `;
             
             const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
             
