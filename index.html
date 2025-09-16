@@ -410,7 +410,6 @@
                         <div class="games-back">Games Back</div>
                         <div class="pf">PF</div>
                     </div>
-                    <p class="text-sm text-gray-500 mt-4">Note: Only the top 3 teams in the wild card standings qualify for a playoff spot.</p>
                 </div>
             </section>
     
@@ -541,7 +540,20 @@
         function populateWildcardStandings(teams) {
             const wildcardContainer = document.getElementById('wildcard-standings-container');
 
-            wildcardContainer.querySelectorAll('.standing-row:not(.wildcard-header)').forEach(row => row.remove());
+            // Remove all old rows, including the header and note, for a clean slate
+            wildcardContainer.innerHTML = '';
+            
+            // Re-create and append the header row
+            const headerRow = document.createElement('div');
+            headerRow.className = "standing-row wildcard-header";
+            headerRow.innerHTML = `
+                <div class="rank">Rank</div>
+                <div class="team">Team</div>
+                <div class="record">Overall Record</div>
+                <div class="games-back">Games Back</div>
+                <div class="pf">PF</div>
+            `;
+            wildcardContainer.appendChild(headerRow);
 
             teams.sort((a, b) => {
                 const winsA = parseInt(a.Wins);
@@ -576,6 +588,12 @@
                 `;
                 wildcardContainer.appendChild(row);
             });
+
+            // Create and append the note after all rows have been added
+            const note = document.createElement('p');
+            note.className = "text-sm text-gray-500 mt-4";
+            note.textContent = "Note: Only the top 3 teams in the wild card standings qualify for a playoff spot.";
+            wildcardContainer.appendChild(note);
         }
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
