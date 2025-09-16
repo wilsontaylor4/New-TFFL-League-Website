@@ -353,7 +353,7 @@
                 <a href="Jose.html">Jose Granados</a>
                 <a href="mitch.html">Mitch Sennewald</a>
                 <a href="riley.html">Riley Kuhl</a>
-                <a href="ron.html">ron Wilson</a>
+                <a href="ron.html">Ron Wilson</a>
                 <a href="stephen.html">Stephen Zamora</a>
                 <a href="taryn.html">Taryn & Josh Sanchez</a>
                 <a href="taylor.html">Taylor Wilson</a>
@@ -442,7 +442,7 @@
                         const firstTeam = data.defenders[0];
                         const weekNumber = firstTeam.H2HWins + firstTeam.H2HLosses;
                         updateTitle('divisional-standings-title', `Divisional Standings Through Week ${weekNumber}`);
-                        updateTitle('power-rankings-title', `Power Rankings Through Week ${weekNumber}`);
+                        updateTitle('power-ankings-title', `Power Rankings Through Week ${weekNumber}`);
                         updateTitle('wildcard-standings-title', `Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
@@ -628,6 +628,7 @@
                 <p><strong>Note:</strong></p>
                 <ul class="list-disc list-inside mt-2">
                     <li>Only the top 3 teams in the wild card standings qualify for a playoff spot.</li>
+                    <li>For Strength of Schedule, 1 represents the hardest schedule faced to date and 12 represents the easiest schedule faced to date.</li>
                 </ul>
             `;
             wildcardContainer.appendChild(noteContainer);
