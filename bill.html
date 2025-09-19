@@ -153,6 +153,14 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
+
+        /* New styles for highlighting */
+        .championship-row {
+            background-color: #ffd700; /* Gold */
+        }
+        .division-title-cell {
+            background-color: #c8e6c9; /* Light green */
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -202,7 +210,9 @@
                         <tr>
                             <th>Season</th>
                             <th>Team Name</th>
-                            <th>Record</th>
+                            <th>Total Record</th>
+                            <th>H2H Record</th>
+                            <th>League Median Record</th>
                             <th>Final Standing</th>
                             <th>Championship</th>
                             <th>Division Title</th>
@@ -211,40 +221,50 @@
                     <tbody>
                         <tr>
                             <td>2024</td>
-                            <td>Team Kuhl</td>
-                            <td>14-14</td>
-                            <td>5</td>
+                            <td>Playing it Kuhl</td>
+                            <td>4-24</td>
+                            <td>4-10</td>
+                            <td>0-14</td>
+                            <td>12</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2023</td>
                             <td>Team Kuhl</td>
-                            <td>10-18</td>
-                            <td>12</td>
+                            <td>16-12</td>
+                            <td>7-7</td>
+                            <td>9-5</td>
+                            <td>5</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2022</td>
                             <td>Team Kuhl</td>
-                            <td>11-17</td>
+                            <td>9-19</td>
+                            <td>5-9</td>
+                            <td>4-10</td>
                             <td>10</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
-                        <tr>
+                        <tr class="championship-row">
                             <td>2021</td>
                             <td>Team Kuhl</td>
                             <td>17-11</td>
+                            <td>9-5</td>
+                            <td>8-6</td>
                             <td>1</td>
-                            <td>Yes</td>
+                            <td><strong>Yes</strong></td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2020</td>
                             <td>Team Kuhl</td>
-                            <td>12-14</td>
+                            <td>16-10</td>
+                            <td>7-6</td>
+                            <td>9-4</td>
                             <td>6</td>
                             <td>No</td>
                             <td>No</td>
@@ -252,24 +272,30 @@
                         <tr>
                             <td>2019</td>
                             <td>Team Kuhl</td>
-                            <td>13-13</td>
+                            <td>14-12</td>
+                            <td>7-6</td>
+                            <td>7-6</td>
                             <td>5</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
-                        <tr>
+                        <tr class="championship-row">
                             <td>2018</td>
                             <td>Team Kuhl</td>
                             <td>10-3</td>
+                            <td>10-3</td>
+                            <td>---</td>
                             <td>1</td>
-                            <td>Yes</td>
+                            <td><strong>Yes</strong></td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2017</td>
                             <td>Team Kuhl</td>
-                            <td>4-9</td>
-                            <td>9</td>
+                            <td>8-4</td>
+                            <td>8-4</td>
+                            <td>---</td>
+                            <td>4</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
@@ -277,7 +303,9 @@
                             <td>2016</td>
                             <td>Team Kuhl</td>
                             <td>7-6</td>
-                            <td>7</td>
+                            <td>7-6</td>
+                            <td>---</td>
+                            <td>6</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
@@ -285,14 +313,28 @@
                             <td>2015</td>
                             <td>Team Kuhl</td>
                             <td>8-5</td>
-                            <td>5</td>
+                            <td>8-5</td>
+                            <td>---</td>
+                            <td>7</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2014</td>
                             <td>Team Kuhl</td>
-                            <td>7-6</td>
+                            <td>5-8</td>
+                            <td>5-8</td>
+                            <td>---</td>
+                            <td>7</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                         <tr>
+                            <td>2013</td>
+                            <td>Team Kuhl</td>
+                            <td>5-8</td>
+                            <td>5-8</td>
+                            <td>---</td>
                             <td>7</td>
                             <td>No</td>
                             <td>No</td>
@@ -300,13 +342,13 @@
                     </tbody>
                 </table>
             </div>
-            <p class="mt-4 text-sm text-gray-500">Note: The record format changed after the 2018 season to include League Median scores.</p>
+            <p class="mt-4 text-sm text-gray-500">Note: League Median records were not tracked before the 2019 season.</p>
         </section>
 
         <section id="graphs" class="card mt-8">
             <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
                 <img src="billwin.png" alt="Bill & Kathy Kuhl Career H2H Win Percentage Over Time" class="w-full md:w-1/2 h-auto object-contain">
-                <img src="billwin%.png" alt="Bill & Kathy Kuhl Win Percentage by Season" class="w-full md:w-1/2 h-auto object-contain">
+                <img src="billwinper.png" alt="Bill & Kathy Kuhl Win Percentage by Season" class="w-full md:w-1/2 h-auto object-contain">
             </div>
         </section>
 
