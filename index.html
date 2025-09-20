@@ -338,47 +338,58 @@
         .flex-container {
             flex-direction: column;
         }
-        
-        /* Adjust header for mobile */
-        .header {
-            padding: 0.5rem 0;
-        }
-        .header h1 {
-            font-size: 1.5rem;
-        }
-        .header p {
-            margin-top: 0.25rem;
-        }
-        .logo, .sleeper-logo {
-            max-height: 50px;
-            max-width: 50px;
-            margin: 0.25rem 0;
-        }
 
         /* Adjust padding and font sizes for better mobile readability */
         .container {
             padding: 1rem;
         }
+        h1 {
+            font-size: 2rem;
+        }
+        .header {
+            flex-direction: column;
+            padding: 1rem 0.5rem;
+        }
+        .logo, .sleeper-logo {
+            position: static;
+            transform: none;
+            max-height: 100px;
+            max-width: 100px;
+            margin: 0.5rem 0;
+        }
 
         /* Adjust nav ribbon for mobile */
         .nav-ribbon {
-            flex-direction: column;
-            gap: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            gap: 0.5rem;
         }
         .nav-ribbon a {
-            width: 100%;
+            flex-grow: 1;
             text-align: center;
-            padding: 0.5rem 0;
+            font-size: 0.75rem; /* Reduced font size for mobile nav */
+            padding: 0.5rem 0.25rem;
+        }
+        .dropdown {
+            flex-grow: 1;
         }
         .dropdown-content {
-            position: static;
-            transform: none;
-            width: 100%;
-            box-shadow: none;
+            position: absolute;
+            background-color: #1f2937;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
             margin-top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
         }
         .dropdown:hover .dropdown-content {
-            display: none; /* Hide dropdown on hover to avoid issues */
+            display: block;
         }
         
         .standing-row, .power-rankings-row {
@@ -447,7 +458,7 @@
         }
         /* Hide less critical columns in tables */
         .standing-row .record, .standing-row .median, .standing-row .division-record, .standing-row .pf, .standing-row .pa,
-        .wildcard-standings .standing-row .record, .wildcard-standings .standing-row .pf,
+        .wildcard-standings .standing-row .record, .wildcard-standings .standing-row .games-back, .wildcard-standings .standing-row .sos-remaining, .wildcard-standings .standing-row .pf,
         .power-rankings-row .wins-median, .power-rankings-row .sos {
             display: none;
         }
