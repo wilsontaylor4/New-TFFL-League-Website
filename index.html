@@ -445,6 +445,28 @@
             display: none;
         }
     }
+    
+    /* Show mobile headers and make them compact */
+    @media screen and (max-width: 768px) and (orientation: portrait) {
+        .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            border-radius: 0.5rem;
+        }
+        .standing-row.table-header > div, .standing-row.wildcard-header > div, .standing-row.power-rankings-header > div {
+            padding: 0.25rem;
+        }
+        /* Make headers for hidden columns not take up space */
+        .standing-row.table-header .record, .standing-row.table-header .median, .standing-row.table-header .division-record, .standing-row.table-header .pa,
+        .standing-row.wildcard-header .games-back, .standing-row.wildcard-header .sos-remaining, .standing-row.wildcard-header .pf,
+        .standing-row.power-rankings-header .wins-median, .standing-row.power-rankings-header .sos {
+            display: none;
+        }
+    }
 </style>
 </head>
 <body class="bg-gray-100">
