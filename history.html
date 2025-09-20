@@ -153,11 +153,6 @@
                 display: none;
             }
             
-            /* Stack the main sections vertically */
-            .flex-container {
-                flex-direction: column;
-            }
-            
             /* Adjust header for mobile */
             .header {
                 flex-direction: column;
@@ -173,8 +168,8 @@
             .logo, .sleeper-logo {
                 position: static;
                 transform: none;
-                max-height: 50px;
-                max-width: 50px;
+                max-height: 100px;
+                max-width: 100px;
                 margin: 0.25rem 0;
             }
     
@@ -189,7 +184,7 @@
             .nav-ribbon a {
                 flex-grow: 1;
                 text-align: center;
-                font-size: 0.75rem; /* Reduced font size for mobile nav */
+                font-size: 0.75rem;
                 padding: 0.5rem 0.25rem;
             }
             .dropdown {
@@ -198,19 +193,6 @@
             .show-on-portrait {
                 display: block;
             }
-            
-            .standing-row, .power-rankings-row {
-                display: block;
-                width: 100%;
-                border: 1px solid #e5e7eb;
-                border-radius: 0.5rem;
-                margin-bottom: 1rem;
-            }
-            /* Hide headers for mobile view of tables */
-            .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
-                display: none;
-            }
-            
         }
         /* Media query for portrait mode (and small screens) */
         @media screen and (orientation: portrait) and (max-width: 768px) {
@@ -233,73 +215,6 @@
             /* Show the simplified link */
             .show-on-portrait {
               display: block;
-            }
-            
-            /* Simplified list-like view for tables */
-            .standing-row, .power-rankings-row, .wildcard-standings .standing-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border: 1px solid #e5e7eb;
-                border-radius: 0.5rem;
-                margin-bottom: 0.5rem;
-                padding: 0.5rem 1rem;
-            }
-            .standing-row > div, .power-rankings-row > div, .wildcard-standings .standing-row > div {
-                padding: 0;
-            }
-            .standing-row .rank, .standing-row .team, .standing-row .h2h,
-            .power-rankings-row .rank, .power-rankings-row .team,
-            .wildcard-standings .standing-row .rank, .wildcard-standings .standing-row .team,
-            .wildcard-standings .standing-row .games-back, .wildcard-standings .standing-row .sos-remaining {
-                display: block;
-                flex: 0 0 auto;
-                width: auto;
-            }
-            .standing-row .rank, .power-rankings-row .rank, .wildcard-standings .standing-row .rank {
-                margin-right: 0.5rem; /* Add space between rank and team name */
-            }
-            .standing-row .team, .power-rankings-row .team, .wildcard-standings .standing-row .team {
-                flex-grow: 1;
-                text-align: left;
-            }
-            /* Hide less critical columns in tables */
-            .standing-row .record, .standing-row .median, .standing-row .division-record, .standing-row .pf, .standing-row .pa,
-            .wildcard-standings .standing-row .record, .wildcard-standings .standing-row .games-back, .wildcard-standings .standing-row .sos-remaining, .wildcard-standings .standing-row .pf,
-            .power-rankings-row .wins-median, .power-rankings-row .sos {
-                display: none;
-            }
-            .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.5rem 1rem;
-                margin-bottom: 0.5rem;
-                font-size: 0.8rem;
-                border-radius: 0.5rem;
-            }
-            .standing-row.table-header > div, .standing-row.wildcard-header > div, .standing-row.power-rankings-header > div {
-                padding: 0.25rem;
-                flex: 1 1 0;
-                text-align: center;
-                font-weight: bold;
-            }
-            /* Make headers for hidden columns not take up space */
-            .standing-row.table-header .record, .standing-row.table-header .median, .standing-row.table-header .division-record, .standing-row.table-header .pa,
-            .standing-row.wildcard-header .record, .standing-row.wildcard-header .pf,
-            .standing-row.power-rankings-header .wins-median, .standing-row.power-rankings-header .sos {
-                display: none;
-            }
-            /* Make sure visible headers align with data */
-            .standing-row.table-header .rank, .standing-row.wildcard-header .rank, .standing-row.power-rankings-header .rank {
-                flex: 0 0 auto;
-            }
-            .standing-row.table-header .team, .standing-row.wildcard-header .team, .standing-row.power-rankings-header .team {
-                flex-grow: 1;
-                text-align: left;
-            }
-            .standing-row.table-header .h2h, .standing-row.wildcard-header .h2h, .standing-row.wildcard-header .games-back, .standing-row.wildcard-header .sos-remaining {
-              text-align: center;
             }
         }
     </style>
@@ -390,47 +305,47 @@
         </section>
 
         <section id="league-spotlight" class="card mt-8">
-            <h2 class="text-2xl font-bold mb-4 border-b pb-2">League Spotlight</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Owner</th>
-                            <th>Years Competing</th>
-                            <th>Total Record (W-L-T)</th>
-                            <th>H2H Record (W-L-T)</th>
-                            <th>League Median Record (W-L)</th>
-                            <th>Total Win %</th>
-                            <th>H2H Win %</th>
-                            <th>League Median Win %</th>
-                            <th>Championships</th>
-                            <th>Division Titles</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Taylor Wilson</td><td>12</td><td>154-88-0</td><td>97-63-0</td><td>57-25</td><td>0.636</td><td>0.606</td><td>0.695</td><td>1</td><td>4</td></tr>
-                        <tr><td>Ron Wilson</td><td>12</td><td>128-114-0</td><td>83-77-0</td><td>45-37</td><td>0.529</td><td>0.519</td><td>0.549</td><td>3</td><td>--</td></tr>
-                        <tr><td>Riley Kuhl</td><td>12</td><td>123-119-0</td><td>79-81-0</td><td>44-38</td><td>0.508</td><td>0.494</td><td>0.537</td><td>--</td><td>1</td></tr>
-                        <tr><td>Stephen Zamora</td><td>12</td><td>124-117-1</td><td>86-73-1</td><td>38-44</td><td>0.515</td><td>0.541</td><td>0.463</td><td>1</td><td>2</td></tr>
-                        <tr><td>Mitch Sennewald</td><td>11</td><td>127-102-0</td><td>76-71-0</td><td>51-31</td><td>0.555</td><td>0.517</td><td>0.622</td><td>2</td><td>2</td></tr>
-                        <tr><td>Bill & Kathy Kuhl</td><td>11</td><td>111-117-1</td><td>74-72-1</td><td>37-45</td><td>0.487</td><td>0.507</td><td>0.451</td><td>2</td><td>--</td></tr>
-                        <tr><td>Jake Wolfer</td><td>9</td><td>98-105-0</td><td>62-59-0</td><td>36-46</td><td>0.483</td><td>0.512</td><td>0.439</td><td>--</td><td>2</td></tr>
-                        <tr><td>Jason Zamora</td><td>10</td><td>107-109-0</td><td>69-65-0</td><td>38-44</td><td>0.495</td><td>0.515</td><td>0.463</td><td>1</td><td>2</td></tr>
-                        <tr><td>Israel Flores</td><td>11</td><td>100-129-0</td><td>67-80-0</td><td>33-49</td><td>0.437</td><td>0.456</td><td>0.402</td><td>--</td><td>--</td></tr>
-                        <tr><td>Jose Granados</td><td>10</td><td>106-110-0</td><td>66-68-0</td><td>40-42</td><td>0.491</td><td>0.493</td><td>0.488</td><td>--</td><td>--</td></tr>
-                        <tr><td>Zach Loya</td><td>6</td><td>72-92-0</td><td>37-45-0</td><td>35-47</td><td>0.439</td><td>0.451</td><td>0.427</td><td>1</td><td>1</td></tr>
-                        <tr><td>Taryn & Josh Sanchez</td><td>6</td><td>46-62-0</td><td>30-50-0</td><td>16-12</td><td>0.426</td><td>0.375</td><td>0.571</td><td>--</td><td>--</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <h2 class="text-2xl font-bold mb-4 border-b pb-2">League Spotlight</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Owner</th>
+                    <th>Years Competing</th>
+                    <th>Total Record (W-L-T)</th>
+                    <th>H2H Record (W-L-T)</th>
+                    <th>League Median Record (W-L)</th>
+                    <th>Total Win %</th>
+                    <th>H2H Win %</th>
+                    <th>League Median Win %</th>
+                    <th>Championships</th>
+                    <th>Division Titles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Taylor Wilson</td><td>12</td><td>154-88-0</td><td>97-63-0</td><td>57-25</td><td>0.636</td><td>0.606</td><td>0.695</td><td>1</td><td>4</td></tr>
+                <tr><td>Ron Wilson</td><td>12</td><td>128-114-0</td><td>83-77-0</td><td>45-37</td><td>0.529</td><td>0.519</td><td>0.549</td><td>3</td><td>--</td></tr>
+                <tr><td>Riley Kuhl</td><td>12</td><td>123-119-0</td><td>79-81-0</td><td>44-38</td><td>0.508</td><td>0.494</td><td>0.537</td><td>--</td><td>1</td></tr>
+                <tr><td>Stephen Zamora</td><td>12</td><td>124-117-1</td><td>86-73-1</td><td>38-44</td><td>0.515</td><td>0.541</td><td>0.463</td><td>1</td><td>2</td></tr>
+                <tr><td>Mitch Sennewald</td><td>11</td><td>127-102-0</td><td>76-71-0</td><td>51-31</td><td>0.555</td><td>0.517</td><td>0.622</td><td>2</td><td>2</td></tr>
+                <tr><td>Bill & Kathy Kuhl</td><td>11</td><td>111-117-1</td><td>74-72-1</td><td>37-45</td><td>0.487</td><td>0.507</td><td>0.451</td><td>2</td><td>--</td></tr>
+                <tr><td>Jake Wolfer</td><td>9</td><td>98-105-0</td><td>62-59-0</td><td>36-46</td><td>0.483</td><td>0.512</td><td>0.439</td><td>--</td><td>2</td></tr>
+                <tr><td>Jason Zamora</td><td>10</td><td>107-109-0</td><td>69-65-0</td><td>38-44</td><td>0.495</td><td>0.515</td><td>0.463</td><td>1</td><td>2</td></tr>
+                <tr><td>Israel Flores</td><td>11</td><td>100-129-0</td><td>67-80-0</td><td>33-49</td><td>0.437</td><td>0.456</td><td>0.402</td><td>--</td><td>--</td></tr>
+                <tr><td>Jose Granados</td><td>10</td><td>106-110-0</td><td>66-68-0</td><td>40-42</td><td>0.491</td><td>0.493</td><td>0.488</td><td>--</td><td>--</td></tr>
+                <tr><td>Zach Loya</td><td>6</td><td>72-92-0</td><td>37-45-0</td><td>35-47</td><td>0.439</td><td>0.451</td><td>0.427</td><td>1</td><td>1</td></tr>
+                <tr><td>Taryn & Josh Sanchez</td><td>6</td><td>46-62-0</td><td>30-50-0</td><td>16-12</td><td>0.426</td><td>0.375</td><td>0.571</td><td>--</td><td>--</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
-        <section id="graphs" class="card mt-8">
-            <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
-                <img src="CareerH2HWinPercentage.png" alt="Career H2H Win Percentage" class="w-full md:w-1/2 h-auto object-contain">
-                <img src="AllTimeH2HWins.png" alt="All-Time H2H Wins" class="w-full md:w-1/2 h-auto object-contain">
-            </div>
-        </section>
+<section id="graphs" class="card mt-8">
+    <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
+        <img src="CareerH2HWinPercentage.png" alt="Career H2H Win Percentage" class="w-full md:w-1/2 h-auto object-contain">
+        <img src="AllTimeH2HWins.png" alt="All-Time H2H Wins" class="w-full md:w-1/2 h-auto object-contain">
+    </div>
+</section>
 
     </main>
 </body>
