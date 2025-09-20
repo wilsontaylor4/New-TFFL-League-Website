@@ -94,7 +94,6 @@
         .nav-ribbon a:hover {
             background-color: #4b5563;
         }
-
         /* Dropdown specific styles */
         .dropdown {
             position: relative;
@@ -102,7 +101,6 @@
             align-items: center;
             padding-bottom: 0.5rem;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -117,7 +115,6 @@
             transform: translateX(-50%);
             top: 100%;
         }
-
         .dropdown-content a {
             color: white;
             padding: 12px 16px;
@@ -126,13 +123,36 @@
             text-align: left;
             border-radius: 0;
         }
-
         .dropdown-content a:hover {
             background-color: #4b5563;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+        .owner-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        /* New styles for highlighting */
+        .championship-row {
+            background-color: #ffd700; /* Gold */
+        }
+        .division-title-cell {
+            background-color: #c8e6c9; /* Light green */
         }
     </style>
 </head>
@@ -174,7 +194,7 @@
     <main class="container">
         <section class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Taylor Wilson</h2>
-            <p class="text-gray-700 mb-6">As "The Commish" and creator of the TFFL, Taylor put the league together with a mix of friends, family, and co-workers. A passionate fan of the Kansas City Chiefs, he has been a competitor for all 12 seasons and holds the top career total win percentage. Taylor relocated to Vancouver, WA during the league's existence, making him one of the owners who has had a major relocation. Taylor is known for building elite regular-season teams, but he has often fallen victim to the "Commissioner's Curse," winning only one of the four championships he's competed in, and frequently having abrupt playoff exits despite elite regular seasons.</p>
+            <p class="text-gray-700 mb-6">A founding member of the TFFL, Taylor Wilson is a lifelong friend of The Commish, as well as the son of fellow owner Ron Wilson and the brother of fellow owner Taryn Sanchez. A fan of the Los Angeles Chargers, he has been a consistent force in the league since 2013 and is the league’s all-time wins leader and holds the highest career win percentage. His ability to build a dominant roster was on full display in 2020, where he secured his first title with a dominant 21-5 record.</p>
             
             <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">Career Overview</h3>
             <div class="table-container">
@@ -183,7 +203,9 @@
                         <tr>
                             <th>Season</th>
                             <th>Team Name</th>
-                            <th>Record</th>
+                            <th>Total Record</th>
+                            <th>H2H Record</th>
+                            <th>League Median Record</th>
                             <th>Final Standing</th>
                             <th>Championship</th>
                             <th>Division Title</th>
@@ -193,104 +215,136 @@
                         <tr>
                             <td>2024</td>
                             <td>WA Whatchamacallits</td>
-                            <td>20-8</td>
+                            <td>17-11</td>
+                            <td>11-3</td>
+                            <td>6-8</td>
                             <td>2</td>
                             <td>No</td>
-                            <td>Yes</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2023</td>
                             <td>WA Whatchamacallits</td>
-                            <td>21-7</td>
+                            <td>19-9</td>
+                            <td>10-4</td>
+                            <td>9-5</td>
                             <td>3</td>
                             <td>No</td>
-                            <td>Yes</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2022</td>
-                            <td>Washington Woodchucks</td>
-                            <td>18-10</td>
-                            <td>3</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2021</td>
-                            <td>Hurts Donut Company</td>
-                            <td>16-12</td>
-                            <td>6</td>
-                            <td>No</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>2020</td>
-                            <td>Glass Case of Emotion</td>
-                            <td>21-5</td>
-                            <td>1</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>2019</td>
-                            <td>Eye on the Prize</td>
-                            <td>18-8</td>
-                            <td>4</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2018</td>
-                            <td>The Zeke-a Virus</td>
-                            <td>11-2</td>
-                            <td>2</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>2017</td>
-                            <td>Wham! Bam! Thank You Cam!</td>
-                            <td>8-5</td>
+                            <td>WA Whatchamacallits</td>
+                            <td>17-11</td>
+                            <td>9-5</td>
+                            <td>8-6</td>
                             <td>5</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
-                            <td>2016</td>
-                            <td>Ask Me About My Fleener</td>
+                            <td>2021</td>
+                            <td>WA Whatchamacallits</td>
+                            <td>15-13</td>
+                            <td>7-7</td>
+                            <td>8-6</td>
+                            <td>5</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                        <tr class="championship-row">
+                            <td>2020</td>
+                            <td>Glass Case of Emotion</td>
+                            <td>21-5</td>
+                            <td>10-3</td>
+                            <td>11-2</td>
+                            <td>1</td>
+                            <td><strong>Yes</strong></td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2019</td>
+                            <td>Glass Case of Emotion</td>
+                            <td>15-11</td>
                             <td>7-6</td>
+                            <td>8-5</td>
+                            <td>3</td>
+                            <td>No</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2018</td>
+                            <td>The Zeke-a Virus</td>
+                            <td>11-2</td>
+                            <td>11-2</td>
+                            <td>---</td>
+                            <td>2</td>
+                            <td>No</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2017</td>
+                            <td>Glass Case of Emotion</td>
+                            <td>9-4</td>
+                            <td>9-4</td>
+                            <td>---</td>
+                            <td>4</td>
+                            <td>No</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>2016</td>
+                            <td>Glass Case of Emotion</td>
+                            <td>10-3</td>
+                            <td>10-3</td>
+                            <td>---</td>
                             <td>2</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2015</td>
-                            <td>Too Legit to Colquitt</td>
-                            <td>5-8</td>
-                            <td>10</td>
+                            <td>The Zeke-a Virus</td>
+                            <td>8-5</td>
+                            <td>8-5</td>
+                            <td>---</td>
+                            <td>2</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2014</td>
-                            <td>The Hali Llama</td>
-                            <td>4-9</td>
-                            <td>8</td>
+                            <td>Glass Case of Emotion</td>
+                            <td>7-6</td>
+                            <td>7-6</td>
+                            <td>---</td>
+                            <td>6</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2013</td>
-                            <td>T-Bags McCluster Phux</td>
-                            <td>5-8</td>
-                            <td>6</td>
+                            <td>Glass Case of Emotion</td>
+                            <td>7-6</td>
+                            <td>7-6</td>
+                            <td>---</td>
+                            <td>4</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="mt-4 text-sm text-gray-500">Note: The record format changed after the 2018 season to include League Median scores.</p>
+            <p class="mt-4 text-sm text-gray-500">Note: League Median records were not tracked before the 2019 season.</p>
         </section>
+        
+        <section id="graphs" class="card mt-8">
+            <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
+                <img src="taylorwin.png" alt="Taylor Wilson Career H2H Win Percentage Over Time" class="w-full md:w-1/2 h-auto object-contain">
+                <img src="taylorwinper.png" alt="Taylor Wilson Win Percentage by Season" class="w-full md:w-1/2 h-auto object-contain">
+            </div>
+        </section>
+
     </main>
 </body>
 </html>

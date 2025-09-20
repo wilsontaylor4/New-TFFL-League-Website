@@ -94,7 +94,6 @@
         .nav-ribbon a:hover {
             background-color: #4b5563;
         }
-
         /* Dropdown specific styles */
         .dropdown {
             position: relative;
@@ -102,7 +101,6 @@
             align-items: center;
             padding-bottom: 0.5rem;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -117,7 +115,6 @@
             transform: translateX(-50%);
             top: 100%;
         }
-
         .dropdown-content a {
             color: white;
             padding: 12px 16px;
@@ -126,13 +123,36 @@
             text-align: left;
             border-radius: 0;
         }
-
         .dropdown-content a:hover {
             background-color: #4b5563;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+        .owner-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        /* New styles for highlighting */
+        .championship-row {
+            background-color: #ffd700; /* Gold */
+        }
+        .division-title-cell {
+            background-color: #c8e6c9; /* Light green */
         }
     </style>
 </head>
@@ -174,7 +194,7 @@
     <main class="container">
         <section class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Stephen Zamora</h2>
-            <p class="text-gray-700 mb-6">A founding member, Stephen has been an active owner for all 12 seasons. He and Ron were roommates for a while, and that living situation fueled many great rivalries and conversations about the league. His son Jason has also been in the league for the majority of its existence. He and Taylor bonded over their shared love of football during their closing shifts at The Home Depot in 2008. A fan of the Los Angeles Chargers, Stephen holds the distinction of being the first-ever TFFL champion, winning the inaugural season in 2013. His career is marked by a solid H2H win percentage and two division titles.</p>
+            <p class="text-gray-700 mb-6">A founding member of the TFFL, Stephen Zamora is a lifelong friend of The Commish, and has been in the league since 2013. A fan of the Los Angeles Chargers, he holds a special place in the league's history as the inaugural champion. He has also secured two division titles, with back-to-back wins in the 2020 and 2021 seasons. Stephen's presence in the league has been a constant, and his longevity and ability to remain a competitive owner over a decade makes him a true staple of the league's history.</p>
             
             <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">Career Overview</h3>
             <div class="table-container">
@@ -183,7 +203,9 @@
                         <tr>
                             <th>Season</th>
                             <th>Team Name</th>
-                            <th>Record</th>
+                            <th>Total Record</th>
+                            <th>H2H Record</th>
+                            <th>League Median Record</th>
                             <th>Final Standing</th>
                             <th>Championship</th>
                             <th>Division Title</th>
@@ -192,80 +214,100 @@
                     <tbody>
                         <tr>
                             <td>2024</td>
-                            <td>Charge on for ol' SZ</td>
-                            <td>12-16</td>
-                            <td>9</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>13-15</td>
+                            <td>6-8</td>
+                            <td>7-7</td>
+                            <td>7</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2023</td>
-                            <td>Charge On for Ol' SZ</td>
+                            <td>Eks Marks The Spot</td>
                             <td>15-13</td>
-                            <td>4</td>
+                            <td>7-7</td>
+                            <td>8-6</td>
+                            <td>6</td>
                             <td>No</td>
-                            <td>Yes</td>
+                            <td>No</td>
                         </tr>
                         <tr>
                             <td>2022</td>
-                            <td>Charge On for Ol' SZ</td>
-                            <td>17-11</td>
-                            <td>6</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>12-16</td>
+                            <td>6-8</td>
+                            <td>6-8</td>
+                            <td>12</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2021</td>
                             <td>Eks Marks The Spot</td>
-                            <td>19-9</td>
+                            <td>17-11</td>
+                            <td>9-5</td>
+                            <td>8-6</td>
                             <td>3</td>
                             <td>No</td>
-                            <td>Yes</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2020</td>
-                            <td>A New Hope</td>
-                            <td>8-18</td>
-                            <td>10</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>16-10</td>
+                            <td>8-5</td>
+                            <td>8-5</td>
+                            <td>5</td>
                             <td>No</td>
-                            <td>No</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2019</td>
-                            <td>Lights, Kamara, Action</td>
+                            <td>Eks Marks The Spot</td>
                             <td>14-12</td>
-                            <td>6</td>
+                            <td>7-6</td>
+                            <td>7-6</td>
+                            <td>4</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2018</td>
-                            <td>Lights, Kamara, Action</td>
-                            <td>8-5</td>
-                            <td>5</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>10-3</td>
+                            <td>10-3</td>
+                            <td>---</td>
+                            <td>6</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2017</td>
-                            <td>Team Pearly Gates</td>
-                            <td>5-7-1</td>
-                            <td>7</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>7-6-1</td>
+                            <td>7-6-1</td>
+                            <td>---</td>
+                            <td>10</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2016</td>
-                            <td>Team Zbaggs</td>
-                            <td>4-9</td>
-                            <td>12</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>7-6</td>
+                            <td>7-6</td>
+                            <td>---</td>
+                            <td>8</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2015</td>
-                            <td>Team Zbaggs</td>
-                            <td>9-4</td>
+                            <td>Eks Marks The Spot</td>
+                            <td>10-3</td>
+                            <td>10-3</td>
+                            <td>---</td>
                             <td>3</td>
                             <td>No</td>
                             <td>No</td>
@@ -273,24 +315,36 @@
                         <tr>
                             <td>2014</td>
                             <td>Team Zbaggs</td>
-                            <td>5-8</td>
-                            <td>9</td>
+                            <td>6-7</td>
+                            <td>6-7</td>
+                            <td>---</td>
+                            <td>6</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
-                        <tr>
+                        <tr class="championship-row">
                             <td>2013</td>
                             <td>Team Zbaggs</td>
                             <td>8-5</td>
+                            <td>8-5</td>
+                            <td>---</td>
                             <td>1</td>
-                            <td>Yes</td>
+                            <td><strong>Yes</strong></td>
                             <td>No</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="mt-4 text-sm text-gray-500">Note: The record format changed after the 2018 season to include League Median scores.</p>
+            <p class="mt-4 text-sm text-gray-500">Note: League Median records were not tracked before the 2019 season.</p>
         </section>
+        
+        <section id="graphs" class="card mt-8">
+            <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
+                <img src="stephenwin.png" alt="Stephen Zamora Career H2H Win Percentage Over Time" class="w-full md:w-1/2 h-auto object-contain">
+                <img src="stephenwinper.png" alt="Stephen Zamora Win Percentage by Season" class="w-full md:w-1/2 h-auto object-contain">
+            </div>
+        </section>
+
     </main>
 </body>
 </html>

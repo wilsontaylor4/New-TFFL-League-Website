@@ -94,7 +94,6 @@
         .nav-ribbon a:hover {
             background-color: #4b5563;
         }
-
         /* Dropdown specific styles */
         .dropdown {
             position: relative;
@@ -102,7 +101,6 @@
             align-items: center;
             padding-bottom: 0.5rem;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -117,7 +115,6 @@
             transform: translateX(-50%);
             top: 100%;
         }
-
         .dropdown-content a {
             color: white;
             padding: 12px 16px;
@@ -126,13 +123,36 @@
             text-align: left;
             border-radius: 0;
         }
-
         .dropdown-content a:hover {
             background-color: #4b5563;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+        .owner-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        /* New styles for highlighting */
+        .championship-row {
+            background-color: #ffd700; /* Gold */
+        }
+        .division-title-cell {
+            background-color: #c8e6c9; /* Light green */
         }
     </style>
 </head>
@@ -174,7 +194,7 @@
     <main class="container">
         <section class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Jake Wolfer</h2>
-            <p class="text-gray-700 mb-6">Jake is a good friend of Taylor and was a groomsman in his wedding. His wife, Brynn, was one of Taylor's wife Shanna's best friends growing up. Taylor and Jake became very close friends once they were all living in Riverside and did everything together for many years until Taylor and Shanna moved to Washington. A fan of the Cincinnati Bengals, Jake has consistently been a strong contender, winning two division titles in 2018 and 2020. He came close to winning a championship in 2022, where he finished in second place. His solid overall win percentage reflects his competitive nature.</p>
+            <p class="text-gray-700 mb-6">A student of fantasy football, Jake Wolfer has proven he has the skills to compete in the league and has secured two division titles (2016 and 2022) during his time in the TFFL. He has also had a strong track record of making it to the playoffs, having made it to the semifinals six times, and was even the runner up in 2022. As a Minnesota Vikings fan and a longtime friend of The Commish, he brings a passion for the game and a competitive fire to the league.</p>
             
             <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">Career Overview</h3>
             <div class="table-container">
@@ -183,7 +203,9 @@
                         <tr>
                             <th>Season</th>
                             <th>Team Name</th>
-                            <th>Record</th>
+                            <th>Total Record</th>
+                            <th>H2H Record</th>
+                            <th>League Median Record</th>
                             <th>Final Standing</th>
                             <th>Championship</th>
                             <th>Division Title</th>
@@ -192,17 +214,21 @@
                     <tbody>
                         <tr>
                             <td>2024</td>
-                            <td>Angle of the Bengal</td>
+                            <td>Dey Drinking</td>
                             <td>12-16</td>
-                            <td>6</td>
+                            <td>6-8</td>
+                            <td>6-8</td>
+                            <td>9</td>
                             <td>No</td>
-                            <td>Yes</td>
+                            <td>No</td>
                         </tr>
                         <tr>
                             <td>2023</td>
-                            <td>Angle of the Bengal</td>
-                            <td>15-13</td>
-                            <td>6</td>
+                            <td>Dey Drinking</td>
+                            <td>11-17</td>
+                            <td>5-9</td>
+                            <td>6-8</td>
+                            <td>12</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
@@ -210,14 +236,18 @@
                             <td>2022</td>
                             <td>Dey Drinking</td>
                             <td>19-9</td>
+                            <td>10-4</td>
+                            <td>9-5</td>
                             <td>2</td>
                             <td>No</td>
-                            <td>Yes</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2021</td>
                             <td>Dey Drinking</td>
-                            <td>19-9</td>
+                            <td>14-14</td>
+                            <td>8-6</td>
+                            <td>6-8</td>
                             <td>5</td>
                             <td>No</td>
                             <td>No</td>
@@ -225,48 +255,66 @@
                         <tr>
                             <td>2020</td>
                             <td>Dey Drinking</td>
-                            <td>4-22</td>
-                            <td>12</td>
+                            <td>12-14</td>
+                            <td>5-8</td>
+                            <td>7-6</td>
+                            <td>9</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2019</td>
-                            <td>Dey Drinkin'</td>
-                            <td>9-17</td>
-                            <td>10</td>
+                            <td>Dey Drinking</td>
+                            <td>11-15</td>
+                            <td>6-7</td>
+                            <td>5-8</td>
+                            <td>8</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2018</td>
-                            <td>Morning Johnson</td>
-                            <td>7-6</td>
-                            <td>3</td>
+                            <td>Dey Drinking</td>
+                            <td>8-5</td>
+                            <td>8-5</td>
+                            <td>---</td>
+                            <td>4</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2017</td>
-                            <td>Eifhurt Myself</td>
+                            <td>Dey Drinking</td>
                             <td>7-6</td>
-                            <td>7</td>
+                            <td>7-6</td>
+                            <td>---</td>
+                            <td>5</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2016</td>
-                            <td>Black N' Decker</td>
-                            <td>6-7</td>
-                            <td>8</td>
+                            <td>Dey Drinking</td>
+                            <td>8-5</td>
+                            <td>8-5</td>
+                            <td>---</td>
+                            <td>4</td>
                             <td>No</td>
-                            <td>No</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="mt-4 text-sm text-gray-500">Note: The record format changed after the 2018 season to include League Median scores.</p>
+            <p class="mt-4 text-sm text-gray-500">Note: League Median records were not tracked before the 2019 season.</p>
         </section>
+        
+        <section id="graphs" class="card mt-8">
+            <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
+                <img src="jakewin.png" alt="Jake Wolfer Career H2H Win Percentage Over Time" class="w-full md:w-1/2 h-auto object-contain">
+                <img src="jakewinper.png" alt="Jake Wolfer Win Percentage by Season" class="w-full md:w-1/2 h-auto object-contain">
+            </div>
+        </section>
+
     </main>
 </body>
 </html>

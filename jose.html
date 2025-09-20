@@ -94,7 +94,6 @@
         .nav-ribbon a:hover {
             background-color: #4b5563;
         }
-
         /* Dropdown specific styles */
         .dropdown {
             position: relative;
@@ -102,7 +101,6 @@
             align-items: center;
             padding-bottom: 0.5rem;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -117,7 +115,6 @@
             transform: translateX(-50%);
             top: 100%;
         }
-
         .dropdown-content a {
             color: white;
             padding: 12px 16px;
@@ -126,13 +123,36 @@
             text-align: left;
             border-radius: 0;
         }
-
         .dropdown-content a:hover {
             background-color: #4b5563;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+        .owner-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        /* New styles for highlighting */
+        .championship-row {
+            background-color: #ffd700; /* Gold */
+        }
+        .division-title-cell {
+            background-color: #c8e6c9; /* Light green */
         }
     </style>
 </head>
@@ -174,7 +194,7 @@
     <main class="container">
         <section class="card">
             <h2 class="text-2xl font-bold mb-4 border-b pb-2">Jose Granados</h2>
-            <p class="text-gray-700 mb-6">Jose, a childhood friend of Mitch, has been competing for 10 seasons. A fan of the Los Angeles Rams, he has consistently been a middle-of-the-pack team with a total win percentage of 0.491. In 2016, he had the best regular season in league history with an incredible 12-1 record, but his season ended in a surprising elimination in his first playoff game after a bye week. His best finishes came in 2016 and 2020, where he reached the final four of the playoffs.</p>
+            <p class="text-gray-700 mb-6">A student of fantasy football, Jose Granados has proven he has the skills to compete in the league and secured his first championship in 2022 with his team, Henry Given Sunday. Jason, along with his younger brother Stephen, has been in the league since the 2014 season. His team names have always been well-thought-out, including a tribute to one of the most iconic fantasy football characters, "The Commish's Curse."</p>
             
             <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">Career Overview</h3>
             <div class="table-container">
@@ -183,7 +203,9 @@
                         <tr>
                             <th>Season</th>
                             <th>Team Name</th>
-                            <th>Record</th>
+                            <th>Total Record</th>
+                            <th>H2H Record</th>
+                            <th>League Median Record</th>
                             <th>Final Standing</th>
                             <th>Championship</th>
                             <th>Division Title</th>
@@ -192,33 +214,41 @@
                     <tbody>
                         <tr>
                             <td>2024</td>
-                            <td>JobsFinished</td>
-                            <td>17-11</td>
-                            <td>4</td>
+                            <td>Qui-Long Quinn</td>
+                            <td>13-15</td>
+                            <td>6-8</td>
+                            <td>7-7</td>
+                            <td>7</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2023</td>
-                            <td>F dem Picks</td>
-                            <td>12-16</td>
-                            <td>10</td>
+                            <td>Qui-Long Quinn</td>
+                            <td>14-14</td>
+                            <td>7-7</td>
+                            <td>7-7</td>
+                            <td>8</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2022</td>
-                            <td>808s & Hurtsbreaks</td>
-                            <td>9-19</td>
-                            <td>9</td>
+                            <td>Qui-Long Quinn</td>
+                            <td>10-18</td>
+                            <td>5-9</td>
+                            <td>5-9</td>
+                            <td>11</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2021</td>
-                            <td>Eli's Double Bird</td>
-                            <td>11-17</td>
-                            <td>9</td>
+                            <td>Qui-Long Quinn</td>
+                            <td>14-14</td>
+                            <td>7-7</td>
+                            <td>7-7</td>
+                            <td>8</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
@@ -226,31 +256,39 @@
                             <td>2020</td>
                             <td>Papa Stan</td>
                             <td>17-9</td>
+                            <td>8-5</td>
+                            <td>9-4</td>
                             <td>3</td>
                             <td>No</td>
-                            <td>No</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2019</td>
-                            <td>Tuck Your Chubb in your Kupp</td>
-                            <td>10-16</td>
-                            <td>9</td>
+                            <td>Papa Stan</td>
+                            <td>13-13</td>
+                            <td>7-6</td>
+                            <td>6-7</td>
+                            <td>5</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2018</td>
-                            <td>Good JuJu</td>
+                            <td>Papa Stan</td>
                             <td>9-4</td>
-                            <td>4</td>
+                            <td>9-4</td>
+                            <td>---</td>
+                            <td>2</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>2017</td>
-                            <td>Mr. Rodgers Neighborhood</td>
-                            <td>3-10</td>
-                            <td>11</td>
+                            <td>Papa Stan</td>
+                            <td>6-7</td>
+                            <td>6-7</td>
+                            <td>---</td>
+                            <td>7</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
@@ -258,23 +296,35 @@
                             <td>2016</td>
                             <td>Qui-Long Quinn</td>
                             <td>12-1</td>
+                            <td>12-1</td>
+                            <td>---</td>
                             <td>4</td>
                             <td>No</td>
-                            <td>No</td>
+                            <td class="division-title-cell"><strong>Yes</strong></td>
                         </tr>
                         <tr>
                             <td>2015</td>
-                            <td>Qui-Long Quinn</td>
-                            <td>6-7</td>
-                            <td>11</td>
+                            <td>Papa Stan</td>
+                            <td>8-5</td>
+                            <td>8-5</td>
+                            <td>---</td>
+                            <td>6</td>
                             <td>No</td>
                             <td>No</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="mt-4 text-sm text-gray-500">Note: The record format changed after the 2018 season to include League Median scores.</p>
+            <p class="mt-4 text-sm text-gray-500">Note: League Median records were not tracked before the 2019 season.</p>
         </section>
+
+        <section id="graphs" class="card mt-8">
+            <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
+                <img src="josewin.png" alt="Jose Granados Career H2H Win Percentage Over Time" class="w-full md:w-1/2 h-auto object-contain">
+                <img src="josewinper.png" alt="Jose Granados Win Percentage by Season" class="w-full md:w-1/2 h-auto object-contain">
+            </div>
+        </section>
+
     </main>
 </body>
 </html>
