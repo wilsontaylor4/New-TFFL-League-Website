@@ -297,6 +297,10 @@
     .flex-container > section {
         flex: 1;
     }
+    /* Class to hide elements in portrait mode */
+    .hide-on-portrait {
+        display: none;
+    }
 
     /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
@@ -367,42 +371,48 @@
             border-radius: 0.5rem;
             margin-bottom: 1rem;
         }
-        /* Hide headers for mobile view of tables, except for the first one */
+        /* Hide headers for mobile view of tables */
         .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
             display: none;
         }
-
-        /* Style for table rows on mobile */
-        .standing-row > div, .power-rankings-row > div {
+    }
+    /* Media query for portrait mode (and small screens) */
+    @media screen and (orientation: portrait) and (max-width: 768px) {
+        /* Simplified list-like view for tables */
+        .standing-row, .power-rankings-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            border-bottom: 1px solid #e5e7eb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
             padding: 0.5rem 1rem;
         }
-        .standing-row > div:last-child, .power-rankings-row > div:last-child {
-            border-bottom: none;
+        .standing-row > div, .power-rankings-row > div {
+            padding: 0;
         }
-        .standing-row > div::before, .power-rankings-row > div::before {
-            content: attr(class) ": ";
-            font-weight: bold;
-            text-transform: capitalize;
-            color: #4b5563;
+        .standing-row .rank, .standing-row .team, .standing-row .h2h {
+            display: block;
+            flex: 0 0 auto;
+            width: auto;
         }
-        .standing-row .rank::before { content: "Rank: "; }
-        .standing-row .team::before { content: "Team: "; }
-        .standing-row .record::before { content: "Overall Record: "; }
-        .standing-row .h2h::before { content: "H2H: "; }
-        .standing-row .median::before { content: "Median: "; }
-        .standing-row .division-record::before { content: "Divisional Record: "; }
-        .standing-row .pf::before { content: "PF: "; }
-        .standing-row .pa::before { content: "PA: "; }
-        .power-rankings-row .rank::before { content: "Rank: "; }
-        .power-rankings-row .team::before { content: "Team: "; }
-        .power-rankings-row .wins-median::before { content: "Wins Against Average: "; }
-        .power-rankings-row .sos::before { content: "Strength of Schedule Faced: "; }
-        .power-rankings-row .movement::before { content: ""; }
+        .power-rankings-row .rank, .power-rankings-row .team {
+            display: block;
+            flex: 0 0 auto;
+            width: auto;
+        }
+        .standing-row .team {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .power-rankings-row .team {
+            flex-grow: 1;
+            text-align: left;
+        }
+        /* Hide less critical columns in tables */
+        .hide-on-portrait {
+            display: none;
+        }
     }
 </style>
 </head>
@@ -584,12 +594,12 @@
             row.innerHTML = `
                 <div class="rank">${getVal(rank)}</div>
                 <div class="team">${getVal(team.TeamName)}</div>
-                <div class="record">${overallRecord}</div>
+                <div class="record hide-on-portrait">${overallRecord}</div>
                 <div class="h2h">${h2hRecord}</div>
-                <div class="median">${medianRecord}</div>
-                <div class="division-record">${divisionalRecord}</div>
-                <div class="pf">${formatScore(team.PF)}</div>
-                <div class="pa">${formatScore(team.PA)}</div>
+                <div class="median hide-on-portrait">${medianRecord}</div>
+                <div class="division-record hide-on-portrait">${divisionalRecord}</div>
+                <div class="pf hide-on-portrait">${formatScore(team.PF)}</div>
+                <div class="pa hide-on-portrait">${formatScore(team.PA)}</div>
             `;
             return row;
         }
@@ -624,8 +634,8 @@
                 row.innerHTML = `
                     <div class="rank">${getVal(team['Power Rank'])}</div>
                     <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(movementText)})</span></div>
-                    <div class="wins-median">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
-                    <div class="sos">${getVal(team.SOS)}</div>
+                    <div class="wins-median hide-on-portrait">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
+                    <div class="sos hide-on-portrait">${getVal(team.SOS)}</div>
                 `;
                 powerRankingsContainer.appendChild(row);
             });
@@ -691,10 +701,10 @@
                 row.innerHTML = `
                     <div class="rank">${getVal(rank)}</div>
                     <div class="team">${getVal(team.TeamName)}</div>
-                    <div class="record">${overallRecord}</div>
-                    <div class="games-back">${gamesBack}</div>
-                    <div class="sos-remaining">${sosRemaining}</div>
-                    <div class="pf">${formatScore(team.PF)}</div>
+                    <div class="record hide-on-portrait">${overallRecord}</div>
+                    <div class="games-back hide-on-portrait">${gamesBack}</div>
+                    <div class="sos-remaining hide-on-portrait">${sosRemaining}</div>
+                    <div class="pf hide-on-portrait">${formatScore(team.PF)}</div>
                 `;
                 wildcardContainer.appendChild(row);
             });
