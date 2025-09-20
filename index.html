@@ -327,6 +327,10 @@
     .mobile-note {
         display: none;
     }
+    .hide-on-desktop {
+      display: none;
+    }
+    
 
     /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
@@ -426,7 +430,8 @@
         }
         .standing-row .rank, .standing-row .team, .standing-row .h2h,
         .power-rankings-row .rank, .power-rankings-row .team,
-        .wildcard-standings .standing-row .rank, .wildcard-standings .standing-row .team {
+        .wildcard-standings .standing-row .rank, .wildcard-standings .standing-row .team,
+        .wildcard-standings .standing-row .games-back, .wildcard-standings .standing-row .sos-remaining {
             display: block;
             flex: 0 0 auto;
             width: auto;
@@ -440,14 +445,10 @@
         }
         /* Hide less critical columns in tables */
         .standing-row .record, .standing-row .median, .standing-row .division-record, .standing-row .pf, .standing-row .pa,
-        .wildcard-standings .standing-row .record, .wildcard-standings .standing-row .games-back, .wildcard-standings .standing-row .sos-remaining, .wildcard-standings .standing-row .pf,
+        .wildcard-standings .standing-row .record, .wildcard-standings .standing-row .pf,
         .power-rankings-row .wins-median, .power-rankings-row .sos {
             display: none;
         }
-    }
-    
-    /* Show mobile headers and make them compact */
-    @media screen and (max-width: 768px) and (orientation: portrait) {
         .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
             display: flex;
             justify-content: space-between;
@@ -459,12 +460,26 @@
         }
         .standing-row.table-header > div, .standing-row.wildcard-header > div, .standing-row.power-rankings-header > div {
             padding: 0.25rem;
+            flex: 1 1 0;
+            text-align: center;
+            font-weight: bold;
         }
         /* Make headers for hidden columns not take up space */
         .standing-row.table-header .record, .standing-row.table-header .median, .standing-row.table-header .division-record, .standing-row.table-header .pa,
-        .standing-row.wildcard-header .games-back, .standing-row.wildcard-header .sos-remaining, .standing-row.wildcard-header .pf,
+        .standing-row.wildcard-header .record, .standing-row.wildcard-header .pf,
         .standing-row.power-rankings-header .wins-median, .standing-row.power-rankings-header .sos {
             display: none;
+        }
+        /* Make sure visible headers align with data */
+        .standing-row.table-header .rank, .standing-row.wildcard-header .rank, .standing-row.power-rankings-header .rank {
+            flex: 0 0 auto;
+        }
+        .standing-row.table-header .team, .standing-row.wildcard-header .team, .standing-row.power-rankings-header .team {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .standing-row.table-header .h2h, .standing-row.wildcard-header .h2h, .standing-row.wildcard-header .games-back, .standing-row.wildcard-header .sos-remaining {
+          text-align: center;
         }
     }
 </style>
