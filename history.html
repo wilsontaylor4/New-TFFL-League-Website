@@ -22,6 +22,12 @@
             align-items: center;
             position: relative;
         }
+        .header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
         .container {
             max-width: 1200px;
             margin: auto;
@@ -100,7 +106,6 @@
             position: relative;
             display: flex;
             align-items: center;
-            padding-bottom: 0.5rem;
         }
 
         .dropdown-content {
@@ -112,10 +117,9 @@
             z-index: 1;
             border-radius: 0.5rem;
             padding: 0.5rem 0;
-            margin-top: 0;
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            top: 100%;
         }
 
         .dropdown-content a {
@@ -157,13 +161,14 @@
             /* Adjust header for mobile */
             .header {
                 flex-direction: column;
-                padding: 1rem 0.5rem;
+                padding: 0.5rem 0;
             }
             .header h1 {
                 font-size: 1.5rem;
             }
             .header p {
                 margin-top: 0.25rem;
+                margin-bottom: 0;
             }
             .logo, .sleeper-logo {
                 position: static;
@@ -184,26 +189,13 @@
             .nav-ribbon a {
                 flex-grow: 1;
                 text-align: center;
-                font-size: 0.75rem;
+                font-size: 0.75rem; /* Reduced font size for mobile nav */
                 padding: 0.5rem 0.25rem;
             }
             .dropdown {
-                flex-grow: 1;
+                display: none;
             }
-            .dropdown-content {
-                position: absolute;
-                background-color: #1f2937;
-                min-width: 200px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
-                border-radius: 0.5rem;
-                padding: 0.5rem 0;
-                margin-top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                top: 100%;
-            }
-            .dropdown:hover .dropdown-content {
+            .show-on-portrait {
                 display: block;
             }
             
@@ -398,47 +390,47 @@
         </section>
 
         <section id="league-spotlight" class="card mt-8">
-    <h2 class="text-2xl font-bold mb-4 border-b pb-2">League Spotlight</h2>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Owner</th>
-                    <th>Years Competing</th>
-                    <th>Total Record (W-L-T)</th>
-                    <th>H2H Record (W-L-T)</th>
-                    <th>League Median Record (W-L)</th>
-                    <th>Total Win %</th>
-                    <th>H2H Win %</th>
-                    <th>League Median Win %</th>
-                    <th>Championships</th>
-                    <th>Division Titles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Taylor Wilson</td><td>12</td><td>154-88-0</td><td>97-63-0</td><td>57-25</td><td>0.636</td><td>0.606</td><td>0.695</td><td>1</td><td>4</td></tr>
-                <tr><td>Ron Wilson</td><td>12</td><td>128-114-0</td><td>83-77-0</td><td>45-37</td><td>0.529</td><td>0.519</td><td>0.549</td><td>3</td><td>--</td></tr>
-                <tr><td>Riley Kuhl</td><td>12</td><td>123-119-0</td><td>79-81-0</td><td>44-38</td><td>0.508</td><td>0.494</td><td>0.537</td><td>--</td><td>1</td></tr>
-                <tr><td>Stephen Zamora</td><td>12</td><td>124-117-1</td><td>86-73-1</td><td>38-44</td><td>0.515</td><td>0.541</td><td>0.463</td><td>1</td><td>2</td></tr>
-                <tr><td>Mitch Sennewald</td><td>11</td><td>127-102-0</td><td>76-71-0</td><td>51-31</td><td>0.555</td><td>0.517</td><td>0.622</td><td>2</td><td>2</td></tr>
-                <tr><td>Bill & Kathy Kuhl</td><td>11</td><td>111-117-1</td><td>74-72-1</td><td>37-45</td><td>0.487</td><td>0.507</td><td>0.451</td><td>2</td><td>--</td></tr>
-                <tr><td>Jake Wolfer</td><td>9</td><td>98-105-0</td><td>62-59-0</td><td>36-46</td><td>0.483</td><td>0.512</td><td>0.439</td><td>--</td><td>2</td></tr>
-                <tr><td>Jason Zamora</td><td>10</td><td>107-109-0</td><td>69-65-0</td><td>38-44</td><td>0.495</td><td>0.515</td><td>0.463</td><td>1</td><td>2</td></tr>
-                <tr><td>Israel Flores</td><td>11</td><td>100-129-0</td><td>67-80-0</td><td>33-49</td><td>0.437</td><td>0.456</td><td>0.402</td><td>--</td><td>--</td></tr>
-                <tr><td>Jose Granados</td><td>10</td><td>106-110-0</td><td>66-68-0</td><td>40-42</td><td>0.491</td><td>0.493</td><td>0.488</td><td>--</td><td>--</td></tr>
-                <tr><td>Zach Loya</td><td>6</td><td>72-92-0</td><td>37-45-0</td><td>35-47</td><td>0.439</td><td>0.451</td><td>0.427</td><td>1</td><td>1</td></tr>
-                <tr><td>Taryn & Josh Sanchez</td><td>6</td><td>46-62-0</td><td>30-50-0</td><td>16-12</td><td>0.426</td><td>0.375</td><td>0.571</td><td>--</td><td>--</td></tr>
-            </tbody>
-        </table>
-    </div>
-</section>
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">League Spotlight</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Owner</th>
+                            <th>Years Competing</th>
+                            <th>Total Record (W-L-T)</th>
+                            <th>H2H Record (W-L-T)</th>
+                            <th>League Median Record (W-L)</th>
+                            <th>Total Win %</th>
+                            <th>H2H Win %</th>
+                            <th>League Median Win %</th>
+                            <th>Championships</th>
+                            <th>Division Titles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Taylor Wilson</td><td>12</td><td>154-88-0</td><td>97-63-0</td><td>57-25</td><td>0.636</td><td>0.606</td><td>0.695</td><td>1</td><td>4</td></tr>
+                        <tr><td>Ron Wilson</td><td>12</td><td>128-114-0</td><td>83-77-0</td><td>45-37</td><td>0.529</td><td>0.519</td><td>0.549</td><td>3</td><td>--</td></tr>
+                        <tr><td>Riley Kuhl</td><td>12</td><td>123-119-0</td><td>79-81-0</td><td>44-38</td><td>0.508</td><td>0.494</td><td>0.537</td><td>--</td><td>1</td></tr>
+                        <tr><td>Stephen Zamora</td><td>12</td><td>124-117-1</td><td>86-73-1</td><td>38-44</td><td>0.515</td><td>0.541</td><td>0.463</td><td>1</td><td>2</td></tr>
+                        <tr><td>Mitch Sennewald</td><td>11</td><td>127-102-0</td><td>76-71-0</td><td>51-31</td><td>0.555</td><td>0.517</td><td>0.622</td><td>2</td><td>2</td></tr>
+                        <tr><td>Bill & Kathy Kuhl</td><td>11</td><td>111-117-1</td><td>74-72-1</td><td>37-45</td><td>0.487</td><td>0.507</td><td>0.451</td><td>2</td><td>--</td></tr>
+                        <tr><td>Jake Wolfer</td><td>9</td><td>98-105-0</td><td>62-59-0</td><td>36-46</td><td>0.483</td><td>0.512</td><td>0.439</td><td>--</td><td>2</td></tr>
+                        <tr><td>Jason Zamora</td><td>10</td><td>107-109-0</td><td>69-65-0</td><td>38-44</td><td>0.495</td><td>0.515</td><td>0.463</td><td>1</td><td>2</td></tr>
+                        <tr><td>Israel Flores</td><td>11</td><td>100-129-0</td><td>67-80-0</td><td>33-49</td><td>0.437</td><td>0.456</td><td>0.402</td><td>--</td><td>--</td></tr>
+                        <tr><td>Jose Granados</td><td>10</td><td>106-110-0</td><td>66-68-0</td><td>40-42</td><td>0.491</td><td>0.493</td><td>0.488</td><td>--</td><td>--</td></tr>
+                        <tr><td>Zach Loya</td><td>6</td><td>72-92-0</td><td>37-45-0</td><td>35-47</td><td>0.439</td><td>0.451</td><td>0.427</td><td>1</td><td>1</td></tr>
+                        <tr><td>Taryn & Josh Sanchez</td><td>6</td><td>46-62-0</td><td>30-50-0</td><td>16-12</td><td>0.426</td><td>0.375</td><td>0.571</td><td>--</td><td>--</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-<section id="graphs" class="card mt-8">
-    <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
-        <img src="CareerH2HWinPercentage.png" alt="Career H2H Win Percentage" class="w-full md:w-1/2 h-auto object-contain">
-        <img src="AllTimeH2HWins.png" alt="All-Time H2H Wins" class="w-full md:w-1/2 h-auto object-contain">
-    </div>
-</section>
+        <section id="graphs" class="card mt-8">
+            <div class="flex flex-wrap md:flex-nowrap justify-center items-center gap-4">
+                <img src="CareerH2HWinPercentage.png" alt="Career H2H Win Percentage" class="w-full md:w-1/2 h-auto object-contain">
+                <img src="AllTimeH2HWins.png" alt="All-Time H2H Wins" class="w-full md:w-1/2 h-auto object-contain">
+            </div>
+        </section>
 
     </main>
 </body>
