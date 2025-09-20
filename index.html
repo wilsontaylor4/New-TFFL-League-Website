@@ -145,7 +145,7 @@
         border-bottom: 1px solid #e5e7eb;
     }
     .standing-row > div {
-        padding: 0.5rem;
+        padding: 0.75rem;
         text-align: center;
     }
     .standing-row .rank {
@@ -301,6 +301,32 @@
     .flex-container > section {
         flex: 1;
     }
+    #wildcard-standings-container .standing-row > div {
+        text-align: center;
+    }
+    #wildcard-standings-container .standing-row .rank {
+        width: 8%;
+    }
+    #wildcard-standings-container .standing-row .team {
+        width: 25%;
+        text-align: left;
+    }
+    #wildcard-standings-container .standing-row .record {
+        width: 15%;
+    }
+    #wildcard-standings-container .standing-row .games-back {
+        width: 15%;
+    }
+    #wildcard-standings-container .standing-row .sos-remaining {
+        width: 20%;
+    }
+    #wildcard-standings-container .standing-row .pf {
+        width: 10%;
+    }
+
+    .mobile-note {
+        display: none;
+    }
 
     /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
@@ -348,22 +374,7 @@
         .dropdown:hover .dropdown-content {
             display: none; /* Hide dropdown on hover to avoid issues */
         }
-        .dropdown-content a {
-            padding: 10px 0;
-        }
-        /* Hide the owner profiles dropdown on small screens */
-        .dropdown {
-          display: none;
-        }
-        .nav-ribbon a[href="ownerprofiles.html"] {
-          display: block;
-          padding: 0.5rem 1rem;
-        }
-
-        /* Force tables to be scrollable if needed */
-        .table-container {
-            overflow-x: auto;
-        }
+        
         .standing-row, .power-rankings-row {
             display: block;
             width: 100%;
@@ -375,15 +386,33 @@
         .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
             display: none;
         }
+        
     }
     /* Media query for portrait mode (and small screens) */
     @media screen and (orientation: portrait) and (max-width: 768px) {
+        /* Show the mobile note */
+        .mobile-note {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 1rem;
+        }
         /* Hide the Sleeper logo */
         .sleeper-logo {
             display: none;
         }
+        /* Hide the regular dropdown */
+        .dropdown {
+          display: none;
+        }
+        /* Show the simplified link */
+        .show-on-portrait {
+          display: block;
+        }
+        
         /* Simplified list-like view for tables */
-        .standing-row, .power-rankings-row {
+        .standing-row, .power-rankings-row, .wildcard-standings .standing-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -392,44 +421,39 @@
             margin-bottom: 0.5rem;
             padding: 0.5rem 1rem;
         }
-        .standing-row > div, .power-rankings-row > div {
+        .standing-row > div, .power-rankings-row > div, .wildcard-standings .standing-row > div {
             padding: 0;
         }
-        .standing-row .rank, .standing-row .team, .standing-row .h2h {
+        .standing-row .rank, .standing-row .team, .standing-row .h2h,
+        .power-rankings-row .rank, .power-rankings-row .team,
+        .wildcard-standings .standing-row .rank, .wildcard-standings .standing-row .team {
             display: block;
             flex: 0 0 auto;
             width: auto;
         }
-        .power-rankings-row .rank, .power-rankings-row .team {
-            display: block;
-            flex: 0 0 auto;
-            width: auto;
-        }
-        .standing-row .rank {
+        .standing-row .rank, .power-rankings-row .rank, .wildcard-standings .standing-row .rank {
             margin-right: 0.5rem; /* Add space between rank and team name */
         }
-        .standing-row .team {
-            flex-grow: 1;
-            text-align: left;
-        }
-        .power-rankings-row .team {
+        .standing-row .team, .power-rankings-row .team, .wildcard-standings .standing-row .team {
             flex-grow: 1;
             text-align: left;
         }
         /* Hide less critical columns in tables */
-        .record, .median, .division-record, .pf, .pa, .games-back, .sos-remaining, .wins-median, .sos {
+        .standing-row .record, .standing-row .median, .standing-row .division-record, .standing-row .pf, .standing-row .pa,
+        .wildcard-standings .standing-row .record, .wildcard-standings .standing-row .games-back, .wildcard-standings .standing-row .sos-remaining, .wildcard-standings .standing-row .pf,
+        .power-rankings-row .wins-median, .power-rankings-row .sos {
             display: none;
         }
     }
 </style>
 </head>
 <body class="bg-gray-100">
-
+    <div class="mobile-note">For best viewing and full details, rotate phone to landscape orientation.</div>
     <header class="header bg-gray-800">
         <div class="container flex flex-col items-center">
             <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
             <h1 class="text-4xl font-bold">The TFFL Wiki</h1>
-            <p class="mt-2 text-gray-300">Your one-stop source for league history and stats.</p>
+            <p class="mt-2 text-gray-300">Your one-stop source for everything TFFL!</p>
             <img src="Sleeper Logo.png" alt="Sleeper App Logo" class="sleeper-logo">
         </div>
     </header>
@@ -438,7 +462,7 @@
         <a href="index.html">Home</a>
         <a href="history.html">League History</a>
         <a href="throne.html">Thoughts from the Throne</a>
-        <div class="dropdown hide-on-portrait">
+        <div class="dropdown">
             <a href="ownerprofiles.html">Owner Profiles</a>
             <div class="dropdown-content">
                 <a href="bill.html">Bill & Kathy Kuhl</a>
