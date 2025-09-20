@@ -134,7 +134,11 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
-
+    
+    .show-on-portrait {
+        display: none;
+    }
+    
     .standing-row {
         display: flex;
         align-items: center;
@@ -297,10 +301,6 @@
     .flex-container > section {
         flex: 1;
     }
-    /* Class to hide elements in portrait mode */
-    .hide-on-portrait {
-        display: none;
-    }
 
     /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
@@ -333,7 +333,7 @@
             flex-direction: column;
             gap: 0;
         }
-        .nav-ribbon a, .dropdown {
+        .nav-ribbon a {
             width: 100%;
             text-align: center;
             padding: 0.5rem 0;
@@ -378,6 +378,10 @@
     }
     /* Media query for portrait mode (and small screens) */
     @media screen and (orientation: portrait) and (max-width: 768px) {
+        /* Hide the Sleeper logo */
+        .sleeper-logo {
+            display: none;
+        }
         /* Simplified list-like view for tables */
         .standing-row, .power-rankings-row {
             display: flex;
@@ -401,6 +405,9 @@
             flex: 0 0 auto;
             width: auto;
         }
+        .standing-row .rank {
+            margin-right: 0.5rem; /* Add space between rank and team name */
+        }
         .standing-row .team {
             flex-grow: 1;
             text-align: left;
@@ -410,7 +417,7 @@
             text-align: left;
         }
         /* Hide less critical columns in tables */
-        .hide-on-portrait {
+        .record, .median, .division-record, .pf, .pa, .games-back, .sos-remaining, .wins-median, .sos {
             display: none;
         }
     }
@@ -431,8 +438,8 @@
         <a href="index.html">Home</a>
         <a href="history.html">League History</a>
         <a href="throne.html">Thoughts from the Throne</a>
-        <div class="dropdown">
-            <a href="ownerprofiles.html" class="">Owner Profiles</a>
+        <div class="dropdown hide-on-portrait">
+            <a href="ownerprofiles.html">Owner Profiles</a>
             <div class="dropdown-content">
                 <a href="bill.html">Bill & Kathy Kuhl</a>
                 <a href="izzy.html">Israel Flores</a>
@@ -448,6 +455,7 @@
                 <a href="zach.html">Zach Loya</a>
             </div>
         </div>
+        <a href="ownerprofiles.html" class="show-on-portrait">Owner Profiles</a>
         <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
     </nav>
 
@@ -594,12 +602,12 @@
             row.innerHTML = `
                 <div class="rank">${getVal(rank)}</div>
                 <div class="team">${getVal(team.TeamName)}</div>
-                <div class="record hide-on-portrait">${overallRecord}</div>
+                <div class="record">${overallRecord}</div>
                 <div class="h2h">${h2hRecord}</div>
-                <div class="median hide-on-portrait">${medianRecord}</div>
-                <div class="division-record hide-on-portrait">${divisionalRecord}</div>
-                <div class="pf hide-on-portrait">${formatScore(team.PF)}</div>
-                <div class="pa hide-on-portrait">${formatScore(team.PA)}</div>
+                <div class="median">${medianRecord}</div>
+                <div class="division-record">${divisionalRecord}</div>
+                <div class="pf">${formatScore(team.PF)}</div>
+                <div class="pa">${formatScore(team.PA)}</div>
             `;
             return row;
         }
@@ -634,8 +642,8 @@
                 row.innerHTML = `
                     <div class="rank">${getVal(team['Power Rank'])}</div>
                     <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(movementText)})</span></div>
-                    <div class="wins-median hide-on-portrait">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
-                    <div class="sos hide-on-portrait">${getVal(team.SOS)}</div>
+                    <div class="wins-median">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
+                    <div class="sos">${getVal(team.SOS)}</div>
                 `;
                 powerRankingsContainer.appendChild(row);
             });
@@ -701,10 +709,10 @@
                 row.innerHTML = `
                     <div class="rank">${getVal(rank)}</div>
                     <div class="team">${getVal(team.TeamName)}</div>
-                    <div class="record hide-on-portrait">${overallRecord}</div>
-                    <div class="games-back hide-on-portrait">${gamesBack}</div>
-                    <div class="sos-remaining hide-on-portrait">${sosRemaining}</div>
-                    <div class="pf hide-on-portrait">${formatScore(team.PF)}</div>
+                    <div class="record">${overallRecord}</div>
+                    <div class="games-back">${gamesBack}</div>
+                    <div class="sos-remaining">${sosRemaining}</div>
+                    <div class="pf">${formatScore(team.PF)}</div>
                 `;
                 wildcardContainer.appendChild(row);
             });
