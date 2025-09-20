@@ -334,6 +334,11 @@
 
     /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
+        /* Hide pay dues link on mobile */
+        .nav-ribbon a[href="https://venmo.com/wilsontaylor4"] {
+            display: none;
+        }
+        
         /* Stack the main sections vertically */
         .flex-container {
             flex-direction: column;
