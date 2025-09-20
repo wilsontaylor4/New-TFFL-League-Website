@@ -22,6 +22,12 @@
             align-items: center;
             position: relative;
         }
+        .header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
         .container {
             max-width: 1200px;
             margin: auto;
@@ -99,7 +105,6 @@
             position: relative;
             display: flex;
             align-items: center;
-            padding-bottom: 0.5rem;
         }
         .dropdown-content {
             display: none;
@@ -110,10 +115,9 @@
             z-index: 1;
             border-radius: 0.5rem;
             padding: 0.5rem 0;
-            margin-top: 0;
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            top: 100%;
         }
         .dropdown-content a {
             color: white;
@@ -154,10 +158,89 @@
         .division-title-cell {
             background-color: #c8e6c9; /* Light green */
         }
+        .mobile-note {
+            display: none;
+        }
+        .show-on-portrait {
+            display: none;
+        }
+        /* Media query for screens smaller than 768px */
+        @media screen and (max-width: 768px) {
+            /* Hide pay dues link on mobile */
+            .nav-ribbon a[href="https://venmo.com/wilsontaylor4"] {
+                display: none;
+            }
+            
+            /* Adjust header for mobile */
+            .header {
+                flex-direction: column;
+                padding: 0.5rem 0;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .header p {
+                margin-top: 0.25rem;
+                margin-bottom: 0;
+            }
+            .logo, .sleeper-logo {
+                position: static;
+                transform: none;
+                max-height: 100px;
+                max-width: 100px;
+                margin: 0.25rem 0;
+            }
+    
+            /* Adjust nav ribbon for mobile */
+            .nav-ribbon {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                padding: 0.5rem 0;
+                gap: 0.5rem;
+            }
+            .nav-ribbon a {
+                flex-grow: 1;
+                text-align: center;
+                font-size: 0.75rem;
+                padding: 0.5rem 0.25rem;
+            }
+            .dropdown {
+                display: none;
+            }
+            .show-on-portrait {
+                display: block;
+            }
+        }
+        /* Media query for portrait mode (and small screens) */
+        @media screen and (orientation: portrait) and (max-width: 768px) {
+            /* Show the mobile note */
+            .mobile-note {
+                display: block;
+                text-align: center;
+                font-size: 0.8rem;
+                color: #4b5563;
+                margin-top: 1rem;
+            }
+            /* Hide the Sleeper logo */
+            .sleeper-logo {
+                display: none;
+            }
+            /* Hide the regular dropdown */
+            .dropdown {
+              display: none;
+            }
+            /* Show the simplified link */
+            .show-on-portrait {
+              display: block;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100">
 
+    <div class="mobile-note">For best viewing and full details, rotate phone to landscape orientation.</div>
+    
     <header class="header bg-gray-800">
         <div class="container flex flex-col items-center">
             <img src="TFFL Logo.jpg" alt="TFFL League Logo" class="logo">
@@ -188,6 +271,7 @@
                 <a href="zach.html">Zach Loya</a>
             </div>
         </div>
+        <a href="ownerprofiles.html" class="show-on-portrait">Owner Profiles</a>
         <a href="https://venmo.com/wilsontaylor4">Pay Dues</a>
     </nav>
 
@@ -222,15 +306,15 @@
                             <td>No</td>
                             <td>No</td>
                         </tr>
-                        <tr>
-                            <td class="championship-row">2023</td>
-                            <td class="championship-row">Dewey DewHickeys</td>
-                            <td class="championship-row">17-11</td>
-                            <td class="championship-row">8-6</td>
-                            <td class="championship-row">9-5</td>
-                            <td class="championship-row">1</td>
-                            <td class="championship-row"><strong>Yes</strong></td>
-                            <td class="championship-row">No</td>
+                        <tr class="championship-row">
+                            <td>2023</td>
+                            <td>Dewey DewHickeys</td>
+                            <td>17-11</td>
+                            <td>8-6</td>
+                            <td>9-5</td>
+                            <td>1</td>
+                            <td><strong>Yes</strong></td>
+                            <td>No</td>
                         </tr>
                         <tr>
                             <td>2022</td>
@@ -262,15 +346,15 @@
                             <td>No</td>
                             <td>No</td>
                         </tr>
-                        <tr>
-                            <td class="championship-row">2019</td>
-                            <td class="championship-row">Ooops i did it again!!!</td>
-                            <td class="championship-row">18-8</td>
-                            <td class="championship-row">8-5</td>
-                            <td class="championship-row">10-3</td>
-                            <td class="championship-row">1</td>
-                            <td class="championship-row"><strong>Yes</strong></td>
-                            <td class="championship-row">No</td>
+                        <tr class="championship-row">
+                            <td>2019</td>
+                            <td>Ooops i did it again!!!</td>
+                            <td>18-8</td>
+                            <td>8-5</td>
+                            <td>10-3</td>
+                            <td>1</td>
+                            <td><strong>Yes</strong></td>
+                            <td>No</td>
                         </tr>
                         <tr>
                             <td>2018</td>
@@ -292,15 +376,15 @@
                             <td>No</td>
                             <td>No</td>
                         </tr>
-                        <tr>
-                            <td class="championship-row">2016</td>
-                            <td class="championship-row">Woodhead Be Out Of The Question</td>
-                            <td class="championship-row">7-6</td>
-                            <td class="championship-row">7-6</td>
-                            <td class="championship-row">---</td>
-                            <td class="championship-row">1</td>
-                            <td class="championship-row"><strong>Yes</strong></td>
-                            <td class="championship-row">No</td>
+                        <tr class="championship-row">
+                            <td>2016</td>
+                            <td>Woodhead Be Out Of The Question</td>
+                            <td>7-6</td>
+                            <td>7-6</td>
+                            <td>---</td>
+                            <td>1</td>
+                            <td><strong>Yes</strong></td>
+                            <td>No</td>
                         </tr>
                         <tr>
                             <td>2015</td>
