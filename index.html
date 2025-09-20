@@ -298,34 +298,104 @@
         flex: 1;
     }
 
-    /* Adjust Power Rankings columns for side-by-side layout */
-    #power-rankings-container .power-rankings-header > div,
-    #power-rankings-container .power-rankings-row > div {
-        text-align: center;
-    }
-    #power-rankings-container .power-rankings-header .team,
-    #power-rankings-container .power-rankings-row .team {
-        text-align: left;
-    }
-    #power-rankings-container .power-rankings-header .rank,
-    #power-rankings-container .power-rankings-row .rank { width: 15%; }
-    #power-rankings-container .power-rankings-header .team,
-    #power-rankings-container .power-rankings-row .team { width: 40%; }
-    #power-rankings-container .power-rankings-header .wins-median,
-    #power-rankings-container .power-rankings-row .wins-median { width: 25%; }
-    #power-rankings-container .power-rankings-header .sos,
-    #power-rankings-container .power-rankings-row .sos { width: 20%; }
+    /* Media query for screens smaller than 768px */
+    @media screen and (max-width: 768px) {
+        /* Stack the main sections vertically */
+        .flex-container {
+            flex-direction: column;
+        }
 
-    /* Adjust Wild Card Standings columns for side-by-side layout */
-    #wildcard-standings-container .standing-row > div { text-align: center; }
-    #wildcard-standings-container .standing-row .team { text-align: left; }
-    #wildcard-standings-container .standing-row .rank { width: 10%; }
-    #wildcard-standings-container .standing-row .team { width: 30%; }
-    #wildcard-standings-container .standing-row .record { width: 15%; }
-    #wildcard-standings-container .standing-row .games-back { width: 15%; }
-    #wildcard-standings-container .standing-row .sos-remaining { width: 20%; }
-    #wildcard-standings-container .standing-row .pf { width: 10%; }
+        /* Adjust padding and font sizes for better mobile readability */
+        .container {
+            padding: 1rem;
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        .header {
+            flex-direction: column;
+            padding: 1rem 0.5rem;
+        }
+        .logo, .sleeper-logo {
+            position: static;
+            transform: none;
+            max-height: 100px;
+            max-width: 100px;
+            margin: 0.5rem 0;
+        }
 
+        /* Adjust nav ribbon for mobile */
+        .nav-ribbon {
+            flex-direction: column;
+            gap: 0;
+        }
+        .nav-ribbon a, .dropdown {
+            width: 100%;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+        .dropdown-content {
+            position: static;
+            transform: none;
+            width: 100%;
+            box-shadow: none;
+            margin-top: 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: none; /* Hide dropdown on hover to avoid issues */
+        }
+        .dropdown-content a {
+            padding: 10px 0;
+        }
+        /* Hide the owner profiles dropdown on small screens */
+        .dropdown {
+          display: none;
+        }
+        .nav-ribbon a[href="ownerprofiles.html"] {
+          display: block;
+          padding: 0.5rem 1rem;
+        }
+
+        /* Force tables to be scrollable if needed */
+        .table-container {
+            overflow-x: auto;
+        }
+        table, .standing-row, .power-rankings-row {
+            display: block;
+            width: 100%;
+        }
+        /* Hide headers for mobile view of tables, except for the first one */
+        .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
+          display: none;
+        }
+
+        /* Style for table rows on mobile */
+        .standing-row > div, .power-rankings-row > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: none;
+            padding: 0.25rem 0.5rem;
+        }
+        .standing-row > div::before, .power-rankings-row > div::before {
+            content: attr(class) ": ";
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .standing-row .rank::before { content: "Rank: "; }
+        .standing-row .team::before { content: "Team: "; }
+        .standing-row .record::before { content: "Overall Record: "; }
+        .standing-row .h2h::before { content: "H2H: "; }
+        .standing-row .median::before { content: "Median: "; }
+        .standing-row .division-record::before { content: "Divisional Record: "; }
+        .standing-row .pf::before { content: "PF: "; }
+        .standing-row .pa::before { content: "PA: "; }
+        .power-rankings-row .rank::before { content: "Rank: "; }
+        .power-rankings-row .team::before { content: "Team: "; }
+        .power-rankings-row .wins-median::before { content: "Wins Against Average: "; }
+        .power-rankings-row .sos::before { content: "Strength of Schedule Faced: "; }
+    }
 </style>
 </head>
 <body class="bg-gray-100">
@@ -344,7 +414,7 @@
         <a href="history.html">League History</a>
         <a href="throne.html">Thoughts from the Throne</a>
         <div class="dropdown">
-            <a href="ownerprofiles.html" class="dropbtn">Owner Profiles</a>
+            <a href="ownerprofiles.html" class="">Owner Profiles</a>
             <div class="dropdown-content">
                 <a href="bill.html">Bill & Kathy Kuhl</a>
                 <a href="izzy.html">Israel Flores</a>
@@ -442,7 +512,7 @@
                         const firstTeam = data.defenders[0];
                         const weekNumber = firstTeam.H2HWins + firstTeam.H2HLosses;
                         updateTitle('divisional-standings-title', `Divisional Standings Through Week ${weekNumber}`);
-                        updateTitle('power-ankings-title', `Power Rankings Through Week ${weekNumber}`);
+                        updateTitle('power-rankings-title', `Power Rankings Through Week ${weekNumber}`);
                         updateTitle('wildcard-standings-title', `Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
