@@ -156,7 +156,8 @@
             
             /* Adjust header for mobile */
             .header {
-                padding: 0.5rem 0;
+                flex-direction: column;
+                padding: 1rem 0.5rem;
             }
             .header h1 {
                 font-size: 1.5rem;
@@ -165,6 +166,8 @@
                 margin-top: 0.25rem;
             }
             .logo, .sleeper-logo {
+                position: static;
+                transform: none;
                 max-height: 50px;
                 max-width: 50px;
                 margin: 0.25rem 0;
