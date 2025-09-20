@@ -338,24 +338,26 @@
         .flex-container {
             flex-direction: column;
         }
+        
+        /* Adjust header for mobile */
+        .header {
+            padding: 0.5rem 0;
+        }
+        .header h1 {
+            font-size: 1.5rem;
+        }
+        .header p {
+            margin-top: 0.25rem;
+        }
+        .logo, .sleeper-logo {
+            max-height: 50px;
+            max-width: 50px;
+            margin: 0.25rem 0;
+        }
 
         /* Adjust padding and font sizes for better mobile readability */
         .container {
             padding: 1rem;
-        }
-        h1 {
-            font-size: 2rem;
-        }
-        .header {
-            flex-direction: column;
-            padding: 1rem 0.5rem;
-        }
-        .logo, .sleeper-logo {
-            position: static;
-            transform: none;
-            max-height: 100px;
-            max-width: 100px;
-            margin: 0.5rem 0;
         }
 
         /* Adjust nav ribbon for mobile */
