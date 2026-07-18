@@ -603,9 +603,9 @@
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
                         const weekNumber = firstTeam.H2HWins + firstTeam.H2HLosses;
-                        updateTitle('divisional-standings-title', `Divisional Standings Through Week ${weekNumber}`);
-                        updateTitle('power-rankings-title', `Power Rankings Through Week ${weekNumber}`);
-                        updateTitle('wildcard-standings-title', `Wild Card Standings Through Week ${weekNumber}`);
+                        updateTitle('divisional-standings-title', `2025 Divisional Standings Through Week ${weekNumber}`);
+                        updateTitle('power-rankings-title', `2025 Power Rankings Through Week ${weekNumber}`);
+                        updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
                     populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
