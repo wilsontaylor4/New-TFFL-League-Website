@@ -702,12 +702,10 @@
                 row.className = 'power-rankings-row';
                 
                 const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
-                const movementVal = team.Movement;
-                const movementText = movementVal > 0 ? `+${movementVal}` : movementVal;
 
                 row.innerHTML = `
                     <div class="rank">${getVal(team['Power Rank'])}</div>
-                    <div class="team">${getVal(team.TeamName)} <span class="movement">(${getVal(movementText)})</span></div>
+                    <div class="team">${getVal(team.TeamName)}</div>
                     <div class="wins-median">${getVal(Number(team.PowerRankTotal).toFixed(3))}</div>
                     <div class="sos">${getVal(team.SOS)}</div>
                 `;
