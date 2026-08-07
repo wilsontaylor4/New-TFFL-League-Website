@@ -297,15 +297,25 @@
     .wildcard-leader {
         background-color: #f5d5c7;
     }
-    /* New Side-by-Side Layout CSS */
+
+    /* Side-by-Side Flex Layout */
     .flex-container {
         display: flex;
-        gap: 2rem;
+        gap: 1.5rem;
         margin-top: 2rem;
     }
     .flex-container > section {
         flex: 1;
+        min-width: 0;
     }
+
+    #weekly-awards table {
+        font-size: 0.875rem;
+    }
+    #weekly-awards th, #weekly-awards td {
+        padding: 0.5rem 0.25rem;
+    }
+
     #wildcard-standings-container .standing-row > div {
         text-align: center;
     }
@@ -335,7 +345,17 @@
     .hide-on-desktop {
       display: none;
     }
-    
+
+    /* Stack flex-container items vertically on mobile or screens smaller than 1024px */
+    @media screen and (max-width: 1024px), (orientation: portrait) {
+        .flex-container {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .flex-container > section {
+            width: 100%;
+        }
+    }
 
     /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
@@ -375,7 +395,7 @@
         .nav-ribbon a {
             flex-grow: 1;
             text-align: center;
-            font-size: 0.75rem; /* Reduced font size for mobile nav */
+            font-size: 0.75rem;
             padding: 0.5rem 0.25rem;
         }
         .dropdown {
@@ -396,8 +416,8 @@
         .standing-row.table-header, .standing-row.wildcard-header, .standing-row.power-rankings-header {
             display: none;
         }
-        
     }
+
     /* Media query for portrait mode (and small screens) */
     @media screen and (orientation: portrait) and (max-width: 768px) {
         /* Show the mobile note */
@@ -443,7 +463,7 @@
             width: auto;
         }
         .standing-row .rank, .power-rankings-row .rank, .wildcard-standings .standing-row .rank {
-            margin-right: 0.5rem; /* Add space between rank and team name */
+            margin-right: 0.5rem;
         }
         .standing-row .team, .power-rankings-row .team, .wildcard-standings .standing-row .team {
             flex-grow: 1;
@@ -470,13 +490,11 @@
             text-align: center;
             font-weight: bold;
         }
-        /* Make headers for hidden columns not take up space */
         .standing-row.table-header .record, .standing-row.table-header .median, .standing-row.table-header .division-record, .standing-row.table-header .pa,
         .standing-row.wildcard-header .record, .standing-row.wildcard-header .pf,
         .standing-row.power-rankings-header .wins-median, .standing-row.power-rankings-header .sos {
             display: none;
         }
-        /* Make sure visible headers align with data */
         .standing-row.table-header .rank, .standing-row.wildcard-header .rank, .standing-row.power-rankings-header .rank {
             flex: 0 0 auto;
         }
@@ -487,6 +505,38 @@
         .standing-row.table-header .h2h, .standing-row.wildcard-header .h2h, .standing-row.wildcard-header .games-back, .standing-row.wildcard-header .sos-remaining {
           text-align: center;
         }
+
+        /* Portrait Mobile formatting for Weekly Awards Table (3 Columns) */
+        #weekly-awards table, 
+        #weekly-awards thead, 
+        #weekly-awards tbody, 
+        #weekly-awards th, 
+        #weekly-awards td, 
+        #weekly-awards tr {
+            display: block;
+        }
+        #weekly-awards thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        #weekly-awards tr {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background-color: #ffffff;
+        }
+        #weekly-awards td {
+            border: none;
+            padding: 0.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #weekly-awards td:nth-of-type(1)::before { content: "Week #:"; font-weight: 600; color: #4b5563; }
+        #weekly-awards td:nth-of-type(2)::before { content: "Award:"; font-weight: 600; color: #4b5563; }
+        #weekly-awards td:nth-of-type(3)::before { content: "Winner:"; font-weight: 600; color: #4b5563; }
     }
 </style>
 </head>
@@ -565,10 +615,30 @@
                     <div class="pf">PF</div>
                     <div class="pa">PA</div>
                 </div>
-                </div>
+            </div>
         </section>
         
         <div class="flex-container">
+            <!-- Weekly Awards Section (3 Columns & 14 Weeks) -->
+            <section id="weekly-awards" class="card">
+                <h2 id="weekly-awards-title" class="text-2xl font-bold mb-4 border-b pb-2">Weekly Awards</h2>
+                <div id="weekly-awards-container" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Week #</th>
+                                <th style="width: 45%;">Award</th>
+                                <th style="width: 30%;">Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody id="awards-body">
+                            <!-- Populated dynamically via JS or falls back to static HTML -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Wild Card Standings Section -->
             <section id="wildcard-standings" class="card">
                 <h2 id="wildcard-standings-title" class="text-2xl font-bold mb-4 border-b pb-2">Wild Card Standings</h2>
                 <div id="wildcard-standings-container">
@@ -583,10 +653,11 @@
                 </div>
             </section>
     
+            <!-- Power Rankings Section -->
             <section id="power-rankings" class="card">
                 <h2 id="power-rankings-title" class="text-2xl font-bold mb-4 border-b pb-2">Power Rankings</h2>
                 <div id="power-rankings-container">
-                    </div>
+                </div>
             </section>
         </div>
 
@@ -594,6 +665,24 @@
 
     <script>
         const dataUrl = 'https://script.google.com/macros/s/AKfycbw0yxPcjSDePxbjpMshXRE_w9ac767nYYED5rxT7_H2wUywLEODDKns1HBZ-6fOXmgY/exec';
+
+        // Placeholder awards data for Weeks 1 to 14
+        const defaultAwards = [
+            { week: 1, awardName: "🏆 High Scorer", winnerName: "Taylor Wilson" },
+            { week: 2, awardName: "🤡 Bench Monster", winnerName: "Mitch Sennewald" },
+            { week: 3, awardName: "💔 Tough Luck", winnerName: "Jake Wolfer" },
+            { week: 4, awardName: "🎯 Nailbiter", winnerName: "Riley Kuhl" },
+            { week: 5, awardName: "🏆 High Scorer", winnerName: "Jason Zamora" },
+            { week: 6, awardName: "💣 Blowout Win", winnerName: "Israel Flores" },
+            { week: 7, awardName: "🤡 Bench Monster", winnerName: "Bill & Kathy Kuhl" },
+            { week: 8, awardName: "🏆 High Scorer", winnerName: "Zach Loya" },
+            { week: 9, awardName: "🎯 Nailbiter", winnerName: "Stephen Zamora" },
+            { week: 10, awardName: "💔 Tough Luck", winnerName: "Ron Wilson" },
+            { week: 11, awardName: "🏆 High Scorer", winnerName: "Jose Granados" },
+            { week: 12, awardName: "💣 Blowout Win", winnerName: "Taryn & Josh" },
+            { week: 13, awardName: "🤡 Bench Monster", winnerName: "Taylor Wilson" },
+            { week: 14, awardName: "🏆 High Scorer", winnerName: "Jake Wolfer" }
+        ];
 
         async function fetchDataAndPopulate() {
             try {
@@ -612,10 +701,15 @@
                     populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
                     populatePowerRankings(data.powerRankings);
                     populateWildcardStandings(data.wildcard);
+                    
+                    // Populate awards using API data if available, otherwise use default 14-week placeholders
+                    populateWeeklyAwards(data.awards && data.awards.length > 0 ? data.awards : defaultAwards);
                 }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+                // Fallback to placeholders if API call fails
+                populateWeeklyAwards(defaultAwards);
             }
         }
 
@@ -682,10 +776,8 @@
         function populatePowerRankings(teams) {
             const powerRankingsContainer = document.getElementById('power-rankings-container');
             
-            // Clear all existing content within the container for a clean slate
             powerRankingsContainer.innerHTML = '';
             
-            // Re-add the header row
             const headerRow = document.createElement('div');
             headerRow.className = "standing-row power-rankings-header";
             headerRow.innerHTML = `
@@ -713,7 +805,6 @@
                 powerRankingsContainer.appendChild(row);
             });
 
-            // Add the new note at the bottom
             const noteContainer = document.createElement('div');
             noteContainer.className = "text-sm text-gray-500 mt-4 power-rankings-note";
             noteContainer.innerHTML = `
@@ -729,10 +820,8 @@
         function populateWildcardStandings(teams) {
             const wildcardContainer = document.getElementById('wildcard-standings-container');
 
-            // Clear all old rows, including the header and note, for a clean slate
             wildcardContainer.innerHTML = '';
             
-            // Re-create and append the header row
             const headerRow = document.createElement('div');
             headerRow.className = "standing-row wildcard-header";
             headerRow.innerHTML = `
@@ -782,7 +871,6 @@
                 wildcardContainer.appendChild(row);
             });
 
-            // Create and append the note after all rows have been added
             const noteContainer = document.createElement('div');
             noteContainer.className = "text-sm text-gray-500 mt-4";
             noteContainer.innerHTML = `
@@ -793,6 +881,21 @@
                 </ul>
             `;
             wildcardContainer.appendChild(noteContainer);
+        }
+
+        function populateWeeklyAwards(awards) {
+            const tbody = document.getElementById('awards-body');
+            tbody.innerHTML = '';
+
+            awards.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-bold">Week ${item.week}</td>
+                    <td>${item.awardName}</td>
+                    <td>${item.winnerName}</td>
+                `;
+                tbody.appendChild(row);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
