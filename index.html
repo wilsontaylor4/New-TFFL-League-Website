@@ -563,14 +563,13 @@
                         updateTitle('divisional-standings-title', `2025 Divisional Standings Through Week ${weekNumber}`);
                         updateTitle('power-rankings-title', `2025 Power Rankings Through Week ${weekNumber}`);
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
-                        updateTitle('weekly-awards-title', `Weekly Awards Through Week ${weekNumber}`);
                     }
                     
                     populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
                     populatePowerRankings(data.powerRankings);
                     populateWildcardStandings(data.wildcard);
                     
-                    if (data.awards && data.awards.length > 0) {
+                    if (data.awards) {
                         populateWeeklyAwards(data.awards);
                     }
                 }
@@ -704,27 +703,21 @@
             const tbody = document.getElementById('awards-body');
             tbody.innerHTML = '';
 
-            awards.forEach(item => {
-                const rawWeek = item.week ?? item.Week ?? item['Week #'] ?? item['Week'];
-                const rawAward = item.awardName ?? item.Award ?? item['Award Name'] ?? item['Award'];
-                const rawWinner = item.winnerName ?? item.Winner ?? item['Winner Name'] ?? item['Winner'];
+            if (awards && awards.length > 0) {
+                awards.forEach(item => {
+                    const weekText = item.week ? String(item.week).trim() : '—';
+                    const awardDisplay = (item.awardName && String(item.awardName).trim() !== '') ? item.awardName : '—';
+                    const winnerDisplay = (item.winnerName && String(item.winnerName).trim() !== '') ? item.winnerName : '—';
 
-                let weekDisplay = '—';
-                if (rawWeek !== undefined && rawWeek !== null && String(rawWeek).trim() !== '') {
-                    weekDisplay = String(rawWeek).toLowerCase().includes('week') ? rawWeek : `Week ${rawWeek}`;
-                }
-
-                const awardDisplay = (rawAward && String(rawAward).trim() !== '') ? rawAward : '—';
-                const winnerDisplay = (rawWinner && String(rawWinner).trim() !== '') ? rawWinner : '—';
-
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="font-bold no-wrap">${weekDisplay}</td>
-                    <td>${awardDisplay}</td>
-                    <td>${winnerDisplay}</td>
-                `;
-                tbody.appendChild(row);
-            });
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="font-bold no-wrap">${weekText}</td>
+                        <td>${awardDisplay}</td>
+                        <td>${winnerDisplay}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
         }
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
