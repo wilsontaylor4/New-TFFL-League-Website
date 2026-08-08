@@ -248,7 +248,7 @@
     }
 
     /* Stack flex-container items vertically on mobile or screens smaller than 1024px */
-    @media screen and (max-width: 1024px), (orientation: portrait) {
+    @media screen and (max-width: 1024px) {
         .flex-container {
             flex-direction: column;
             gap: 1.5rem;
@@ -311,86 +311,6 @@
         .standing-row.table-header {
             display: none;
         }
-    }
-
-    /* Media query for portrait mode (and small screens) */
-    @media screen and (orientation: portrait) and (max-width: 768px) {
-        .mobile-note {
-            display: block;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #4b5563;
-            margin-top: 1rem;
-        }
-        .sleeper-logo { display: none; }
-        .dropdown { display: none; }
-        .show-on-portrait { display: block; }
-        
-        .standing-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem 1rem;
-        }
-        .standing-row > div { padding: 0; }
-        .standing-row .rank, .standing-row .team, .standing-row .h2h {
-            display: block;
-            flex: 0 0 auto;
-            width: auto;
-        }
-        .standing-row .rank { margin-right: 0.5rem; }
-        .standing-row .team { flex-grow: 1; text-align: left; }
-        
-        .standing-row .record, .standing-row .median, .standing-row .division-record, .standing-row .pf, .standing-row .pa {
-            display: none;
-        }
-        .standing-row.table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.8rem;
-            border-radius: 0.5rem;
-        }
-        .standing-row.table-header > div {
-            padding: 0.25rem;
-            flex: 1 1 0;
-            text-align: center;
-            font-weight: bold;
-        }
-        .standing-row.table-header .record, .standing-row.table-header .median, .standing-row.table-header .division-record, .standing-row.table-header .pa {
-            display: none;
-        }
-        .standing-row.table-header .rank { flex: 0 0 auto; }
-        .standing-row.table-header .team { flex-grow: 1; text-align: left; }
-        .standing-row.table-header .h2h { text-align: center; }
-
-        /* Portrait Mobile formatting for Weekly Awards Table */
-        #weekly-awards table, #weekly-awards thead, #weekly-awards tbody, #weekly-awards th, #weekly-awards td, #weekly-awards tr {
-            display: block;
-        }
-        #weekly-awards thead tr { position: absolute; top: -9999px; left: -9999px; }
-        #weekly-awards tr {
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            background-color: #ffffff;
-        }
-        #weekly-awards td {
-            border: none;
-            padding: 0.2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #weekly-awards td:nth-of-type(1)::before { content: "Week #:"; font-weight: 600; color: #4b5563; }
-        #weekly-awards td:nth-of-type(2)::before { content: "Award:"; font-weight: 600; color: #4b5563; }
-        #weekly-awards td:nth-of-type(3)::before { content: "Winner:"; font-weight: 600; color: #4b5563; }
     }
 </style>
 </head>
@@ -480,8 +400,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 22%;">Week #</th>
-                                <th style="width: 48%;">Award</th>
+                                <th style="width: 25%;">Week #</th>
+                                <th style="width: 45%;">Award</th>
                                 <th style="width: 30%;">Winner</th>
                             </tr>
                         </thead>
@@ -557,6 +477,14 @@
                 const data = await response.json();
 
                 if (data) {
+                    // 1. Weekly Awards renders FIRST so nothing can block it
+                    try {
+                        if (data.awards) populateWeeklyAwards(data.awards);
+                    } catch (err) {
+                        console.error('Error populating Weekly Awards:', err);
+                    }
+
+                    // 2. Update section titles
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
                         const weekNumber = (firstTeam.H2HWins || 0) + (firstTeam.H2HLosses || 0);
@@ -565,18 +493,28 @@
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
-                    if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
-                    if (data.powerRankings) populatePowerRankings(data.powerRankings);
-                    if (data.wildcard) populateWildcardStandings(data.wildcard);
-                    
-                    populateWeeklyAwards(data.awards);
-                } else {
-                    populateWeeklyAwards(null);
+                    // 3. Isolated renders for other sections
+                    try {
+                        if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
+                    } catch (err) {
+                        console.error('Error populating Divisional Standings:', err);
+                    }
+
+                    try {
+                        if (data.powerRankings) populatePowerRankings(data.powerRankings);
+                    } catch (err) {
+                        console.error('Error populating Power Rankings:', err);
+                    }
+
+                    try {
+                        if (data.wildcard) populateWildcardStandings(data.wildcard);
+                    } catch (err) {
+                        console.error('Error populating Wildcard Standings:', err);
+                    }
                 }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
-                populateWeeklyAwards(null);
             }
         }
 
@@ -710,43 +648,16 @@
             const tbody = document.getElementById('awards-body');
             tbody.innerHTML = '';
 
-            if (Array.isArray(awards) && awards.length > 0) {
-                awards.forEach((item, index) => {
-                    if (!item || typeof item !== 'object') return;
-
-                    // Extract values by property position to prevent header-naming mismatches
-                    const values = Object.values(item);
-                    
-                    let weekVal = values[0] ?? `Week ${index + 1}`;
-                    let awardVal = values[1] ?? '—';
-                    let winnerVal = values[2] ?? '—';
-
-                    weekVal = String(weekVal).trim();
-                    awardVal = String(awardVal).trim();
-                    winnerVal = String(winnerVal).trim();
-
-                    if (weekVal !== '' && weekVal !== '—' && !weekVal.toLowerCase().includes('week')) {
-                        weekVal = `Week ${weekVal}`;
-                    }
-
+            if (awards && awards.length > 0) {
+                awards.forEach(item => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td class="font-bold no-wrap">${weekVal !== '' ? weekVal : `Week ${index + 1}`}</td>
-                        <td>${awardVal !== '' ? awardVal : '—'}</td>
-                        <td>${winnerVal !== '' ? winnerVal : '—'}</td>
+                        <td class="font-bold no-wrap">${item.week || '—'}</td>
+                        <td>${item.awardName || '—'}</td>
+                        <td>${item.winnerName || '—'}</td>
                     `;
                     tbody.appendChild(row);
                 });
-            } else {
-                for (let i = 1; i <= 14; i++) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="font-bold no-wrap">Week ${i}</td>
-                        <td>—</td>
-                        <td>—</td>
-                    `;
-                    tbody.appendChild(row);
-                }
             }
         }
 
