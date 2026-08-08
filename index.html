@@ -247,7 +247,6 @@
         display: none;
     }
 
-    /* Stack flex-container items vertically on mobile or screens smaller than 1024px */
     @media screen and (max-width: 1024px) {
         .flex-container {
             flex-direction: column;
@@ -258,7 +257,6 @@
         }
     }
 
-    /* Media query for screens smaller than 768px */
     @media screen and (max-width: 768px) {
         .nav-ribbon a[href="https://venmo.com/wilsontaylor4"] {
             display: none;
@@ -477,8 +475,9 @@
                 const data = await response.json();
 
                 if (data) {
-                    // Populate Awards first
-                    populateWeeklyAwards(data.awards);
+                    if (data.awards) {
+                        populateWeeklyAwards(data.awards);
+                    }
 
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
@@ -505,62 +504,28 @@
         }
 
         function populateWeeklyAwards(awards) {
-            // Robust target selection: checks for ID first, falls back to the table inside #weekly-awards
-            let tbody = document.getElementById('awards-body');
-            if (!tbody) {
-                const awardsTable = document.querySelector('#weekly-awards table');
-                if (awardsTable) {
-                    tbody = awardsTable.querySelector('tbody') || awardsTable.appendChild(document.createElement('tbody'));
-                    tbody.id = 'awards-body';
-                }
-            }
-
+            const tbody = document.getElementById('awards-body');
             if (!tbody) return;
             tbody.innerHTML = '';
 
-            // Extract items array cleanly regardless of wrapper shape
-            let list = [];
-            if (Array.isArray(awards)) {
-                list = awards;
-            } else if (awards && typeof awards === 'object') {
-                list = Object.values(awards);
-            }
+            let list = Array.isArray(awards) ? awards : (awards && typeof awards === 'object' ? Object.values(awards) : []);
 
             if (list.length > 0) {
-                list.forEach((item, index) => {
+                list.forEach((item) => {
                     if (!item || typeof item !== 'object') return;
 
-                    const keys = Object.keys(item);
-                    let weekVal = item.week ?? item.Week ?? (keys[0] ? item[keys[0]] : `Week ${index + 1}`);
-                    let awardVal = item.awardName ?? item.Award ?? (keys[1] ? item[keys[1]] : '—');
-                    let winnerVal = item.winnerName ?? item.Winner ?? (keys[2] ? item[keys[2]] : '—');
-
-                    weekVal = String(weekVal ?? '').trim();
-                    awardVal = String(awardVal ?? '').trim();
-                    winnerVal = String(winnerVal ?? '').trim();
-
-                    if (weekVal !== '' && weekVal !== '—' && !weekVal.toLowerCase().includes('week')) {
-                        weekVal = `Week ${weekVal}`;
-                    }
+                    const weekVal = item.week || item.Week || '—';
+                    const awardVal = item.awardName || item.Award || '—';
+                    const winnerVal = item.winnerName || item.Winner || '—';
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="font-bold no-wrap" style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">${weekVal !== '' ? weekVal : `Week ${index + 1}`}</td>
-                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">${awardVal !== '' ? awardVal : '—'}</td>
-                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">${winnerVal !== '' ? winnerVal : '—'}</td>
+                        <td class="font-bold no-wrap">${weekVal}</td>
+                        <td>${awardVal}</td>
+                        <td>${winnerVal}</td>
                     `;
                     tbody.appendChild(tr);
                 });
-            } else {
-                for (let i = 1; i <= 14; i++) {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td class="font-bold no-wrap" style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">Week ${i}</td>
-                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">—</td>
-                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">—</td>
-                    `;
-                    tbody.appendChild(tr);
-                }
             }
         }
 
