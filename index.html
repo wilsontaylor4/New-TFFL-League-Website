@@ -477,11 +477,8 @@
                 const data = await response.json();
 
                 if (data) {
-                    try {
-                        if (data.awards) populateWeeklyAwards(data.awards);
-                    } catch (err) {
-                        console.error('Error populating Weekly Awards:', err);
-                    }
+                    // Populate Awards first
+                    populateWeeklyAwards(data.awards);
 
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
@@ -491,25 +488,10 @@
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
-                    try {
-                        if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
-                    } catch (err) {
-                        console.error('Error populating Divisional Standings:', err);
-                    }
-
-                    try {
-                        if (data.powerRankings) populatePowerRankings(data.powerRankings);
-                    } catch (err) {
-                        console.error('Error populating Power Rankings:', err);
-                    }
-
-                    try {
-                        if (data.wildcard) populateWildcardStandings(data.wildcard);
-                    } catch (err) {
-                        console.error('Error populating Wildcard Standings:', err);
-                    }
+                    if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
+                    if (data.powerRankings) populatePowerRankings(data.powerRankings);
+                    if (data.wildcard) populateWildcardStandings(data.wildcard);
                 }
-
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -522,131 +504,21 @@
             }
         }
 
-        function populateDivisionalStandings(defenders, contenders, pretenders) {
-            const defendersContainer = document.querySelector('#divisional-standings-container');
-            const contendersContainer = document.querySelector('#divisional-standings-container');
-            const pretendersContainer = document.querySelector('#divisional-standings-container');
-            
-            defendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
-            contendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
-            pretendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
-
-            if (defenders) {
-                defenders.forEach((team, index) => {
-                    const row = createDivisionalRow(team, index + 1, 'defenders');
-                    defendersContainer.insertBefore(row, defendersContainer.querySelector('.contenders-header'));
-                });
-            }
-
-            if (contenders) {
-                contenders.forEach((team, index) => {
-                    const row = createDivisionalRow(team, index + 1, 'contenders');
-                    contendersContainer.insertBefore(row, contendersContainer.querySelector('.pretenders-header'));
-                });
-            }
-            
-            if (pretenders) {
-                pretenders.forEach((team, index) => {
-                    const row = createDivisionalRow(team, index + 1, 'pretenders');
-                    pretendersContainer.appendChild(row);
-                });
-            }
-        }
-
-        function createDivisionalRow(team, rank, divisionName) {
-            const row = document.createElement('div');
-            row.className = `standing-row ${divisionName}-row`;
-            if (rank === 1) {
-                row.classList.add(`${divisionName}-leader`);
-            }
-
-            const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
-            const formatScore = (score) => score ? Number(score).toFixed(2) : '—';
-
-            const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
-            const h2hRecord = `${getVal(team.H2HWins)}-${getVal(team.H2HLosses)}`;
-            const medianRecord = `${getVal(team.MedianWins)}-${getVal(team.MedianLosses)}`;
-            const divisionalRecord = `${getVal(team.DivisionalWins)}-${getVal(team.DivisionalLosses)}`;
-
-            row.innerHTML = `
-                <div class="rank">${getVal(rank)}</div>
-                <div class="team">${getVal(team.TeamName)}</div>
-                <div class="record">${overallRecord}</div>
-                <div class="h2h">${h2hRecord}</div>
-                <div class="median">${medianRecord}</div>
-                <div class="division-record">${divisionalRecord}</div>
-                <div class="pf">${formatScore(team.PF)}</div>
-                <div class="pa">${formatScore(team.PA)}</div>
-            `;
-            return row;
-        }
-
-        function populatePowerRankings(teams) {
-            const powerBody = document.getElementById('power-body');
-            powerBody.innerHTML = '';
-            
-            const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
-            
-            sortedTeams.forEach(team => {
-                const row = document.createElement('tr');
-                const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
-
-                row.innerHTML = `
-                    <td style="text-align: center; font-weight: 600;">${getVal(team['Power Rank'])}</td>
-                    <td>${getVal(team.TeamName)}</td>
-                    <td style="text-align: center;">${getVal(Number(team.PowerRankTotal).toFixed(3))}</td>
-                    <td style="text-align: center;">${getVal(team.SOS)}</td>
-                `;
-                powerBody.appendChild(row);
-            });
-        }
-
-        function populateWildcardStandings(teams) {
-            const wildcardBody = document.getElementById('wildcard-body');
-            wildcardBody.innerHTML = '';
-
-            teams.sort((a, b) => {
-                const winsA = parseInt(a.Wins);
-                const winsB = parseInt(b.Wins);
-                if (winsA !== winsB) {
-                    return winsB - winsA;
-                }
-                return b.PF - a.PF;
-            });
-            
-            teams.forEach((team, index) => {
-                const row = document.createElement('tr');
-                const rank = index + 1;
-                
-                if (rank <= 3) {
-                    row.className = 'wildcard-leader-row';
-                }
-                
-                const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
-                const formatScore = (score) => score ? Number(score).toFixed(2) : '—';
-
-                const overallRecord = `${getVal(team.Wins)}-${getVal(team.Losses)}`;
-                const gamesBack = getVal(team['Games Back']);
-                const sosRemaining = getVal(team['SOSRemain']);
-
-                row.innerHTML = `
-                    <td style="text-align: center;">${getVal(rank)}</td>
-                    <td>${getVal(team.TeamName)}</td>
-                    <td style="text-align: center;" class="no-wrap">${overallRecord}</td>
-                    <td style="text-align: center;">${gamesBack}</td>
-                    <td style="text-align: center;">${sosRemaining}</td>
-                    <td style="text-align: center;" class="no-wrap">${formatScore(team.PF)}</td>
-                `;
-                wildcardBody.appendChild(row);
-            });
-        }
-
         function populateWeeklyAwards(awards) {
-            const tbody = document.getElementById('awards-body');
+            // Robust target selection: checks for ID first, falls back to the table inside #weekly-awards
+            let tbody = document.getElementById('awards-body');
+            if (!tbody) {
+                const awardsTable = document.querySelector('#weekly-awards table');
+                if (awardsTable) {
+                    tbody = awardsTable.querySelector('tbody') || awardsTable.appendChild(document.createElement('tbody'));
+                    tbody.id = 'awards-body';
+                }
+            }
+
             if (!tbody) return;
             tbody.innerHTML = '';
 
-            // Safe conversion: converts object or array into a standard iterable list
+            // Extract items array cleanly regardless of wrapper shape
             let list = [];
             if (Array.isArray(awards)) {
                 list = awards;
@@ -671,25 +543,128 @@
                         weekVal = `Week ${weekVal}`;
                     }
 
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="font-bold no-wrap">${weekVal !== '' ? weekVal : `Week ${index + 1}`}</td>
-                        <td>${awardVal !== '' ? awardVal : '—'}</td>
-                        <td>${winnerVal !== '' ? winnerVal : '—'}</td>
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="font-bold no-wrap" style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">${weekVal !== '' ? weekVal : `Week ${index + 1}`}</td>
+                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">${awardVal !== '' ? awardVal : '—'}</td>
+                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">${winnerVal !== '' ? winnerVal : '—'}</td>
                     `;
-                    tbody.appendChild(row);
+                    tbody.appendChild(tr);
                 });
             } else {
                 for (let i = 1; i <= 14; i++) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="font-bold no-wrap">Week ${i}</td>
-                        <td>—</td>
-                        <td>—</td>
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="font-bold no-wrap" style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">Week ${i}</td>
+                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">—</td>
+                        <td style="padding: 0.5rem 0.35rem; border-bottom: 1px solid #e5e7eb;">—</td>
                     `;
-                    tbody.appendChild(row);
+                    tbody.appendChild(tr);
                 }
             }
+        }
+
+        function populateDivisionalStandings(defenders, contenders, pretenders) {
+            const defendersContainer = document.querySelector('#divisional-standings-container');
+            if (!defendersContainer) return;
+            
+            defendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
+
+            if (defenders) {
+                defenders.forEach((team, index) => {
+                    const row = createDivisionalRow(team, index + 1, 'defenders');
+                    const targetHeader = defendersContainer.querySelector('.contenders-header');
+                    if (targetHeader) defendersContainer.insertBefore(row, targetHeader);
+                });
+            }
+
+            if (contenders) {
+                contenders.forEach((team, index) => {
+                    const row = createDivisionalRow(team, index + 1, 'contenders');
+                    const targetHeader = defendersContainer.querySelector('.pretenders-header');
+                    if (targetHeader) defendersContainer.insertBefore(row, targetHeader);
+                });
+            }
+            
+            if (pretenders) {
+                pretenders.forEach((team, index) => {
+                    const row = createDivisionalRow(team, index + 1, 'pretenders');
+                    defendersContainer.appendChild(row);
+                });
+            }
+        }
+
+        function createDivisionalRow(team, rank, divisionName) {
+            const row = document.createElement('div');
+            row.className = `standing-row ${divisionName}-row`;
+            if (rank === 1) row.classList.add(`${divisionName}-leader`);
+
+            const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+            const formatScore = (score) => score ? Number(score).toFixed(2) : '—';
+
+            row.innerHTML = `
+                <div class="rank">${getVal(rank)}</div>
+                <div class="team">${getVal(team.TeamName)}</div>
+                <div class="record">${getVal(team.Wins)}-${getVal(team.Losses)}</div>
+                <div class="h2h">${getVal(team.H2HWins)}-${getVal(team.H2HLosses)}</div>
+                <div class="median">${getVal(team.MedianWins)}-${getVal(team.MedianLosses)}</div>
+                <div class="division-record">${getVal(team.DivisionalWins)}-${getVal(team.DivisionalLosses)}</div>
+                <div class="pf">${formatScore(team.PF)}</div>
+                <div class="pa">${formatScore(team.PA)}</div>
+            `;
+            return row;
+        }
+
+        function populatePowerRankings(teams) {
+            const powerBody = document.getElementById('power-body');
+            if (!powerBody) return;
+            powerBody.innerHTML = '';
+            
+            const sortedTeams = [...teams].sort((a, b) => a['Power Rank'] - b['Power Rank']);
+            sortedTeams.forEach(team => {
+                const row = document.createElement('tr');
+                const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+
+                row.innerHTML = `
+                    <td style="text-align: center; font-weight: 600;">${getVal(team['Power Rank'])}</td>
+                    <td>${getVal(team.TeamName)}</td>
+                    <td style="text-align: center;">${getVal(Number(team.PowerRankTotal).toFixed(3))}</td>
+                    <td style="text-align: center;">${getVal(team.SOS)}</td>
+                `;
+                powerBody.appendChild(row);
+            });
+        }
+
+        function populateWildcardStandings(teams) {
+            const wildcardBody = document.getElementById('wildcard-body');
+            if (!wildcardBody) return;
+            wildcardBody.innerHTML = '';
+
+            teams.sort((a, b) => {
+                const winsA = parseInt(a.Wins);
+                const winsB = parseInt(b.Wins);
+                if (winsA !== winsB) return winsB - winsA;
+                return b.PF - a.PF;
+            });
+            
+            teams.forEach((team, index) => {
+                const row = document.createElement('tr');
+                const rank = index + 1;
+                if (rank <= 3) row.className = 'wildcard-leader-row';
+
+                const getVal = (val) => val === 0 ? '0' : (val === null || val === undefined) ? '—' : val;
+                const formatScore = (score) => score ? Number(score).toFixed(2) : '—';
+
+                row.innerHTML = `
+                    <td style="text-align: center;">${getVal(rank)}</td>
+                    <td>${getVal(team.TeamName)}</td>
+                    <td style="text-align: center;" class="no-wrap">${getVal(team.Wins)}-${getVal(team.Losses)}</td>
+                    <td style="text-align: center;">${getVal(team['Games Back'])}</td>
+                    <td style="text-align: center;">${getVal(team['SOSRemain'])}</td>
+                    <td style="text-align: center;" class="no-wrap">${formatScore(team.PF)}</td>
+                `;
+                wildcardBody.appendChild(row);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', fetchDataAndPopulate);
