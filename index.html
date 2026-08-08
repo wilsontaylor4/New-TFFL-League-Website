@@ -393,7 +393,12 @@
         <div class="flex-container">
             <!-- Weekly Awards Section -->
             <section id="weekly-awards" class="card">
-                <h2 id="weekly-awards-title" class="text-2xl font-bold mb-4 border-b pb-2">Weekly Awards</h2>
+                <h2 id="weekly-awards-title" class="text-2xl font-bold mb-4 border-b pb-2 flex items-baseline gap-2">
+                    <a href="https://docs.google.com/document/d/1oxJuxXW6BuLerppM9-b6hn22WAWz9_Ffrs7Le1sygO4/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="hover:text-green-800 transition-colors inline-flex items-center gap-1">
+                        <span id="weekly-awards-text">2025 Weekly Awards</span>
+                        <span class="text-xs font-normal text-gray-500 hover:underline">(Click for more info)</span>
+                    </a>
+                </h2>
                 <div id="weekly-awards-container" class="table-container">
                     <table>
                         <thead>
@@ -485,7 +490,7 @@
                         updateTitle('divisional-standings-title', `2025 Divisional Standings Through Week ${weekNumber}`);
                         updateTitle('power-rankings-title', `2025 Power Rankings Through Week ${weekNumber}`);
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
-                        updateTitle('weekly-awards-title', `2025 Weekly Awards`);
+                        updateTitle('weekly-awards-text', `2025 Weekly Awards`);
                     }
                     
                     if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
