@@ -477,14 +477,12 @@
                 const data = await response.json();
 
                 if (data) {
-                    // 1. Weekly Awards renders FIRST so nothing can block it
                     try {
                         if (data.awards) populateWeeklyAwards(data.awards);
                     } catch (err) {
                         console.error('Error populating Weekly Awards:', err);
                     }
 
-                    // 2. Update section titles
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
                         const weekNumber = (firstTeam.H2HWins || 0) + (firstTeam.H2HLosses || 0);
@@ -493,7 +491,6 @@
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
-                    // 3. Isolated renders for other sections
                     try {
                         if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
                     } catch (err) {
@@ -646,18 +643,52 @@
 
         function populateWeeklyAwards(awards) {
             const tbody = document.getElementById('awards-body');
+            if (!tbody) return;
             tbody.innerHTML = '';
 
-            if (awards && awards.length > 0) {
-                awards.forEach(item => {
+            // Safe conversion: converts object or array into a standard iterable list
+            let list = [];
+            if (Array.isArray(awards)) {
+                list = awards;
+            } else if (awards && typeof awards === 'object') {
+                list = Object.values(awards);
+            }
+
+            if (list.length > 0) {
+                list.forEach((item, index) => {
+                    if (!item || typeof item !== 'object') return;
+
+                    const keys = Object.keys(item);
+                    let weekVal = item.week ?? item.Week ?? (keys[0] ? item[keys[0]] : `Week ${index + 1}`);
+                    let awardVal = item.awardName ?? item.Award ?? (keys[1] ? item[keys[1]] : '—');
+                    let winnerVal = item.winnerName ?? item.Winner ?? (keys[2] ? item[keys[2]] : '—');
+
+                    weekVal = String(weekVal ?? '').trim();
+                    awardVal = String(awardVal ?? '').trim();
+                    winnerVal = String(winnerVal ?? '').trim();
+
+                    if (weekVal !== '' && weekVal !== '—' && !weekVal.toLowerCase().includes('week')) {
+                        weekVal = `Week ${weekVal}`;
+                    }
+
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td class="font-bold no-wrap">${item.week || '—'}</td>
-                        <td>${item.awardName || '—'}</td>
-                        <td>${item.winnerName || '—'}</td>
+                        <td class="font-bold no-wrap">${weekVal !== '' ? weekVal : `Week ${index + 1}`}</td>
+                        <td>${awardVal !== '' ? awardVal : '—'}</td>
+                        <td>${winnerVal !== '' ? winnerVal : '—'}</td>
                     `;
                     tbody.appendChild(row);
                 });
+            } else {
+                for (let i = 1; i <= 14; i++) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="font-bold no-wrap">Week ${i}</td>
+                        <td>—</td>
+                        <td>—</td>
+                    `;
+                    tbody.appendChild(row);
+                }
             }
         }
 
