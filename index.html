@@ -715,28 +715,26 @@
 
             if (awards && awards.length > 0) {
                 awards.forEach(item => {
-                    const rawWeek = item.week ?? item.Week ?? item['Week #'] ?? item['Week'];
-                    const rawAward = item.awardName ?? item.Award ?? item['Award Name'] ?? item['Award'];
-                    const rawWinner = item.winnerName ?? item.Winner ?? item['Winner Name'] ?? item['Winner'];
+                    // Match sheet header properties
+                    const weekVal = item.week || item.Week || '—';
+                    const awardVal = item.awardName || item.Award || item['Award Name'] || '—';
+                    const winnerVal = item.winnerName || item.Winner || item['Winner Name'] || '—';
 
-                    let weekDisplay = '—';
-                    if (rawWeek !== undefined && rawWeek !== null && String(rawWeek).trim() !== '') {
-                        weekDisplay = String(rawWeek).toLowerCase().includes('week') ? rawWeek : `Week ${rawWeek}`;
+                    let weekDisplay = String(weekVal).trim();
+                    if (weekDisplay !== '—' && !weekDisplay.toLowerCase().includes('week')) {
+                        weekDisplay = `Week ${weekDisplay}`;
                     }
-
-                    const awardDisplay = (rawAward && String(rawAward).trim() !== '') ? rawAward : '—';
-                    const winnerDisplay = (rawWinner && String(rawWinner).trim() !== '') ? rawWinner : '—';
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td class="font-bold no-wrap">${weekDisplay}</td>
-                        <td>${awardDisplay}</td>
-                        <td>${winnerDisplay}</td>
+                        <td>${awardVal.toString().trim() !== '' ? awardVal : '—'}</td>
+                        <td>${winnerVal.toString().trim() !== '' ? winnerVal : '—'}</td>
                     `;
                     tbody.appendChild(row);
                 });
             } else {
-                // Generates Weeks 1 through 14 automatically if awards data is not provided or empty
+                // Generates Weeks 1 through 14 if API awards response is absent
                 for (let i = 1; i <= 14; i++) {
                     const row = document.createElement('tr');
                     row.innerHTML = `
