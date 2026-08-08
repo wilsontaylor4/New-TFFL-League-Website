@@ -503,7 +503,7 @@
                                 <th style="width: 20%; text-align: center;">Record</th>
                                 <th style="width: 14%; text-align: center;">GB</th>
                                 <th style="width: 15%; text-align: center;">SOS Rem</th>
-                                <th style="width: 15%; text-align: right;">PF</th>
+                                <th style="width: 15%; text-align: center;">PF</th>
                             </tr>
                         </thead>
                         <tbody id="wildcard-body">
@@ -551,23 +551,6 @@
     <script>
         const dataUrl = 'https://script.google.com/macros/s/AKfycbw0yxPcjSDePxbjpMshXRE_w9ac767nYYED5rxT7_H2wUywLEODDKns1HBZ-6fOXmgY/exec';
 
-        const defaultAwards = [
-            { week: 1, awardName: "🏆 High Scorer", winnerName: "Taylor Wilson" },
-            { week: 2, awardName: "🤡 Bench Monster", winnerName: "Mitch Sennewald" },
-            { week: 3, awardName: "💔 Tough Luck", winnerName: "Jake Wolfer" },
-            { week: 4, awardName: "🎯 Nailbiter", winnerName: "Riley Kuhl" },
-            { week: 5, awardName: "🏆 High Scorer", winnerName: "Jason Zamora" },
-            { week: 6, awardName: "💣 Blowout Win", winnerName: "Israel Flores" },
-            { week: 7, awardName: "🤡 Bench Monster", winnerName: "Bill & Kathy Kuhl" },
-            { week: 8, awardName: "🏆 High Scorer", winnerName: "Zach Loya" },
-            { week: 9, awardName: "🎯 Nailbiter", winnerName: "Stephen Zamora" },
-            { week: 10, awardName: "💔 Tough Luck", winnerName: "Ron Wilson" },
-            { week: 11, awardName: "🏆 High Scorer", winnerName: "Jose Granados" },
-            { week: 12, awardName: "💣 Blowout Win", winnerName: "Taryn & Josh" },
-            { week: 13, awardName: "🤡 Bench Monster", winnerName: "Taylor Wilson" },
-            { week: 14, awardName: "🏆 High Scorer", winnerName: "Jake Wolfer" }
-        ];
-
         async function fetchDataAndPopulate() {
             try {
                 const response = await fetch(dataUrl);
@@ -580,18 +563,20 @@
                         updateTitle('divisional-standings-title', `2025 Divisional Standings Through Week ${weekNumber}`);
                         updateTitle('power-rankings-title', `2025 Power Rankings Through Week ${weekNumber}`);
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
+                        updateTitle('weekly-awards-title', `Weekly Awards Through Week ${weekNumber}`);
                     }
                     
                     populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
                     populatePowerRankings(data.powerRankings);
                     populateWildcardStandings(data.wildcard);
                     
-                    populateWeeklyAwards(data.awards && data.awards.length > 0 ? data.awards : defaultAwards);
+                    if (data.awards && data.awards.length > 0) {
+                        populateWeeklyAwards(data.awards);
+                    }
                 }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
-                populateWeeklyAwards(defaultAwards);
             }
         }
 
@@ -709,7 +694,7 @@
                     <td style="text-align: center;" class="no-wrap">${overallRecord}</td>
                     <td style="text-align: center;">${gamesBack}</td>
                     <td style="text-align: center;">${sosRemaining}</td>
-                    <td style="text-align: right;" class="no-wrap">${formatScore(team.PF)}</td>
+                    <td style="text-align: center;" class="no-wrap">${formatScore(team.PF)}</td>
                 `;
                 wildcardBody.appendChild(row);
             });
@@ -720,11 +705,15 @@
             tbody.innerHTML = '';
 
             awards.forEach(item => {
+                const weekDisplay = item.week ? (String(item.week).toLowerCase().includes('week') ? item.week : `Week ${item.week}`) : '—';
+                const awardDisplay = item.awardName || '—';
+                const winnerDisplay = item.winnerName || '—';
+
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class="font-bold no-wrap">Week ${item.week}</td>
-                    <td>${item.awardName}</td>
-                    <td>${item.winnerName}</td>
+                    <td class="font-bold no-wrap">${weekDisplay}</td>
+                    <td>${awardDisplay}</td>
+                    <td>${winnerDisplay}</td>
                 `;
                 tbody.appendChild(row);
             });
