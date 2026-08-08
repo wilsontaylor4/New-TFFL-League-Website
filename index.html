@@ -570,10 +570,13 @@
                     if (data.wildcard) populateWildcardStandings(data.wildcard);
                     
                     populateWeeklyAwards(data.awards);
+                } else {
+                    populateWeeklyAwards(null);
                 }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+                populateWeeklyAwards(null);
             }
         }
 
@@ -707,25 +710,37 @@
             const tbody = document.getElementById('awards-body');
             tbody.innerHTML = '';
 
+            // Map existing API items if present
+            const awardsMap = {};
             if (awards && awards.length > 0) {
                 awards.forEach(item => {
-                    const weekVal = item.week || item.Week || '—';
-                    const awardVal = item.awardName || item.Award || item['Award Name'] || '—';
-                    const winnerVal = item.winnerName || item.Winner || item['Winner Name'] || '—';
-
-                    let weekDisplay = String(weekVal).trim();
-                    if (weekDisplay !== '—' && !weekDisplay.toLowerCase().includes('week')) {
-                        weekDisplay = `Week ${weekDisplay}`;
+                    const rawWeek = item.week ?? item.Week ?? item['Week #'] ?? item['Week'];
+                    if (rawWeek !== undefined && rawWeek !== null) {
+                        const cleanKey = String(rawWeek).replace(/[^0-9]/g, '');
+                        if (cleanKey) {
+                            awardsMap[cleanKey] = item;
+                        }
                     }
-
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="font-bold no-wrap">${weekDisplay}</td>
-                        <td>${String(awardVal).trim() !== '' ? awardVal : '—'}</td>
-                        <td>${String(winnerVal).trim() !== '' ? winnerVal : '—'}</td>
-                    `;
-                    tbody.appendChild(row);
                 });
+            }
+
+            // Always generate 14 rows, filling in Google Sheet data if present
+            for (let i = 1; i <= 14; i++) {
+                const item = awardsMap[String(i)] || {};
+                
+                const rawAward = item.awardName ?? item.Award ?? item['Award Name'] ?? '';
+                const rawWinner = item.winnerName ?? item.Winner ?? item['Winner Name'] ?? '';
+
+                const awardDisplay = (rawAward && String(rawAward).trim() !== '') ? rawAward : '—';
+                const winnerDisplay = (rawWinner && String(rawWinner).trim() !== '') ? rawWinner : '—';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-bold no-wrap">Week ${i}</td>
+                    <td>${awardDisplay}</td>
+                    <td>${winnerDisplay}</td>
+                `;
+                tbody.appendChild(row);
             }
         }
 
