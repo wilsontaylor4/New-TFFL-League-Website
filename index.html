@@ -710,19 +710,20 @@
             const tbody = document.getElementById('awards-body');
             tbody.innerHTML = '';
 
-            // If awards array exists and is populated, render data
             if (Array.isArray(awards) && awards.length > 0) {
-                awards.forEach((item) => {
+                awards.forEach((item, index) => {
                     if (!item || typeof item !== 'object') return;
 
-                    const keys = Object.keys(item);
-                    let weekVal = item.week ?? item.Week ?? (keys[0] ? item[keys[0]] : '');
-                    let awardVal = item.awardName ?? item.Award ?? (keys[1] ? item[keys[1]] : '');
-                    let winnerVal = item.winnerName ?? item.Winner ?? (keys[2] ? item[keys[2]] : '');
+                    // Extract values by property position to prevent header-naming mismatches
+                    const values = Object.values(item);
+                    
+                    let weekVal = values[0] ?? `Week ${index + 1}`;
+                    let awardVal = values[1] ?? '—';
+                    let winnerVal = values[2] ?? '—';
 
-                    weekVal = String(weekVal ?? '').trim();
-                    awardVal = String(awardVal ?? '').trim();
-                    winnerVal = String(winnerVal ?? '').trim();
+                    weekVal = String(weekVal).trim();
+                    awardVal = String(awardVal).trim();
+                    winnerVal = String(winnerVal).trim();
 
                     if (weekVal !== '' && weekVal !== '—' && !weekVal.toLowerCase().includes('week')) {
                         weekVal = `Week ${weekVal}`;
@@ -730,14 +731,13 @@
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td class="font-bold no-wrap">${weekVal !== '' ? weekVal : '—'}</td>
+                        <td class="font-bold no-wrap">${weekVal !== '' ? weekVal : `Week ${index + 1}`}</td>
                         <td>${awardVal !== '' ? awardVal : '—'}</td>
                         <td>${winnerVal !== '' ? winnerVal : '—'}</td>
                     `;
                     tbody.appendChild(row);
                 });
             } else {
-                // Hardcoded fallback loop: Ensures 14 rows exist even if API response is empty/null
                 for (let i = 1; i <= 14; i++) {
                     const row = document.createElement('tr');
                     row.innerHTML = `
