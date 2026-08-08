@@ -705,9 +705,17 @@
             tbody.innerHTML = '';
 
             awards.forEach(item => {
-                const weekDisplay = item.week ? (String(item.week).toLowerCase().includes('week') ? item.week : `Week ${item.week}`) : '—';
-                const awardDisplay = item.awardName || '—';
-                const winnerDisplay = item.winnerName || '—';
+                const rawWeek = item.week ?? item.Week ?? item['Week #'] ?? item['Week'];
+                const rawAward = item.awardName ?? item.Award ?? item['Award Name'] ?? item['Award'];
+                const rawWinner = item.winnerName ?? item.Winner ?? item['Winner Name'] ?? item['Winner'];
+
+                let weekDisplay = '—';
+                if (rawWeek !== undefined && rawWeek !== null && String(rawWeek).trim() !== '') {
+                    weekDisplay = String(rawWeek).toLowerCase().includes('week') ? rawWeek : `Week ${rawWeek}`;
+                }
+
+                const awardDisplay = (rawAward && String(rawAward).trim() !== '') ? rawAward : '—';
+                const winnerDisplay = (rawWinner && String(rawWinner).trim() !== '') ? rawWinner : '—';
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
