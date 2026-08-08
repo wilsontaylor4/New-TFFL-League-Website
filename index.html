@@ -557,6 +557,7 @@
                 const data = await response.json();
 
                 if (data) {
+                    // Update Divisional Titles
                     if (data.defenders && data.defenders.length > 0) {
                         const firstTeam = data.defenders[0];
                         const weekNumber = firstTeam.H2HWins + firstTeam.H2HLosses;
@@ -565,17 +566,20 @@
                         updateTitle('wildcard-standings-title', `2025 Wild Card Standings Through Week ${weekNumber}`);
                     }
                     
-                    populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
-                    populatePowerRankings(data.powerRankings);
-                    populateWildcardStandings(data.wildcard);
+                    // Render Tables
+                    if (data.defenders) populateDivisionalStandings(data.defenders, data.contenders, data.pretenders);
+                    if (data.powerRankings) populatePowerRankings(data.powerRankings);
+                    if (data.wildcard) populateWildcardStandings(data.wildcard);
                     
-                    if (data.awards) {
-                        populateWeeklyAwards(data.awards);
-                    }
+                    // Independent Awards render
+                    populateWeeklyAwards(data.awards);
+                } else {
+                    populateWeeklyAwards(null);
                 }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+                populateWeeklyAwards(null);
             }
         }
 
@@ -595,20 +599,26 @@
             contendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
             pretendersContainer.querySelectorAll('.standing-row:not(.table-header)').forEach(row => row.remove());
 
-            defenders.forEach((team, index) => {
-                const row = createDivisionalRow(team, index + 1, 'defenders');
-                defendersContainer.insertBefore(row, defendersContainer.querySelector('.contenders-header'));
-            });
+            if (defenders) {
+                defenders.forEach((team, index) => {
+                    const row = createDivisionalRow(team, index + 1, 'defenders');
+                    defendersContainer.insertBefore(row, defendersContainer.querySelector('.contenders-header'));
+                });
+            }
 
-            contenders.forEach((team, index) => {
-                const row = createDivisionalRow(team, index + 1, 'contenders');
-                contendersContainer.insertBefore(row, contendersContainer.querySelector('.pretenders-header'));
-            });
+            if (contenders) {
+                contenders.forEach((team, index) => {
+                    const row = createDivisionalRow(team, index + 1, 'contenders');
+                    contendersContainer.insertBefore(row, contendersContainer.querySelector('.pretenders-header'));
+                });
+            }
             
-            pretenders.forEach((team, index) => {
-                const row = createDivisionalRow(team, index + 1, 'pretenders');
-                pretendersContainer.appendChild(row);
-            });
+            if (pretenders) {
+                pretenders.forEach((team, index) => {
+                    const row = createDivisionalRow(team, index + 1, 'pretenders');
+                    pretendersContainer.appendChild(row);
+                });
+            }
         }
 
         function createDivisionalRow(team, rank, divisionName) {
@@ -705,18 +715,37 @@
 
             if (awards && awards.length > 0) {
                 awards.forEach(item => {
-                    const weekText = item.week ? String(item.week).trim() : '—';
-                    const awardDisplay = (item.awardName && String(item.awardName).trim() !== '') ? item.awardName : '—';
-                    const winnerDisplay = (item.winnerName && String(item.winnerName).trim() !== '') ? item.winnerName : '—';
+                    const rawWeek = item.week ?? item.Week ?? item['Week #'] ?? item['Week'];
+                    const rawAward = item.awardName ?? item.Award ?? item['Award Name'] ?? item['Award'];
+                    const rawWinner = item.winnerName ?? item.Winner ?? item['Winner Name'] ?? item['Winner'];
+
+                    let weekDisplay = '—';
+                    if (rawWeek !== undefined && rawWeek !== null && String(rawWeek).trim() !== '') {
+                        weekDisplay = String(rawWeek).toLowerCase().includes('week') ? rawWeek : `Week ${rawWeek}`;
+                    }
+
+                    const awardDisplay = (rawAward && String(rawAward).trim() !== '') ? rawAward : '—';
+                    const winnerDisplay = (rawWinner && String(rawWinner).trim() !== '') ? rawWinner : '—';
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td class="font-bold no-wrap">${weekText}</td>
+                        <td class="font-bold no-wrap">${weekDisplay}</td>
                         <td>${awardDisplay}</td>
                         <td>${winnerDisplay}</td>
                     `;
                     tbody.appendChild(row);
                 });
+            } else {
+                // Generates Weeks 1 through 14 automatically if awards data is not provided or empty
+                for (let i = 1; i <= 14; i++) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="font-bold no-wrap">Week ${i}</td>
+                        <td>—</td>
+                        <td>—</td>
+                    `;
+                    tbody.appendChild(row);
+                }
             }
         }
 
